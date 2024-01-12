@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_enviar_terminos_condiciones" tabindex="-1" role="dialog"
+    aria-labelledby="modal_enviar_terminos_condiciones" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title">Enviar Términos y Condiciones</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6">
+                        <label>Cédula:</label>
+                        <input type="text" class="form-control mb-4" id="cedula_enviar_terminos_condiciones">
+                    </div>
+                    <div class="col-6">
+                        <label>Celular (opcional):</label>
+                        <input type="text" class="form-control mb-4" id="celular_enviar_terminos_condiciones">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary"
+                    onclick="enviar_terminos_y_condiciones_socio(false)">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
