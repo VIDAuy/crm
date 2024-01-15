@@ -85,6 +85,7 @@ if ($envioSector != "") {
 	} else {
 		$respuesta['error'] = true;
 		$respuesta['email'] = false;
+		$respuesta['emailError'] = $email;
 		$respuesta['message'] = 'Se ha cargado el registro para la cédula <span class="text-danger"><strong>' . $cedula . '</strong></span> pero ocurrieron errores al enviar el email';
 		$respuesta['area'] = $area;
 	}

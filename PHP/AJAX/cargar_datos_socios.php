@@ -50,7 +50,7 @@ if (mysqli_num_rows($r) === 0) {
 				'noSocioConRegistros' 	=> true,
 				'mensaje' 				=> "La cédula ingresada no pertenece a un socio pero ya tiene registros.\nSe le mostrará un formulario diferente.",
 				'nombre' 				=> eliminarAcentos($f2["nombre"]),
-				'telefono' 				=> corregirTelefono($f2['telefono']),
+				'telefono' 				=> $f2['telefono'] == "" || $f2['telefono'] == 0 ? 0 : corregirTelefono($f2['telefono']),
 			];
 	} else {
 		$f =
@@ -75,10 +75,10 @@ if (mysqli_num_rows($r) === 0) {
 			[
 				'bajaProcesada'	=> true,
 				'nombre' 		=> eliminarAcentos($f2['nombre']),
-				'telefono' 		=> corregirTelefono($f2['telefono']),
+				'telefono' 		=> $f2['telefono'] == "" || $f2['telefono'] == 0 ? 0 : corregirTelefono($f2['telefono']),
 				'mensaje'		=> "La cédula ingresada no pertenece a un socio pero ya tiene registros.\nSe le mostrará un formulario diferente."
 			];
-	} else $f['tel'] = corregirTelefono($f['tel']);
+	} else $f['tel'] = $f['tel'] == "" || $f['tel'] == 0 ? 0 : corregirTelefono($f['tel']);
 }
 $f['mostrar_inspira'] = $mostrar_inspira;
 
