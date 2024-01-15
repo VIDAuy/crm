@@ -160,10 +160,10 @@ function htmlBodyEmail($texto)
 					<table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
 						<tr>
 						<td style="padding:0 0 36px 0;color:#153643;">
-							<h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">' . utf8_decode($texto["titulo"]) . '</h1>
-							<p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">' . utf8_decode($texto["cabecera"]) . '</p>
-							<p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">' . utf8_decode($texto["detalle1"]) . '</p>
-							<p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">' . utf8_decode($texto["informacion"]) . '</p>
+							<h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">' . @utf8_decode($texto["titulo"]) . '</h1>
+							<p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">' . @utf8_decode($texto["cabecera"]) . '</p>
+							<p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">' . @utf8_decode($texto["detalle1"]) . '</p>
+							<p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">' . @utf8_decode($texto["informacion"]) . '</p>
 						</td>
 						</tr>
 					</table>
@@ -192,12 +192,12 @@ function EnviarMail($sector, $datos_sector_avisar, $bodyHtml, $ccs = null)
 		"username" => "no-responder@vida.com.uy",
 		"password" => "2k8.vida",
 		"from" => "no-responder@vida.com.uy",
-		"fromname" => utf8_decode(ucfirst($sector)),
+		"fromname" => @utf8_decode(ucfirst($sector)),
 	];
 
 	$datos = [
 		"email" => $datos_sector_avisar['email'],
-		"nombre" => utf8_decode(ucfirst($datos_sector_avisar['usuario']))
+		"nombre" => @utf8_decode(ucfirst($datos_sector_avisar['usuario']))
 	];
 
 	$asunto = "Usted tiene una nueva alerta en CRM";
@@ -214,10 +214,10 @@ function EnviarMail($sector, $datos_sector_avisar, $bodyHtml, $ccs = null)
 	$mail->isHTML(true);
 	$mail->setFrom($configuracion["from"], $configuracion["fromname"]);
 	//$mail->addReplyTo($configuracion["from"], $configuracion["fromname"]);
-	$mail->addAddress($datos["email"], utf8_decode(ucfirst($datos["nombre"])));
+	$mail->addAddress($datos["email"], @utf8_decode(ucfirst($datos["nombre"])));
 	if ($ccs != null) {
 		foreach ($ccs as $cc) {
-			$mail->addCC($cc["email"], utf8_decode(ucfirst($cc["nombre"])));
+			$mail->addCC($cc["email"], @utf8_decode(ucfirst($cc["nombre"])));
 		}
 	}
 	$mail->Body = $bodyHtml;

@@ -133,8 +133,8 @@ function corregirTelefono($var)
 
 function eliminarAcentos($cadena)
 {
-	$especial = utf8_decode('ÁÀÂÄáàäâªÉÈÊËéèëêÍÌÏÎíìïîÓÒÖÔóòöôÚÙÛÜúùüûÑñÇç³€™º');
-	$reemplazar = utf8_decode('AAAAaaaaaEEEEeeeeIIIIiiiiOOOOooooUUUUuuuuNnCcA    ');
+	$especial = @utf8_decode('ÁÀÂÄáàäâªÉÈÊËéèëêÍÌÏÎíìïîÓÒÖÔóòöôÚÙÛÜúùüûÑñÇç³€™º');
+	$reemplazar = @utf8_decode('AAAAaaaaaEEEEeeeeIIIIiiiiOOOOooooUUUUuuuuNnCcA    ');
 	for ($i = 0; $i <= strlen($cadena); $i++) {
 		for ($f = 0; $f < strlen($especial); $f++) {
 			$caracteri = substr($cadena, $i, 1);

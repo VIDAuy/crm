@@ -48,10 +48,12 @@ if ($data) {
 	else {
 		$qSelect = "SELECT COUNT(`telefono_contacto`) AS `cantidad` FROM `bajas` WHERE `telefono_contacto` = '{$telefonoContacto}' GROUP BY `telefono_contacto`";
 		$select = mysqli_query($conexion, $q);
-		$cantidadDeUsosTelefono = mysqli_fetch_assoc($select)['cantidad'];
+		$cantidadDeUsosTelefono = mysqli_num_rows($select) != 0 ? mysqli_fetch_assoc($select)['cantidad'] : 0;
+
+
 		$qSelect = "SELECT COUNT(`celular_contacto`) AS `cantidad` FROM `bajas` WHERE `celular_contacto` = '{$celularContacto}' GROUP BY `celular_contacto`";
 		$select = mysqli_query($conexion, $q);
-		$cantidadDeUsosCelular = mysqli_fetch_assoc($select)['cantidad'];
+		$cantidadDeUsosCelular = mysqli_num_rows($select) != 0 ? mysqli_fetch_assoc($select)['cantidad'] : 0;
 
 		if ($cantidadDeUsosTelefono > 0)
 			$observaciones .= "\nADVERTENCIA, EL TELÉFONO DE CONTACTO {$telefonoContacto} SE HA UTILIZADO {$cantidadDeUsosTelefono} VECES.";

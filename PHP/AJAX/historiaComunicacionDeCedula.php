@@ -56,10 +56,11 @@ if (isset($_GET['ID'])) {
 			$imagen = count($imagenes) > 0 ? "<button class='btn btn-sm btn-info' onclick='modal_ver_imagen_registro(`" . URL_DOCUMENTOS . "`, `" . $id . "`);'>Ver Archivos</button>" : "";
 
 			$id_avisar_a = $row['envioSector'];
-			$avisar_a = obtener_area_avisada($id_avisar_a);
+
+			$avisar_a = $id_avisar_a != "" ? obtener_area_avisada($id_avisar_a) : "";
 			$observaciones = $row['observaciones'];
 			$id_sub_usuario = $row['id_sub_usuario'];
-			$nombre_sub_usuario = utf8_encode(obtener_nombre_sub_usuario($id_sub_usuario));
+			$nombre_sub_usuario = $id_sub_usuario != "" ? @utf8_encode(obtener_nombre_sub_usuario($id_sub_usuario)) : "";
 
 
 			$f[] = array(
@@ -188,8 +189,8 @@ function remplazarAcentos($texto)
 
 function eliminarAcentos($cadena)
 {
-	$especial = utf8_decode('ÁÀÂÄáàäâªÉÈÊËéèëêÍÌÏÎíìïîÓÒÖÔóòöôÚÙÛÜúùüûÑñÇç³€™º');
-	$reemplazar = utf8_decode('AAAAaaaaaEEEEeeeeIIIIiiiiOOOOooooUUUUuuuuNnCcA    ');
+	$especial = @utf8_decode('ÁÀÂÄáàäâªÉÈÊËéèëêÍÌÏÎíìïîÓÒÖÔóòöôÚÙÛÜúùüûÑñÇç³€™º');
+	$reemplazar = @utf8_decode('AAAAaaaaaEEEEeeeeIIIIiiiiOOOOooooUUUUuuuuNnCcA    ');
 	for ($i = 0; $i <= strlen($cadena); $i++) {
 		for ($f = 0; $f < strlen($especial); $f++) {
 			$caracteri = substr($cadena, $i, 1);

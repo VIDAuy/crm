@@ -1,20 +1,17 @@
 const produccion = true;
-const app = produccion ? "crm" : "crm_test";
-const url_app = "http://192.168.1.250:82/" + app + "/PHP/AJAX/";
-
-
-
+const app = produccion ? 'crm' : 'crm_test';
+const url_app = 'http://192.168.1.250:82/' + app + '/PHP/AJAX/';
 
 // AJAX
 function agregarFiliales() {
   $.ajax({
-    url: url_app + "agregarFiliales.php",
-    dataType: "JSON",
+    url: url_app + 'agregarFiliales.php',
+    dataType: 'JSON',
     success: function (r) {
       $.each(r.datos, function (i, v) {
         let nuevaLinea =
-          '<option value="' + v.id + '">' + v.usuario + "</option>";
-        $(nuevaLinea).appendTo(".agregarFiliales");
+          '<option value="' + v.id + '">' + v.usuario + '</option>';
+        $(nuevaLinea).appendTo('.agregarFiliales');
       });
     },
   });
@@ -22,77 +19,69 @@ function agregarFiliales() {
 
 function enviar_terminos_y_condiciones_socio(openModal = false) {
   if (openModal === true) {
-    $("#cedula_enviar_terminos_condiciones").val("");
-    $("#celular_enviar_terminos_condiciones").val("");
-    $("#modal_enviar_terminos_condiciones").modal("show");
+    $('#cedula_enviar_terminos_condiciones').val('');
+    $('#celular_enviar_terminos_condiciones').val('');
+    $('#modal_enviar_terminos_condiciones').modal('show');
   } else {
-    let sector = $("#sector").val();
-    let cedula = $("#cedula_enviar_terminos_condiciones").val();
-    let celular = $("#celular_enviar_terminos_condiciones").val();
+    let sector = $('#sector').val();
+    let cedula = $('#cedula_enviar_terminos_condiciones').val();
+    let celular = $('#celular_enviar_terminos_condiciones').val();
 
-    if (cedula == "") {
-      error("Debe ingresar una cédula");
+    if (cedula == '') {
+      error('Debe ingresar una cédula');
     } else if (comprobarCI(cedula) === false) {
-      error("Debe ingresar una cédula válida");
-    } else if (celular != "" && comprobarCelular(celular) === false) {
-      error("Debe ingresar un celular válido, <br> Ejemplo: 096548762");
+      error('Debe ingresar una cédula válida');
+    } else if (celular != '' && comprobarCelular(celular) === false) {
+      error('Debe ingresar un celular válido, <br> Ejemplo: 096548762');
     } else {
-
       $.ajax({
-        type: "POST",
+        type: 'POST',
         url: `${url_app}enviar_terminos_y_condiciones.php`,
         data: {
           sector: sector,
           cedula: cedula,
-          celular: celular
+          celular: celular,
         },
-        dataType: "JSON",
+        dataType: 'JSON',
         beforeSend: function () {
           mostrarLoader();
         },
         complete: function () {
-          mostrarLoader("O");
+          mostrarLoader('O');
         },
         success: function (response) {
           if (response.error === false) {
             correcto(response.mensaje);
             historiaComunicacionDeCedula();
-            $("#cedula_enviar_terminos_condiciones").val("");
-            $("#celular_enviar_terminos_condiciones").val("");
-            $("#modal_enviar_terminos_condiciones").modal("hide");
+            $('#cedula_enviar_terminos_condiciones').val('');
+            $('#celular_enviar_terminos_condiciones').val('');
+            $('#modal_enviar_terminos_condiciones').modal('hide');
           } else {
             error(response.mensaje);
           }
-        }
+        },
       });
-
     }
-
   }
 }
-
-
-
-
-
 
 // Funciones complementarias
 
 function ocultarContenido() {
-  if ($("#ci").val() != $("cedulas").text()) {
-    $(".contenido").css("display", "none");
-    $(".contenido_funcionario").css("display", "none");
-    $("#historiaComunicacionDeCedulaDiv").css("display", "none");
-    $(".patologias_socio").css("display", "none");
-    $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
-    $("#acciones_socios_nivel_3").css("display", "none");
+  if ($('#ci').val() != $('cedulas').text()) {
+    $('.contenido').css('display', 'none');
+    $('.contenido_funcionario').css('display', 'none');
+    $('#historiaComunicacionDeCedulaDiv').css('display', 'none');
+    $('.patologias_socio').css('display', 'none');
+    $('#historiaComunicacionDeCedulaDiv_funcionarios').css('display', 'none');
+    $('#acciones_socios_nivel_3').css('display', 'none');
   }
 }
 
 // Funciones de control
 
 function comprobarCI(cedi) {
-  if (cedi == "93233611" || cedi == "78183625") return true;
+  if (cedi == '93233611' || cedi == '78183625') return true;
 
   let arrCoefs = [2, 9, 8, 7, 6, 3, 4, 1];
   let suma = 0;
@@ -119,58 +108,58 @@ function comprobarCelular(celular) {
 }
 
 function controlCargo(param) {
-  let mensaje = "";
+  let mensaje = '';
   if (param == 0) {
-    if ($("#observacionesNSR").val() == "")
-      mensaje += "Es necesario que agregue una observación.";
+    if ($('#observacionesNSR').val() == '')
+      mensaje += 'Es necesario que agregue una observación.';
   } else if (param == 1) {
-    if ($("#nombreNS").val() == "")
+    if ($('#nombreNS').val() == '')
       mensaje += 'Es necesario que llene el campo "nombre".\n';
-    if ($("#apellidoNS").val() == "")
+    if ($('#apellidoNS').val() == '')
       mensaje += 'Es necesario que llene el campo "apellido".\n';
-    if ($("#telefonoNS").val() == "" && $("#celularNS").val() == "")
-      mensaje += "Es necesario que agregue un teléfono o un celular.\n";
+    if ($('#telefonoNS').val() == '' && $('#celularNS').val() == '')
+      mensaje += 'Es necesario que agregue un teléfono o un celular.\n';
     else {
-      if ($("#telefonoNS").val() != "") {
-        if (!/^([0-9])*$/.test($("#telefonoNS").val()))
+      if ($('#telefonoNS').val() != '') {
+        if (!/^([0-9])*$/.test($('#telefonoNS').val()))
           mensaje += 'El campo "Telefono" sólo puede contener números.\n';
-        else if ($("#telefonoNS").val().length != 8)
+        else if ($('#telefonoNS').val().length != 8)
           mensaje += 'El campo "Teléfono" debe de tener 8 números.\n';
         else if (
-          $("#telefonoNS").val().substring(0, 1) != 2 &&
-          $("#telefonoNS").val().substring(0, 1) != 4
+          $('#telefonoNS').val().substring(0, 1) != 2 &&
+          $('#telefonoNS').val().substring(0, 1) != 4
         )
           mensaje +=
             'El telefono ingresado en el campo "Teléfono" es inválido.\n';
       }
-      if ($("#celularNS").val() != "") {
-        if (!/^([0-9])*$/.test($("#celularNS").val()))
+      if ($('#celularNS').val() != '') {
+        if (!/^([0-9])*$/.test($('#celularNS').val()))
           mensaje += 'El campo "Celular" sólo puede contener números.\n';
-        else if ($("#celularNS").val().length != 9)
+        else if ($('#celularNS').val().length != 9)
           mensaje += 'El campo "Celular" debe de tener 9 números.\n';
-        else if ($("#celularNS").val().substring(0, 2) != 09)
+        else if ($('#celularNS').val().substring(0, 2) != 09)
           mensaje +=
             'El celular ingresado en el campo "Celular" es inválido.\n';
       }
     }
-    if ($("#observacionesNS").val() == "")
-      mensaje += "Es necesario que agregue una observación.";
+    if ($('#observacionesNS').val() == '')
+      mensaje += 'Es necesario que agregue una observación.';
   } else {
-    if ($("#obser").val() == "")
-      mensaje = "Es necesario que agregue una observación.";
+    if ($('#obser').val() == '')
+      mensaje = 'Es necesario que agregue una observación.';
   }
 
   return mensaje;
 }
 
 function ir_a_vida_te_lleva() {
-  let url = "https://vida-apps.com/vida_te_lleva/panel_calidad/index.html";
-  window.open(url, "_blank");
+  let url = 'https://vida-apps.com/vida_te_lleva/panel_calidad/index.html';
+  window.open(url, '_blank');
 }
 
 function verMasTabla(observacion) {
-  $("#todo_comentario_funcionarios").val(observacion);
-  $("#modalVerMasFuncionarios").modal("show");
+  $('#todo_comentario_funcionarios').val(observacion);
+  $('#modalVerMasFuncionarios').modal('show');
 }
 
 function alerta(titulo, mensaje, icono) {
@@ -178,15 +167,15 @@ function alerta(titulo, mensaje, icono) {
 }
 
 function error(mensaje) {
-  Swal.fire({ title: "Error!", html: mensaje, icon: "error" });
+  Swal.fire({ title: 'Error!', html: mensaje, icon: 'error' });
 }
 
 function warning(mensaje) {
-  Swal.fire({ title: "Advertencia!", html: mensaje, icon: "warning" });
+  Swal.fire({ title: 'Advertencia!', html: mensaje, icon: 'warning' });
 }
 
 function correcto(mensaje) {
-  Swal.fire({ title: "Exito!", html: mensaje, icon: "success" });
+  Swal.fire({ title: 'Exito!', html: mensaje, icon: 'success' });
 }
 
 function alerta_ancla(titulo, mensaje, icono) {
@@ -202,53 +191,53 @@ function alerta_ancla(titulo, mensaje, icono) {
 }
 
 function modal_ver_imagen_registro(ruta, id) {
-
-  document.getElementById("mostrar_imagenes_relamos").innerHTML = "";
+  document.getElementById('mostrar_imagenes_relamos').innerHTML = '';
 
   $.ajax({
-    type: "GET",
+    type: 'GET',
     url: `${url_app}imagenes_de_registros.php`,
     data: {
-      id: id
+      id: id,
     },
-    dataType: "JSON",
+    dataType: 'JSON',
     success: function (response) {
       if (response.error === false) {
         let imagenes = response.datos;
 
         imagenes.map((val) => {
-
           let separar_nombre_archivo = val.split('.');
           let extencion_archivo = separar_nombre_archivo[1];
 
-          if (extencion_archivo != "pdf") {
-            document.getElementById("mostrar_imagenes_relamos").innerHTML += `<img src="${ruta}/${val}" style="width: 100%; height: auto"> <br> <br>`;
+          if (extencion_archivo != 'pdf') {
+            document.getElementById(
+              'mostrar_imagenes_relamos'
+            ).innerHTML += `<img src="${ruta}/${val}" style="width: 100%; height: auto"> <br> <br>`;
           } else {
-            document.getElementById("mostrar_imagenes_relamos").innerHTML += `<iframe src="${ruta}/${val}" width=100% height=600></iframe>`;
+            document.getElementById(
+              'mostrar_imagenes_relamos'
+            ).innerHTML += `<iframe src="${ruta}/${val}" width=100% height=600></iframe>`;
           }
-
         });
-
       } else {
         error(response.mensaje);
       }
-    }
+    },
   });
 
-  $("#modalVerImagenesRegistro").modal('show');
+  $('#modalVerImagenesRegistro').modal('show');
 }
 
-function mostrarLoader(opcion = "M") {
+function mostrarLoader(opcion = 'M') {
   $loader =
-    opcion == "M"
+    opcion == 'M'
       ? Swal.fire({
-        title: "Cargando...",
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        didOpen: () => {
-          swal.showLoading();
-        },
-      })
+          title: 'Cargando...',
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          didOpen: () => {
+            swal.showLoading();
+          },
+        })
       : $loader.close();
 }
 
@@ -260,55 +249,55 @@ function correcto_pasajero(mensaje) {
     timer: 3000,
     timerProgressBar: true,
     didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
 
   Toast.fire({
     icon: 'success',
-    title: mensaje
-  })
+    title: mensaje,
+  });
 }
 
 function ocultar_todo_contenido() {
-  $(".contenido_funcionario").css({ display: "none" });
-  $("#acciones_socios_nivel_3").css("display", "none");
-  $(".contenido").css({ display: "none" });
-  $("#historiaComunicacionDeCedulaDiv").css("display", "none");
-  $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
-  $("#b1").val("Coordinación");
-  $("#b1").attr("disabled", false);
-  $("#b2").val("Cobranza");
-  $("#b2").attr("disabled", false);
+  $('.contenido_funcionario').css({ display: 'none' });
+  $('#acciones_socios_nivel_3').css('display', 'none');
+  $('.contenido').css({ display: 'none' });
+  $('#historiaComunicacionDeCedulaDiv').css('display', 'none');
+  $('#historiaComunicacionDeCedulaDiv_funcionarios').css('display', 'none');
+  $('#b1').val('Coordinación');
+  $('#b1').attr('disabled', false);
+  $('#b2').val('Cobranza');
+  $('#b2').attr('disabled', false);
 
   //noEsSocioRegistro
-  $("#cedulasNSR").val("");
-  $("#nombreNSR").val(null);
-  $("#telefonoNSR").val(null);
-  $("#observacionesNSR").val("");
-  $("#avisarNSR").prop("selectedIndex", 0);
-  $("#noEsSocioRegistro").css({ display: "none" });
+  $('#cedulasNSR').val('');
+  $('#nombreNSR').val(null);
+  $('#telefonoNSR').val(null);
+  $('#observacionesNSR').val('');
+  $('#avisarNSR').prop('selectedIndex', 0);
+  $('#noEsSocioRegistro').css({ display: 'none' });
 
   //noEsSocio
-  $("#cedulasNS").val("");
-  $("#nombreNS").val(null);
-  $("#apellidoNS").val(null);
-  $("#telefonoNS").val(null);
-  $("#celularNS").val(null);
-  $("#observacionesNS").val("");
-  $("#avisarNS").prop("selectedIndex", 0);
-  $("#noEsSocio").css({ display: "none" });
+  $('#cedulasNS').val('');
+  $('#nombreNS').val(null);
+  $('#apellidoNS').val(null);
+  $('#telefonoNS').val(null);
+  $('#celularNS').val(null);
+  $('#observacionesNS').val('');
+  $('#avisarNS').prop('selectedIndex', 0);
+  $('#noEsSocio').css({ display: 'none' });
 
   //siEsSocio
-  $("#cedulas").val("");
-  $("#obser").val("");
-  $("#ensec").prop("selectedIndex", 0);
-  $("#siEsSocio").css({ display: "none" });
+  $('#cedulas').val('');
+  $('#obser').val('');
+  $('#ensec').prop('selectedIndex', 0);
+  $('#siEsSocio').css({ display: 'none' });
 
   historiaComunicacionDeCedula();
-  $(".patologias_socio").css("display", "none");
+  $('.patologias_socio').css('display', 'none');
 
-  $("#obser").val("");
-  $("#observacionesNSR").val("");
+  $('#obser').val('');
+  $('#observacionesNSR').val('');
 }
