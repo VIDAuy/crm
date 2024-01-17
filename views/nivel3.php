@@ -139,12 +139,12 @@ if ($_SESSION['usuario'] != 'Audit1' && $_SESSION['usuario'] != 'Audit2' && $_SE
 				</button>
 			</div>
 			<div class="col-3">
-				<button type="button" class="btn btn-info position-relative" style="background-color: purple" onclick="ver_registros_volver_a_llamar()">
+				<button type="button" class="btn btn-info position-relative" onclick="ver_registros_volver_a_llamar()">
 					Historial de volver a llamar
 				</button>
 			</div>
 			<div class="col-3">
-				<button type="button" class="btn btn-info position-relative" style="background-color: purple" onclick="ver_registros_alertas()">
+				<button type="button" class="btn btn-info position-relative" onclick="ver_registros_alertas()">
 					Historial de alertas
 				</button>
 			</div>

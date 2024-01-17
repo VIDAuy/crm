@@ -1,10 +1,8 @@
 $(document).ready(function () {
-    cantidad_volver_a_llamar();
-    setInterval(cantidad_volver_a_llamar, 5000);
-    setInterval(recordatorio_volver_a_llamar, 60000);
 
     $(".ctr_agendar_volver_a_llamar").css("display", "none");
     $(".administrar_pendientes").css("display", "none");
+
 });
 
 
@@ -111,10 +109,10 @@ function cantidad_volver_a_llamar() {
     let area = $("#sector").val();
     let id_sub_usuario = localStorage.getItem("id_sub_usuario");
 
+
+    document.getElementById("cantidad_pendientes_volver_a_llamar").innerHTML = "0+";
+
     if (area == "Morosos" || area == "Calidad" || area == "Bajas") {
-
-        document.getElementById("cantidad_pendientes_volver_a_llamar").innerHTML = "0+";
-
         $.ajax({
             type: "GET",
             url: `${url_app}contar_pendientes_volver_a_llamar.php`,
@@ -129,7 +127,6 @@ function cantidad_volver_a_llamar() {
                 }
             },
         });
-
     }
 }
 
@@ -139,7 +136,7 @@ function recordatorio_volver_a_llamar() {
 
     $.ajax({
         type: "GET",
-        url: url_app + "contar_pendientes_volver_a_llamar.php",
+        url: `${url_app}contar_pendientes_volver_a_llamar.php`,
         data: {
             area: area,
             id_sub_usuario: id_sub_usuario
@@ -148,6 +145,7 @@ function recordatorio_volver_a_llamar() {
         success: function (response) {
             if (response.error === false) {
                 if (response.cantidad > 0) {
+                    console.log(response.cantidad);
                     mostrar_recordatorio();
                 }
             }
@@ -243,11 +241,21 @@ function cargar_registro_volver_a_llamar(openModal = false, id, area, cedula, no
 }
 
 function mostrar_recordatorio() {
-    notie.alert({
-        type: 'warning',
-        text: '<strong>¡Recordatorio!</strong> <br> Tiene agenda pendiente para volver a llamar',
-        time: 3,
-        position: 'top'
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        },
+    });
+    Toast.fire({
+        icon: 'info',
+        title: 'Recordatorio',
+        html: 'Tiene agenda pendiente para volver a llamar!',
     });
 }
 

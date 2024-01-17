@@ -73,6 +73,11 @@ function abrir_modal_identificarse(openModal = false) {
                                 $(".ctr_agendar_volver_a_llamar").css("display", "block");
                             }
 
+                            cantidad_volver_a_llamar();
+                            recordatorio_volver_a_llamar();
+                            setInterval(cantidad_volver_a_llamar, 5000);
+                            setInterval(recordatorio_volver_a_llamar, 60000);
+
                         } else {
                             error(response.mensaje);
                         }
