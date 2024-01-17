@@ -15,7 +15,10 @@
 	<h2 style="color:#FB0B0F">CRM</h2>
 	<div style="display: flex; justify-content: space-between; align-items: center;">
 		<div id="q" style="visibility: hidden;">
-			<button type="button" class="btn btn-primary" onclick="datosAlertas()">ALERTAS <span id="bq" class="badge badge-light rounded-circle">?</span></button>
+			<button type="button" class="btn btn-primary rounded position-relative" onclick="datosAlertas()">
+				Alertas
+				<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="bq">0+</span>
+			</button>
 		</div>
 	</div>
 </div>

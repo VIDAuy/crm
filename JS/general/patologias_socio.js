@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+    $.fn.select2.defaults.set('theme', 'bootstrap');
+
+    $('.select2-single').select2({
+        placeholder: 'Seleccione una patología ...',
+        width: null,
+    });
+
     $(".patologias_socio").css("display", "none");
 
 });

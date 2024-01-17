@@ -25,9 +25,15 @@
 <div class="container" align="center">
 	<h2 style="color:#FB0B0F">CRM</h2>
 	<div style="display: flex; justify-content: space-between; align-items: center;">
-		<a href="http://192.168.1.13/call/panel_calidad" class="btn btn-primary">Afiliaciones competencia/convenios especiales <span class="badge badge-light rounded-circle" id="badgeAfiliacionesCompetencia">0</span></a>
+		<a href="http://192.168.1.13/call/panel_calidad" class="btn btn-primary position-relative" target="_blank">
+			Afiliaciones competencia / Convenios especiales
+			<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="badgeAfiliacionesCompetencia">0+</span>
+		</a>
 		<div id="q" style="visibility: hidden;">
-			<button type="button" class="btn btn-sm btn-primary rounded" onclick="datosAlertas()">ALERTAS <span id="bq" class="badge badge-light rounded-circle">?</span></button>
+			<button type="button" class="btn btn-primary rounded position-relative" onclick="datosAlertas()">
+				Alertas
+				<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="bq">0+</span>
+			</button>
 		</div>
 	</div>
 </div>

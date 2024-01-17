@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $("#q").css("visibility", "visible");
-    $("#bq").text("0");
+    $("#bq").text("0+");
     cantidad_alertas();
     setInterval(cantidad_alertas, 5000);
     $(".administrar_pendientes").css("display", "none");
@@ -30,7 +30,7 @@ function cantidad_alertas() {
                 type: "POST",
                 dataType: "JSON",
                 success: function (content) {
-                    $("#bq").text(content.message);
+                    $("#bq").text(content.message + "+");
                 },
             });
         }
@@ -45,7 +45,7 @@ function cantidad_alertas() {
             type: "POST",
             dataType: "JSON",
             success: function (content) {
-                $("#bq").text(content.message);
+                $("#bq").text(content.message + "+");
             },
         });
     }

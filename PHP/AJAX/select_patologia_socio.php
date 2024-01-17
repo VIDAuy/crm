@@ -25,7 +25,7 @@ $patologias_sin_registrar = patologias_sin_registrar($filtro);
 while ($row = mysqli_fetch_assoc($patologias_sin_registrar)) {
 
     $row['id'] = $row['id'];
-    $row['nombre'] = ucfirst($row['nombre']);
+    $row['nombre'] = strtoupper($row['nombre']);
     $f[] = $row;
 }
 
@@ -55,7 +55,7 @@ function patologias_registradas($cedula)
 
 function patologias_sin_registrar($filtro)
 {
-    $conexion = connection(DB_COORDINACION);
+    include_once '../conexiones/conexion3.php';
     $tabla = TABLA_PATOLOGIAS;
     $sql = "";
 

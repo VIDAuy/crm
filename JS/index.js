@@ -4,13 +4,13 @@ function getAfiliacionesCompetencia() {
         dataType: 'json',
         success: (res) => {
             if (res.success) {
-                $('#badgeAfiliacionesCompetencia').html(res.cantidad);
+                $('#badgeAfiliacionesCompetencia').html(res.cantidad + "+");
             }
         }
     });
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     getAfiliacionesCompetencia();
     let interval = window.setInterval(getAfiliacionesCompetencia, 5000);
 });

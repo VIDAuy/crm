@@ -2,7 +2,7 @@ function datosAlertas() {
 	let sector = $("#sector").val();
 	let id_sub_usuario = sector == "Calidad" || sector == "Bajas" ? localStorage.getItem('id_sub_usuario') : "";
 
-	if ($('#bq').text() == 0) {
+	if ($('#bq').text() == "0+") {
 		alert('No hay ningún mensaje que visualizar.');
 	}
 	else {
