@@ -7,9 +7,10 @@ $(document).ready(function () {
 
 
 function tabla_patologias_socio() {
-    $(".patologias_socio").css("display", "block");
-    let cedula = $("#ci").val();
 
+    $(".patologias_socio").css("display", "block");
+
+    let cedula = $("#ci").val();
     $("#tabla_patologias_socio").DataTable({
         ajax: `${url_app}tabla_patologias_socio.php?cedula=${cedula}`,
         columns: [

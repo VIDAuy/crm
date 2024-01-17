@@ -72,7 +72,7 @@ function ocultarContenido() {
     $('.contenido').css('display', 'none');
     $('.contenido_funcionario').css('display', 'none');
     $('#historiaComunicacionDeCedulaDiv').css('display', 'none');
-    $('.patologias_socio').css('display', 'none');
+    $(".patologias_socio").css("display", "none");
     $('#historiaComunicacionDeCedulaDiv_funcionarios').css('display', 'none');
     $('#acciones_socios_nivel_3').css('display', 'none');
   }
@@ -231,13 +231,13 @@ function mostrarLoader(opcion = 'M') {
   $loader =
     opcion == 'M'
       ? Swal.fire({
-          title: 'Cargando...',
-          allowEscapeKey: false,
-          allowOutsideClick: false,
-          didOpen: () => {
-            swal.showLoading();
-          },
-        })
+        title: 'Cargando...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          swal.showLoading();
+        },
+      })
       : $loader.close();
 }
 
@@ -296,7 +296,7 @@ function ocultar_todo_contenido() {
   $('#siEsSocio').css({ display: 'none' });
 
   historiaComunicacionDeCedula();
-  $('.patologias_socio').css('display', 'none');
+  $(".patologias_socio").css("display", "none");
 
   $('#obser').val('');
   $('#observacionesNSR').val('');
