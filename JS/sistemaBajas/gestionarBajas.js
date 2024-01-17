@@ -78,10 +78,10 @@ function masInfoMLB(id) {
 
         $('#MIDBtitulo').text(
           'Detalles de la baja de: ' +
-            content.nombre_socio +
-            ' (' +
-            cedula +
-            ')'
+          content.nombre_socio +
+          ' (' +
+          cedula +
+          ')'
         );
         $('#MIDBestadoActual').text('Estado actual: ' + content.estado);
 
@@ -115,9 +115,9 @@ function masInfoMLB(id) {
         // INFORMACIÓN DE ACTUALIZACIÓN DE LA GESTIÓN
 
         /*
-					if (content.estado != 'Pendiente')
-						$('#MIDBestado').val(content.estado);
-					*/
+          if (content.estado != 'Pendiente')
+            $('#MIDBestado').val(content.estado);
+          */
         //$('#MIDBobservacion').val(content.observacion_final);
 
         $('#modalInformacionDetalladaBaja').modal('show');
@@ -383,6 +383,8 @@ function corroborarMIDBestado() {
         "<option value='Pendiente excepción'>Pendiente excepción</option>";
       document.getElementById('MIDBmno').innerHTML +=
         "<option value='Derivado a Elite'>Derivado a Elite</option>";
+      document.getElementById('MIDBmno').innerHTML +=
+        "<option value='Pendiente de otorgar en CRM'>Pendiente de otorgar en CRM</option>";
     } else {
       document.getElementById('MIDBmno').innerHTML = '';
       $('#MIDBmno').prop('disabled', true);
