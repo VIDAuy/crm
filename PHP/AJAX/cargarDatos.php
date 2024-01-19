@@ -17,7 +17,7 @@ $q = "SELECT pds.nombre, pds.tel, pds.cedula, pps.fecha_afiliacion, pds.sucursal
 $r = mysqli_query($conexion, $q);
 $f = mysqli_fetch_assoc($r);
 
-$f['fecha_afiliacion'] = (new DateTime($f['fecha_afiliacion']))->format('d/m/Y');
+
 
 if (mysqli_num_rows($r) === 0) {
 	mysqli_close($conexion);
@@ -43,9 +43,10 @@ if (mysqli_num_rows($r) === 0) {
 			];
 	}
 } else {
+	$f['fecha_afiliacion'] = (new DateTime($f['fecha_afiliacion']))->format('d/m/Y');
 	$inspira = in_array($f['sucursal'], $sucursales_inspira) ? 'SI' : 'NO';
 	$f['inspira'] = $inspira;
-	
+
 	$f2 = mysqli_fetch_assoc($r);
 	$q = "SELECT abmactual, abm
 				FROM padron_datos_socio
