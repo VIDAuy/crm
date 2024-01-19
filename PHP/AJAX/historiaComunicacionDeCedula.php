@@ -137,7 +137,7 @@ function obtener_area_avisada($id)
 	$sql = "SELECT usuario FROM usuarios WHERE id = '$id'";
 	$consulta = mysqli_query($conexion, $sql);
 
-	return mysqli_fetch_assoc($consulta)['usuario'];
+	return mysqli_num_rows($consulta) > 0 ? mysqli_fetch_assoc($consulta)['usuario'] : "";
 }
 
 function obtener_imagenes($id)
