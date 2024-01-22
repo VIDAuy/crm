@@ -8,11 +8,10 @@ $id_sub_usuario = $_REQUEST['id_sub_usuario'];
 $sector         = $_REQUEST['sector'];
 $nombre_socio   = $_REQUEST['nombre_socio'];
 $telefono_socio = $_REQUEST['telefono_socio'];
-$socio = verificar_socio_y_baja($cedula)['socio'];
-$baja = verificar_socio_y_baja($cedula)['baja'];
+$socio = verificar_socio_y_baja($cedula)['socio'] == null ? 1 : verificar_socio_y_baja($cedula)['socio'];
+$baja = verificar_socio_y_baja($cedula)['baja'] == null ? 0 : verificar_socio_y_baja($cedula)['socio'];
 $nombre_patologia = nombre_patologia($patologia);
 $observacion_registro = "Patologia: $nombre_patologia - Observacion: $observacion";
-
 
 
 if ($cedula == "" || $patologia == "" || $observacion == "") {
@@ -20,6 +19,7 @@ if ($cedula == "" || $patologia == "" || $observacion == "") {
     $response['mensaje'] = ERROR_GENERAL;
     die(json_encode($response));
 }
+
 
 
 $insert_patologia = registrar_patologia($cedula, $patologia, $observacion);
@@ -85,7 +85,7 @@ function verificar_socio_y_baja($cedula)
 
 function nombre_patologia($id)
 {
-    $conexion = connection(DB_COORDINACION);
+    include_once '../conexiones/conexion3.php';
     $tabla = TABLA_PATOLOGIAS;
 
     $sql = "SELECT patologia AS 'nombre' FROM {$tabla} WHERE id_patologia = '$id' ORDER BY nombre ASC";
