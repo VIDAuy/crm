@@ -76,7 +76,7 @@ echo json_encode($f);
 function corregirTelefono($var)
 {
 	// CORRECCIÓN Y ASIGNACIÓN DE TELÉFONO
-	if (strlen($var) === 0)
+	if (strlen($var) === 0 || $var == 0)
 		return 'Sin datos';
 
 	//EN CASO DE QUE EL TELÉFONO EMPIECE CON '0' Y UN ESPACIO LOS QUITA DE LA VARIABLE

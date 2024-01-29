@@ -60,7 +60,7 @@ function abrir_modal_identificarse(openModal = false) {
                                 $(".administrar_pendientes").css("display", "block");
                             }
 
-                            if (sector == "Bajas" && (cedula == 44417851)) {
+                            if (sector == "Bajas" && (cedula == 44417851 || cedula == 50709395)) {
                                 tabla_llamadas_pendientes();
                                 tabla_alertas_pendientes();
                                 setInterval(tabla_llamadas_pendientes, 300000);
