@@ -105,6 +105,78 @@ function abrir_agenda_volver_a_llamar(openModal = false) {
     });
 }
 
+function abrir_agenda_volver_a_llamar(openModal = false) {
+    if (openModal === true) {
+        $("#modal_agrega_volver_a_llamar").modal("show");
+    }
+
+    let area = $("#sector").val();
+    let id_sub_usuario = localStorage.getItem("id_sub_usuario");
+
+    $("#tabla_agenda_volver_a_llamar").DataTable({
+        ajax: `${url_app}listado_agenda_volver_a_llamar.php?area=${area}&id_sub_usuario=${id_sub_usuario}`,
+        columns: [
+            { data: "id" },
+            { data: "cedula" },
+            { data: "nombre" },
+            { data: "telefono" },
+            { data: "es_socio" },
+            { data: "baja" },
+            { data: "fecha_hora" },
+            { data: "mensaje" },
+            { data: "fecha_registro" },
+            { data: "acciones" },
+        ],
+        columnDefs: [
+            {
+                targets: [0],
+                visible: false,
+                searchable: false,
+            },
+        ],
+        order: [[0, "asc"]],
+        bDestroy: true,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
+        },
+    });
+}
+
+function cambiar_fecha_y_hora_volver_a_llamar(openModal = false, id) {
+    if (openModal === true) {
+        $("#modal_cambiar_fecha_y_hora_volver_a_llamar").modal("show");
+        $("#id_reagendar_volver_a_llamar").val(id);
+        let fecha = new Date();
+        $("#fecha_reagendar_volver_a_llamar").val(fecha.toJSON().slice(0, 10));
+        $("#hora_reagendar_agenda_volver_a_llamar").val(fecha.getHours() + ":" + fecha.getMinutes());
+    } else {
+
+        let id_registro = $("#id_reagendar_volver_a_llamar").val();
+        let fecha = $("#fecha_reagendar_volver_a_llamar").val();
+        let hora = $("#hora_reagendar_agenda_volver_a_llamar").val();
+
+        $.ajax({
+            type: "POST",
+            url: `${url_app}cambiar_fecha_y_hora_volver_a_llamar.php`,
+            data: {
+                "id": id_registro,
+                "fecha": fecha,
+                "hora": hora
+            },
+            dataType: "JSON",
+            success: function (response) {
+                if (response.error === false) {
+                    correcto(response.mensaje);
+                    $("#modal_cambiar_fecha_y_hora_volver_a_llamar").modal("hide");
+                    abrir_agenda_volver_a_llamar(false);
+                } else {
+                    error(response.mensaje);
+                }
+            }
+        });
+    }
+}
+
 function cantidad_volver_a_llamar() {
     let area = $("#sector").val();
     let id_sub_usuario = localStorage.getItem("id_sub_usuario");

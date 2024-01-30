@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.0.65';
+$version = '?v=1.0.66';
 session_start();
 date_default_timezone_set('America/Montevideo');
 
@@ -64,6 +64,7 @@ if (isset($_SESSION['nivel'])) {
 			include('views/modals/modal_historial_registros_de_alertas.html');
 			include('views/modals/modal_historial_registros_volver_a_llamar.html');
 			include('views/modals/modal_agregar_patologia_socio.html');
+			include('views/modals/modal_cambiar_fecha_y_hora_volver_a_llamar.html');
 
 			break;
 		case 2:
@@ -184,6 +185,7 @@ if (isset($_SESSION['nivel'])) {
 			include('views/modals/modal_historial_registros_de_alertas.html');
 			include('views/modals/modal_historial_registros_volver_a_llamar.html');
 			include('views/modals/modal_agregar_patologia_socio.html');
+			include('views/modals/modal_cambiar_fecha_y_hora_volver_a_llamar.html');
 
 
 			echo '<script src="JS/index.js' . $version . '"></script>';
