@@ -108,6 +108,8 @@ function abrir_agenda_volver_a_llamar(openModal = false) {
 function abrir_agenda_volver_a_llamar(openModal = false) {
     if (openModal === true) {
         $("#modal_agrega_volver_a_llamar").modal("show");
+
+        setInterval(abrir_agenda_volver_a_llamar, 60000);
     }
 
     let area = $("#sector").val();
@@ -175,6 +177,7 @@ function cambiar_fecha_y_hora_volver_a_llamar(openModal = false, id) {
                     correcto(response.mensaje);
                     $("#modal_cambiar_fecha_y_hora_volver_a_llamar").modal("hide");
                     tabla_llamadas_pendientes();
+                    abrir_agenda_volver_a_llamar();
                 } else {
                     error(response.mensaje);
                 }

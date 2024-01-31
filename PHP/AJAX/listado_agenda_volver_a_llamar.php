@@ -4,6 +4,7 @@ include './configuraciones.php';
 $area = $_REQUEST['area'];
 $area = obtener_area($area);
 $id_sub_usuario = $_REQUEST['id_sub_usuario'];
+$fecha_actual = date("Y-m-d H:i:s");
 
 
 $tabla["data"] = [];
@@ -23,8 +24,14 @@ while ($resultado = mysqli_fetch_assoc($consulta)) {
     $fecha_hora     = date("d/m/Y H:i:s", strtotime($resultado['fecha_hora']));
     $mensaje        = $resultado['mensaje'];
     $fecha_registro = date("d/m/Y H:i:s", strtotime($resultado['fecha_registro']));
-    $acciones = "<button class='btn btn-primary' onclick='cargar_registro_volver_a_llamar(true, `" . $id . "`, `" . $area . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $es_socio . "`, `" . $fecha_hora . "`, `" . $mensaje . "`, `" . $fecha_registro . "`)'>Registrar llamada</button>";
+    $acciones = "<button class='btn btn-primary mb-2' onclick='cambiar_fecha_y_hora_volver_a_llamar(true, `" . $id . "`)'>Reagendar llamada</button> <br>";
 
+    $fecha_recordatorio = $resultado['fecha_hora'];
+    $fecha_menos_1_hora = date("Y-m-d H:i:s", strtotime($fecha_recordatorio . "- 1 hour"));
+
+    if ($fecha_actual >= $fecha_menos_1_hora) {
+        $acciones .= "<button class='btn btn-warning' onclick='cargar_registro_volver_a_llamar(true, `" . $id . "`, `" . $area . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $es_socio . "`, `" . $fecha_hora . "`, `" . $mensaje . "`, `" . $fecha_registro . "`)'>Registrar llamada</button>";
+    }
 
     $tabla["data"][] = [
         "id"             => $id,
@@ -62,6 +69,7 @@ function obtener_area($area)
     return mysqli_fetch_assoc($consulta)['id'];
 }
 
+/*
 function consulta_general($area, $id_sub_usuario)
 {
     $conexion = connection(DB);
@@ -81,6 +89,33 @@ function consulta_general($area, $id_sub_usuario)
 	{$tabla} 
     WHERE
 	NOW() >= DATE_SUB( fecha_hora, INTERVAL 1 HOUR ) AND
+    mostrar = 1 AND
+    activo = 1 AND 
+    area = '$area' AND
+    id_sub_usuario = '$id_sub_usuario'";
+
+    return mysqli_query($conexion, $sql);
+}
+*/
+
+function consulta_general($area, $id_sub_usuario)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_AGENDA_VOLVER_A_LLAMAR;
+
+    $sql = "SELECT
+	id,
+	area,
+	cedula,
+	nombre,
+	telefono,
+	es_socio,
+	fecha_hora,
+	mensaje,
+	fecha_registro 
+    FROM
+	{$tabla} 
+    WHERE
     mostrar = 1 AND
     activo = 1 AND 
     area = '$area' AND
