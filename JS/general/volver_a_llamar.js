@@ -147,8 +147,14 @@ function cambiar_fecha_y_hora_volver_a_llamar(openModal = false, id) {
         $("#modal_cambiar_fecha_y_hora_volver_a_llamar").modal("show");
         $("#id_reagendar_volver_a_llamar").val(id);
         let fecha = new Date();
+        let hora = fecha.getHours();
+        let minutos = fecha.getMinutes();
+
+        hora = String(hora).length == 1 ? `0${hora}` : hora;
+        minutos = String(minutos).length == 1 ? `0${minutos}` : minutos;
+
         $("#fecha_reagendar_volver_a_llamar").val(fecha.toJSON().slice(0, 10));
-        $("#hora_reagendar_agenda_volver_a_llamar").val(fecha.getHours() + ":" + fecha.getMinutes());
+        $("#hora_reagendar_agenda_volver_a_llamar").val(`${hora}:${minutos}`);
     } else {
 
         let id_registro = $("#id_reagendar_volver_a_llamar").val();
@@ -168,7 +174,7 @@ function cambiar_fecha_y_hora_volver_a_llamar(openModal = false, id) {
                 if (response.error === false) {
                     correcto(response.mensaje);
                     $("#modal_cambiar_fecha_y_hora_volver_a_llamar").modal("hide");
-                    abrir_agenda_volver_a_llamar(false);
+                    tabla_llamadas_pendientes();
                 } else {
                     error(response.mensaje);
                 }

@@ -36,7 +36,9 @@ while ($row = mysqli_fetch_assoc($obtener_registros)) {
         $usuario_asignado = obtener_nombre_usuario($id_usuario_asignado);
         $usuario_asignador = obtener_nombre_usuario($id_usuario_asignador);
         $usuario_agendo = obtener_nombre_usuario($id_usuario_agendo);
-        $acciones             = "<button class='btn btn-warning' onclick='abrir_asignar_llamada(true, `" . $id . "`, `" . $id_area . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $es_socio . "`, `" . $baja . "`, `" . $fecha_hora . "`, `" . $mensaje . "`, `" . $fecha_registro . "`, `" . $id_usuario_asignado . "`, `" . $usuario_asignado . "`, `" . $id_usuario_asignador . "`, `" . $usuario_asignador . "`)'>Reasignar</button>";
+        $acciones = "<button class='btn btn-warning mb-2' onclick='abrir_asignar_llamada(true, `" . $id . "`, `" . $id_area . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $es_socio . "`, `" . $baja . "`, `" . $fecha_hora . "`, `" . $mensaje . "`, `" . $fecha_registro . "`, `" . $id_usuario_asignado . "`, `" . $usuario_asignado . "`, `" . $id_usuario_asignador . "`, `" . $usuario_asignador . "`)'>Reasignar</button>
+        <br>
+        <button class='btn btn-primary' onclick='cambiar_fecha_y_hora_volver_a_llamar(true, `" . $id . "`)'>Reagendar llamada</button>";
     }
 
 

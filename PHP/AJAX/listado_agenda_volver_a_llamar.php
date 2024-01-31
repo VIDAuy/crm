@@ -23,9 +23,7 @@ while ($resultado = mysqli_fetch_assoc($consulta)) {
     $fecha_hora     = date("d/m/Y H:i:s", strtotime($resultado['fecha_hora']));
     $mensaje        = $resultado['mensaje'];
     $fecha_registro = date("d/m/Y H:i:s", strtotime($resultado['fecha_registro']));
-    $acciones = "<button class='btn btn-primary' onclick='cargar_registro_volver_a_llamar(true, `" . $id . "`, `" . $area . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $es_socio . "`, `" . $fecha_hora . "`, `" . $mensaje . "`, `" . $fecha_registro . "`)'>Registrar llamada</button>
-    <br>
-    <button class='btn btn-warning' onclick='cambiar_fecha_y_hora_volver_a_llamar(true, `" . $id . "`)'>Reagendar llamada</button>";
+    $acciones = "<button class='btn btn-primary' onclick='cargar_registro_volver_a_llamar(true, `" . $id . "`, `" . $area . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $es_socio . "`, `" . $fecha_hora . "`, `" . $mensaje . "`, `" . $fecha_registro . "`)'>Registrar llamada</button>";
 
 
     $tabla["data"][] = [
