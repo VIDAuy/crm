@@ -4,13 +4,25 @@ const url_app = 'http://192.168.1.250:82/' + app + '/PHP/AJAX/';
 
 // AJAX
 function agregarFiliales() {
+
+  let sector = $('#sector').val();
+
+  if (sector != "Morosos" && sector != "Calidad_interna") {
+    let nuevaLinea1 = '<option selected value="sin_seleccion">Seleccione una opción</option>';
+    $(nuevaLinea1).appendTo('.agregarFiliales');
+    let nuevaLinea2 = '<option selected value="">No avisar</option>';
+    $(nuevaLinea2).appendTo('.agregarFiliales');
+  } else {
+    let nuevaLinea1 = '<option selected value="">No avisar</option>';
+    $(nuevaLinea1).appendTo('.agregarFiliales');
+  }
+
   $.ajax({
     url: url_app + 'agregarFiliales.php',
     dataType: 'JSON',
     success: function (r) {
       $.each(r.datos, function (i, v) {
-        let nuevaLinea =
-          '<option value="' + v.id + '">' + v.usuario + '</option>';
+        let nuevaLinea = '<option value="' + v.id + '">' + v.usuario + '</option>';
         $(nuevaLinea).appendTo('.agregarFiliales');
       });
     },
