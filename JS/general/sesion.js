@@ -73,7 +73,7 @@ function extender_sesion() {
 
     if (cedula != cedula_registrada) {
 
-      if (errores == 1) error("La cédula ingresada no es correcta. <br> <span style='font-weight: bolder'> Tiene un máximo de 3 intentos para ingresar la cédula correcta, de lo contrario se cerrara la sesión. </span>");
+      if (errores == 1) error("La cédula ingresada no es correcta. <br> <span style='font-weight: bolder'> Tiene un máximo de 3 intentos para ingresar la cédula correcta, de lo contrario, se cerrará la sesión. </span>");
       if (errores == 2) error("¡Última oportunidad! <br> <span style='font-weight: bolder'> Si no ingresa su cédula correctamente se cerrará la sesión. </span>");
 
       if (errores >= 3) cerrarSesion();

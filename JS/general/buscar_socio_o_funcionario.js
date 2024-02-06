@@ -44,6 +44,7 @@ function buscar() {
                     $("#cedulas").text($("#ci").val());
                     historiaComunicacionDeCedula();
                     tabla_patologias_socio();
+                    mostrar_cantidad_etiquetas_socio();
                     if (datos.noSocioConRegistros) {
                         alert(datos.mensaje);
                         $("#cedulasNSR").text($("#ci").val());
@@ -176,6 +177,7 @@ function buscarSocio() {
             $("#cedulas").text(cedula);
             historiaComunicacionDeCedula();
             tabla_patologias_socio();
+            mostrar_cantidad_etiquetas_socio();
             if (datos.noSocioConRegistros) {
                 alerta("Problema!", datos.mensaje, "warning");
                 $("#cedulasNSR").text($("#ci").val());

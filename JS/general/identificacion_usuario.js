@@ -87,6 +87,10 @@ function identificar_persona() {
                         $(".ctr_agendar_volver_a_llamar").css("display", "block");
                     }
 
+                    if (sector == "Calidad") {
+                        $("#div_agregarEtiquetaSocio").css("display", "block");
+                    }
+
                     cantidad_volver_a_llamar();
                     recordatorio_volver_a_llamar();
                     setInterval(cantidad_volver_a_llamar, 5000);

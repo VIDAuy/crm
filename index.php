@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.0.72';
+$version = '?v=1.0.74';
 session_start();
 date_default_timezone_set('America/Montevideo');
 
@@ -28,6 +28,7 @@ if (isset($_SESSION['nivel'])) {
 			echo '<script src="JS/general/historia_comunicacion_de_cedula.js' . $version . '"></script>';
 			echo '<script src="JS/general/historial_registros_alertas.js' . $version . '"></script>';
 			echo '<script src="JS/general/patologias_socio.js' . $version . '"></script>';
+			echo '<script src="JS/general/etiqueta_socio.js' . $version . '"></script>';
 			/** END JS General **/
 
 
@@ -65,6 +66,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/modals/modal_historial_registros_volver_a_llamar.html');
 			include('views/modals/modal_agregar_patologia_socio.html');
 			include('views/modals/modal_cambiar_fecha_y_hora_volver_a_llamar.html');
+			include('views/modals/modal_ver_etiquetas_socio.html');
+			include('views/modals/modal_agregar_etiquetas_socio.html');
 
 			break;
 		case 2:
@@ -82,6 +85,7 @@ if (isset($_SESSION['nivel'])) {
 			echo '<script src="JS/general/historia_comunicacion_de_cedula.js' . $version . '"></script>';
 			echo '<script src="JS/general/historial_registros_alertas.js' . $version . '"></script>';
 			echo '<script src="JS/general/patologias_socio.js' . $version . '"></script>';
+			echo '<script src="JS/general/etiqueta_socio.js' . $version . '"></script>';
 			/** END JS General **/
 
 
@@ -110,6 +114,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/modals/modal_asignar_alerta_pendiente.html');
 			include('views/modals/modal_historial_registros_de_alertas.html');
 			include('views/modals/modal_historial_registros_volver_a_llamar.html');
+			include('views/modals/modal_ver_etiquetas_socio.html');
+			include('views/modals/modal_agregar_etiquetas_socio.html');
 
 			break;
 
@@ -129,6 +135,7 @@ if (isset($_SESSION['nivel'])) {
 			echo '<script src="JS/general/historia_comunicacion_de_cedula.js' . $version . '"></script>';
 			echo '<script src="JS/general/historial_registros_alertas.js' . $version . '"></script>';
 			echo '<script src="JS/general/patologias_socio.js' . $version . '"></script>';
+			echo '<script src="JS/general/etiqueta_socio.js' . $version . '"></script>';
 			/** END JS General **/
 
 
@@ -161,6 +168,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/modals/modal_mostrar_imagenes.html');
 			include('views/modals/modal_historial_registros_volver_a_llamar.html');
 			include('views/modals/modal_historial_registros_de_alertas.html');
+			include('views/modals/modal_ver_etiquetas_socio.html');
+			include('views/modals/modal_agregar_etiquetas_socio.html');
 
 
 			// MODALES DE BAJA Y RELACIONADOS
@@ -201,6 +210,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/modals/modal_asignar_alerta_pendiente.html');
 			include('views/modals/modal_historial_registros_de_alertas.html');
 			include('views/modals/modal_historial_registros_volver_a_llamar.html');
+			include('views/modals/modal_ver_etiquetas_socio.html');
+			include('views/modals/modal_agregar_etiquetas_socio.html');
 
 			break;
 
@@ -237,6 +248,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/modals/modal_asignar_alerta_pendiente.html');
 			include('views/modals/modal_historial_registros_de_alertas.html');
 			include('views/modals/modal_historial_registros_volver_a_llamar.html');
+			include('views/modals/modal_ver_etiquetas_socio.html');
+			include('views/modals/modal_agregar_etiquetas_socio.html');
 
 			break;
 
@@ -269,6 +282,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/modals/modal_asignar_alerta_pendiente.html');
 			include('views/modals/modal_historial_registros_de_alertas.html');
 			include('views/modals/modal_historial_registros_volver_a_llamar.html');
+			include('views/modals/modal_ver_etiquetas_socio.html');
+			include('views/modals/modal_agregar_etiquetas_socio.html');
 
 			break;
 	}

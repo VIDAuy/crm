@@ -115,6 +115,7 @@ const TABLA_AGENDA_VOLVER_A_LLAMAR    = "agenda_volver_a_llamar";
 const VIEW_NEXO                       = "v_nexo";
 const TABLA_SUB_USUARIOS              = "sub_usuarios";
 const TABLA_PATOLOGIAS_SOCIO          = "patologias_socio";
+const TABLA_ETIQUETA_SOCIO            = "etiqueta_socio";
 
 
 //SERVER - COORDINACIÓN
