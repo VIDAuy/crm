@@ -1,6 +1,6 @@
 function datosAlertas() {
 	if ($('#bq').text() == "0+") {
-		alert('No hay ningún mensaje que visualizar.');
+		error('No hay ningún mensaje que visualizar.');
 	}
 	else {
 		$.ajax(

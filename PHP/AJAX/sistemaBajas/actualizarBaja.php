@@ -9,20 +9,21 @@ require '../../../PHPMailer/src/SMTP.php';
 require '../../../PHPMailer/src/Exception.php';
 
 
-$data = array_map('stripslashes', $_POST);
 
-if ($data) {
-	$idrelacion 			= $data['MIDBidrelacion'];
+if ($_REQUEST) {
+	$idrelacion 			= $_REQUEST['idrelacion'];
 	$fechaInicioGestion 	= date('Y-m-d');
-	$estado 				= $data['MIDBestado'];
-	$motivoNoOtorgada 		= (isset($data['MIDBmno'])) ? $data['MIDBmno'] : null;
-	$nombreFuncionarioFinal = mb_convert_case($data['MIDBnombreFA'], MB_CASE_TITLE, 'UTF-8');
+	$estado 				= $_REQUEST['estado'];
+	$motivoNoOtorgada 		= (isset($_REQUEST['motivo'])) ? $_REQUEST['motivo'] : null;
+	$nombreFuncionarioFinal = mb_convert_case($_REQUEST['nombreFuncionarioFinal'], MB_CASE_TITLE, 'UTF-8');
 	$motivo                 = $motivoNoOtorgada == "" ? "" : "- $motivoNoOtorgada";
-	$observacionFinal 		= "Baja $estado $motivo: " . mysqli_real_escape_string($conexion, $data['MIDBobservacion']);
+	$observacionFinal 		= "Baja $estado $motivo: " . mysqli_real_escape_string($conexion, $_REQUEST['observacionFinal']);
 	$areaFinGestion         = $_REQUEST['usuario'];
 	$id_sub_usuario         = $_REQUEST['id_sub_usuario'];
 	$avisar_a_elite         = $_REQUEST['avisar_a_elite'] == "true" ? true : false;
 	$alertar_elite          = $avisar_a_elite == true ? "envioSector = '65', activo = 1" : 'activo = 0';
+
+
 
 
 	if (in_array($areaFinGestion, array('40479176', '48458544', '53220928', '63737983', '20053746', '49203790'))) {
@@ -71,7 +72,7 @@ if ($data) {
 		mysqli_close($conexion);
 
 		include '../../conexiones/conexion.php';
-		$observacion = mysqli_real_escape_string($conexion, $data['MIDBobservacion']);
+		$observacion = mysqli_real_escape_string($conexion, $_REQUEST['observacionFinal']);
 		if (strlen($observacion) > 300) $observacion = substr($observacion, 0, 290) . '...';
 		$q = "UPDATE padron_datos_socio SET abmactual = 1, abm = 'baja', observaciones = '$observacion' WHERE cedula = $cedula";
 		mysqli_query($conexion, $q);

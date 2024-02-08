@@ -79,7 +79,14 @@ if (isset($_GET['ID'])) {
 	} else $f = ['noRegistros' => true];
 }
 
+
+
 echo json_encode($f);
+
+
+
+
+
 
 function corregirTelefono($var)
 {

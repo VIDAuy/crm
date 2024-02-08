@@ -10,6 +10,16 @@ $(document).ready(function () {
 function agendar_volver_a_llamar(openModal = false) {
     if (openModal === true) {
         $("#modal_agregar_volver_a_llamar").modal("show");
+
+        let fecha = new Date();
+        let hora = fecha.getHours();
+        let minutos = fecha.getMinutes();
+
+        hora = String(hora).length == 1 ? `0${hora}` : hora;
+        minutos = String(minutos).length == 1 ? `0${minutos}` : minutos;
+
+        $("#fecha_nueva_agenda_volver_a_llamar").val(fecha.toJSON().slice(0, 10));
+        $("#hora_nueva_agenda_volver_a_llamar").val(`${hora}:${minutos}`);
     } else {
         let area = $("#sector").val();
         let cedula = $("#cedulas").text();

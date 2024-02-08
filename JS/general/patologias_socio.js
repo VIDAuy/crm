@@ -1,10 +1,7 @@
 $(document).ready(function () {
 
-    $.fn.select2.defaults.set('theme', 'bootstrap');
-
-    $('.select2-single').select2({
-        placeholder: 'Seleccione una patología ...',
-        width: null,
+    $('#select_patologia_socio').select2({
+        dropdownParent: $('#modalAgregarPatologiaSocio')
     });
 
     $(".patologias_socio").css("display", "none");

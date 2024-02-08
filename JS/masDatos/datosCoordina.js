@@ -13,7 +13,7 @@ function datosCoordina() {
 		.done(function (datos) {
 			if (datos.error) {
 				$('#b1').val('Coordinación (sin registros)');
-				alert(datos.mensaje);
+				error(datos.mensaje);
 			} else {
 				$('#tbodyMDCoo tr').remove();
 				$.each(datos, function (index, el) {

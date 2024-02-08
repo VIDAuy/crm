@@ -1,7 +1,6 @@
 // AJAX
 
 function MIDBactualizarDatos() {
-  $data = $('#MIDBform').serialize();
   let sector = $('#sector').val();
   let id_sub_usuario = localStorage.getItem('id_sub_usuario');
   id_sub_usuario = id_sub_usuario != null ? id_sub_usuario : '';
@@ -27,17 +26,26 @@ function MIDBactualizarDatos() {
     error('Debe ingresar una observación');
   } else {
     $.ajax({
-      url: `PHP/AJAX/sistemaBajas/actualizarBaja.php?usuario=${sector}&id_sub_usuario=${id_sub_usuario}&avisar_a_elite=${avisar_a_elite}`,
+      url: `PHP/AJAX/sistemaBajas/actualizarBaja.php`,
       type: 'POST',
       dataType: 'JSON',
-      data: $data,
+      data: {
+        "idrelacion": idrelacion,
+        "usuario": sector,
+        "id_sub_usuario": id_sub_usuario,
+        "avisar_a_elite": avisar_a_elite,
+        "nombreFuncionarioFinal": nombre_funcionario,
+        "estado": estado,
+        "motivo": motivo,
+        "observacionFinal": observacion,
+      },
     })
       .done(function (respuesta) {
         if (respuesta.error) alert(respuesta.mensaje);
         else {
           alert(respuesta.mensaje);
           corroborarBajas();
-          $('#modalInformacionDetalladaBaja .close').click();
+          $('#modalInformacionDetalladaBaja').modal("hide");
           limpiarMIDB();
         }
       })
@@ -76,14 +84,8 @@ function masInfoMLB(id) {
 
         $('#idrelacion').val(content.idrelacion);
 
-        $('#MIDBtitulo').text(
-          'Detalles de la baja de: ' +
-          content.nombre_socio +
-          ' (' +
-          cedula +
-          ')'
-        );
-        $('#MIDBestadoActual').text('Estado actual: ' + content.estado);
+        $('#MIDBtitulo').text(`Detalles de la baja de: ${content.nombre_socio} (${cedula})`);
+        $('#MIDBestadoActual').html(`Estado actual: <strong>${content.estado}</strong>`);
 
         // INFORMACIÓN DEL SOCIO
 

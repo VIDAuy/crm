@@ -9,9 +9,7 @@ $q = "SELECT pps.servicio AS nro_servicio,
 		padron_producto_socio AS pps 
 		INNER JOIN servicios_codigos AS sc ON pps.servicio = sc.nro_servicio 
 	WHERE 
-		cedula = $cedula
-		AND activo = 1
-		";
+		cedula = $cedula";
 $r = mysqli_query($conexion, $q);
 
 if (mysqli_num_rows($r) != 0) {

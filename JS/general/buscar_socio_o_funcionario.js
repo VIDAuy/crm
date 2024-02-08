@@ -46,7 +46,7 @@ function buscar() {
                     tabla_patologias_socio();
                     mostrar_cantidad_etiquetas_socio();
                     if (datos.noSocioConRegistros) {
-                        alert(datos.mensaje);
+                        warning(datos.mensaje);
                         $("#cedulasNSR").text($("#ci").val());
                         $("#nombreNSR").val(datos.nombre);
                         $("#telefonoNSR").val(datos.telefono);
@@ -57,7 +57,7 @@ function buscar() {
                             "none"
                         );
                     } else if (datos.noSocio) {
-                        alert(datos.mensaje);
+                        warning(datos.mensaje);
                         $("#cedulasNS").text($("#ci").val());
                         $("#noEsSocio").css({ display: "block" });
                         $("#historiaComunicacionDeCedulaDiv_funcionarios").css(
@@ -65,7 +65,7 @@ function buscar() {
                             "none"
                         );
                     } else if (datos.bajaProcesada) {
-                        alert(datos.mensaje);
+                        warning(datos.mensaje);
                         $("#cedulasNSR").text($("#ci").val());
                         $("#nombreNSR").val(datos.nombre);
                         $("#telefonoNSR").val(datos.telefono);
@@ -95,15 +95,15 @@ function buscar() {
                 })
                 .fail(function (error) {
                     console.log(error);
-                    alert(
+                    error(
                         "Ha ocurrido un error, por favor comuníquese con el administrador"
                     );
                 });
         } else {
-            alert("La cédula ingresada no es válida.");
+            error("La cédula ingresada no es válida.");
         }
     } else {
-        alert("Debe ingresar la cédula de la persona que quiera buscar.");
+        error("Debe ingresar la cédula de la persona que quiera buscar.");
     }
 }
 
@@ -132,98 +132,104 @@ function buscarDatos() {
 function buscarSocio() {
     let cedula = $("#ci").val();
 
-    $.ajax({
-        url: url_app + "cargar_datos_socios.php",
-        type: "GET",
-        dataType: "JSON",
-        data: { CI: cedula },
-        beforeSend: function () {
-            $(".contenido").css({ display: "none" });
-            $("#acciones_socios_nivel_3").css("display", "block");
-            $(".contenido_funcionario").css({ display: "none" });
-            $("#historiaComunicacionDeCedulaDiv").css("display", "none");
-            $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
-            $("#b1").val("Coordinación");
-            $("#b1").attr("disabled", false);
-            $("#b2").val("Cobranza");
-            $("#b2").attr("disabled", false);
+    if (cedula == "") {
+        error("Debe ingresar la cédula a buscar");
+    } else {
 
-            //noEsSocioRegistro
-            $("#cedulasNSR").val("");
-            $("#nombreNSR").val(null);
-            $("#telefonoNSR").val(null);
-            $("#observacionesNSR").val("");
-            $("#avisarNSR").prop("selectedIndex", 0);
-            $("#noEsSocioRegistro").css({ display: "none" });
+        $.ajax({
+            url: url_app + "cargar_datos_socios.php",
+            type: "GET",
+            dataType: "JSON",
+            data: { CI: cedula },
+            beforeSend: function () {
+                $(".contenido").css({ display: "none" });
+                $("#acciones_socios_nivel_3").css("display", "block");
+                $(".contenido_funcionario").css({ display: "none" });
+                $("#historiaComunicacionDeCedulaDiv").css("display", "none");
+                $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
+                $("#b1").val("Coordinación");
+                $("#b1").attr("disabled", false);
+                $("#b2").val("Cobranza");
+                $("#b2").attr("disabled", false);
 
-            //noEsSocio
-            $("#cedulasNS").val("");
-            $("#nombreNS").val(null);
-            $("#apellidoNS").val(null);
-            $("#telefonoNS").val(null);
-            $("#celularNS").val(null);
-            $("#observacionesNS").val("");
-            $("#avisarNS").prop("selectedIndex", 0);
-            $("#noEsSocio").css({ display: "none" });
+                //noEsSocioRegistro
+                $("#cedulasNSR").val("");
+                $("#nombreNSR").val(null);
+                $("#telefonoNSR").val(null);
+                $("#observacionesNSR").val("");
+                $("#avisarNSR").prop("selectedIndex", 0);
+                $("#noEsSocioRegistro").css({ display: "none" });
 
-            //siEsSocio
-            $("#cedulas").val("");
-            $("#obser").val("");
-            $("#ensec").prop("selectedIndex", 0);
-            $("#siEsSocio").css({ display: "none" });
-        },
-    })
-        .done(function (datos) {
-            $("#cedulas").text(cedula);
-            historiaComunicacionDeCedula();
-            tabla_patologias_socio();
-            mostrar_cantidad_etiquetas_socio();
-            if (datos.noSocioConRegistros) {
-                alerta("Problema!", datos.mensaje, "warning");
-                $("#cedulasNSR").text($("#ci").val());
-                $("#nombreNSR").val(datos.nombre);
-                $("#telefonoNSR").val(datos.telefono);
-                $("#noEsSocioRegistro").css({ display: "block" });
-                $("#historiaComunicacionDeCedulaDiv").css("display", "block");
-                $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
-            } else if (datos.noSocio) {
-                alerta("<span style='color: #9C0404'>¿Está seguro de que la cédula pertenece un socio?</span>", datos.mensaje, "error");
-                $("#cedulasNS").text($("#ci").val());
-                $("#noEsSocio").css({ display: "block" });
-                $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
-            } else if (datos.bajaProcesada) {
-                alerta("Problema!", datos.mensaje, "warning");
-                $("#cedulasNSR").text($("#ci").val());
-                $("#nombreNSR").val(datos.nombre);
-                $("#telefonoNSR").val(datos.telefono);
-                $("#noEsSocioRegistro").css({ display: "block" });
-                $("#historiaComunicacionDeCedulaDiv").css("display", "block");
-                $("#historiaComunicacionDeCedulaDiv_funcionarios").css(
-                    "display",
-                    "none"
-                );
-            } else {
-                $("#nom").text(datos.nombre);
-                $("#telefono").text(datos.tel);
-                $("#fechafil").text(datos.fecha_afiliacion);
-                $("#radio").text(datos.radio);
-                $("#sucursal").text(datos.sucursal);
-                $("#inspira").text(datos.inspira);
-                $("#siEsSocio").css({ display: "block" });
-                if (!datos.mostrar_inspira) $("#div_inspira").css("display", "none");
-                $("#historiaComunicacionDeCedulaDiv").css("display", "block");
-                $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
-            }
-            $(".contenido").css({ display: "block" });
+                //noEsSocio
+                $("#cedulasNS").val("");
+                $("#nombreNS").val(null);
+                $("#apellidoNS").val(null);
+                $("#telefonoNS").val(null);
+                $("#celularNS").val(null);
+                $("#observacionesNS").val("");
+                $("#avisarNS").prop("selectedIndex", 0);
+                $("#noEsSocio").css({ display: "none" });
+
+                //siEsSocio
+                $("#cedulas").val("");
+                $("#obser").val("");
+                $("#ensec").prop("selectedIndex", 0);
+                $("#siEsSocio").css({ display: "none" });
+            },
         })
-        .fail(function (error) {
-            console.log(error);
-            alerta(
-                "Error!",
-                "Ha ocurrido un error, por favor comuníquese con el administrador",
-                "error"
-            );
-        });
+            .done(function (datos) {
+                $("#cedulas").text(cedula);
+                historiaComunicacionDeCedula();
+                tabla_patologias_socio();
+                mostrar_cantidad_etiquetas_socio();
+                if (datos.noSocioConRegistros) {
+                    alerta("Problema!", datos.mensaje, "warning");
+                    $("#cedulasNSR").text($("#ci").val());
+                    $("#nombreNSR").val(datos.nombre);
+                    $("#telefonoNSR").val(datos.telefono);
+                    $("#noEsSocioRegistro").css({ display: "block" });
+                    $("#historiaComunicacionDeCedulaDiv").css("display", "block");
+                    $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
+                } else if (datos.noSocio) {
+                    alerta("<span style='color: #9C0404'>¿Está seguro de que la cédula pertenece un socio?</span>", datos.mensaje, "error");
+                    $("#cedulasNS").text($("#ci").val());
+                    $("#noEsSocio").css({ display: "block" });
+                    $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
+                } else if (datos.bajaProcesada) {
+                    alerta("Problema!", datos.mensaje, "warning");
+                    $("#cedulasNSR").text($("#ci").val());
+                    $("#nombreNSR").val(datos.nombre);
+                    $("#telefonoNSR").val(datos.telefono);
+                    $("#noEsSocioRegistro").css({ display: "block" });
+                    $("#historiaComunicacionDeCedulaDiv").css("display", "block");
+                    $("#historiaComunicacionDeCedulaDiv_funcionarios").css(
+                        "display",
+                        "none"
+                    );
+                } else {
+                    $("#nom").text(datos.nombre);
+                    $("#telefono").text(datos.tel);
+                    $("#fechafil").text(datos.fecha_afiliacion);
+                    $("#radio").text(datos.radio);
+                    $("#sucursal").text(datos.sucursal);
+                    $("#inspira").text(datos.inspira);
+                    $("#siEsSocio").css({ display: "block" });
+                    if (!datos.mostrar_inspira) $("#div_inspira").css("display", "none");
+                    $("#historiaComunicacionDeCedulaDiv").css("display", "block");
+                    $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
+                }
+                $(".contenido").css({ display: "block" });
+            })
+            .fail(function (error) {
+                console.log(error);
+                alerta(
+                    "Error!",
+                    "Ha ocurrido un error, por favor comuníquese con el administrador",
+                    "error"
+                );
+            });
+
+    }
 }
 
 function buscarFuncionario(cedula, tipo) {

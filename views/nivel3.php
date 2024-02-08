@@ -12,16 +12,21 @@
 <input type="hidden" id="idrelacion">
 
 
-<nav class="navbar navbar-dark bg-dark text-white mb-4">
-	<a class="navbar-brand">Menú</a>
-	<h3 class="form-inline" id="nombre_usuario_en_sesion"></h3>
-	<form class="form-inline">
-		<!--
-		<button class="btn btn-outline-danger" style="float: right" onclick="cerrarSesion()">Cerrar sesión</button>
-		-->
-		<a class="btn btn-outline-danger" style="float: right" href="cerrarSesion.php" onclick="cerrarSesion()">Cerrar sesión</a>
-	</form>
+<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+	<div class="container-fluid">
+		<a class="navbar-brand">Menú</a>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="navbar-brand fw-bolder" href="#" id="nombre_usuario_en_sesion"></a>
+			</li>
+		</ul>
+		<div class="d-flex">
+			<a class="btn btn-outline-danger" href="cerrarSesion.php" onclick="cerrarSesion()">Cerrar sesión</a>
+		</div>
+	</div>
 </nav>
+
+
 <div class="container" align="center">
 	<h2 style="color:#FB0B0F">CRM</h2>
 	<div style="display: flex; justify-content: space-between; align-items: center;">
@@ -42,27 +47,19 @@
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="col-auto">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<label class="input-group-text bg-secondary text-white" for="inputGroupSelect01">Cédula:</label>
-						</div>
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">Cédula:</span>
 						<?php
 						if ($_SESSION['usuario'] == 'Morosos' || $_SESSION['usuario'] == 'Calidad_interna') {
-							echo '<input type="text" class="form-control" id="ci" name="ci" placeholder="Ingrese cédula a buscar ..." oninput="ocultarContenido()" maxlength="8">';
+							echo '<input type="text" class="form-control" id="ci" name="ci" placeholder="Ingrese cédula a buscar ..." aria-label="Ingrese cédula a buscar ..." aria-describedby="basic-addon1" oninput="ocultarContenido()" maxlength="8">
+
+							<button class="btn btn-danger input-group-text" id="buscarCI" onclick="buscarDatos();">Buscar 🔍</button>';
 						} else {
-							echo '<input type="text" class="form-control solo_numeros" id="ci" name="ci" placeholder="Ingrese cédula a buscar ..." oninput="ocultarContenido()" maxlength="8">';
+							echo '<input type="text" class="form-control solo_numeros" id="ci" name="ci" placeholder="Ingrese cédula a buscar ..." aria-label="Ingrese cédula a buscar ..." aria-describedby="basic-addon1" oninput="ocultarContenido()" maxlength="8">
+
+							<button class="btn btn-danger input-group-text" id="buscarCI" onclick="buscarSocio();">Buscar 🔍</button>';
 						}
 						?>
-
-						<div class="input-group-prepend">
-							<?php
-							if ($_SESSION['usuario'] == 'Morosos' || $_SESSION['usuario'] == 'Calidad_interna') {
-								echo '<input type="button" class="btn btn-danger rounded-end" value="Buscar 🔍" title="Buscar" onclick="buscarDatos();" id="buscarCI" style="padding: 3px 10px; border: 5px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">';
-							} else {
-								echo '<input type="button" class="btn btn-danger rounded-end" value="Buscar 🔍" title="Buscar" onclick="buscarSocio();" id="buscarCI" style="padding: 3px 10px; border: 5px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">';
-							}
-							?>
-						</div>
 					</div>
 				</div>
 			</div>

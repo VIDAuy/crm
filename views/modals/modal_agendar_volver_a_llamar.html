@@ -1,37 +1,41 @@
 <!-- Modal -->
-<div class="modal fade" id="modal_agregar_volver_a_llamar" tabindex="-1" role="dialog"
-    aria-labelledby="modal_agregar_volver_a_llamar" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="modal_agregar_volver_a_llamar" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header bg-info">
-                <h4 class="modal-title">Agendar volver a llamar</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal-header bg-primary">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agendar volver a llamar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
-
                 <div class="row">
                     <div class="col-6">
-                        <label>Fecha:</label>
-                        <input type="date" class="form-control mb-4" id="fecha_nueva_agenda_volver_a_llamar">
+                        <div class="form-floating mb-4">
+                            <input type="date" class="form-control" id="fecha_nueva_agenda_volver_a_llamar"
+                                placeholder="Fecha">
+                            <label for="fecha_nueva_agenda_volver_a_llamar">Fecha:</label>
+                        </div>
                     </div>
                     <div class="col-6">
-                        <label>Hora:</label>
-                        <input type="time" class="form-control mb-4" id="hora_nueva_agenda_volver_a_llamar">
+                        <div class="form-floating mb-4">
+                            <input type="time" class="form-control" id="hora_nueva_agenda_volver_a_llamar"
+                                placeholder="Hora">
+                            <label for="hora_nueva_agenda_volver_a_llamar">Hora:</label>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <label>Mensaje:</label>
-                        <textarea class="form-control" id="mensaje_nueva_agenda_volver_a_llamar" cols="30" rows="10"
-                            placeholder="Ingrese un mensaje para orientación ..."></textarea>
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Mensaje"
+                                id="mensaje_nueva_agenda_volver_a_llamar" style="height: 100px"></textarea>
+                            <label for="mensaje_nueva_agenda_volver_a_llamar">Mensaje (para orientación):</label>
+                        </div>
                     </div>
                 </div>
 
-
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" onclick="agendar_volver_a_llamar(false)">Guardar</button>
             </div>
         </div>

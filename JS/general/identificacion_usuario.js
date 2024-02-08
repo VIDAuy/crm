@@ -87,7 +87,7 @@ function identificar_persona() {
                         $(".ctr_agendar_volver_a_llamar").css("display", "block");
                     }
 
-                    if (sector == "Calidad") {
+                    if (sector == "Calidad" || sector == "Bajas") {
                         $("#div_agregarEtiquetaSocio").css("display", "block");
                     }
 

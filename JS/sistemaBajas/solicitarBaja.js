@@ -32,7 +32,7 @@ function listarDatos(CI) {
 								c4 = content.cedula.substring(7, 8);
 								cedula = c1 + '.' + c2 + '.' + c3 + '-' + c4;
 							}
-							$('#cedulaTitulo').text(content.nombre + ' (CI: ' + cedula + ')');
+							$('#cedulaTitulo').text(`${content.nombre} (CI: ${cedula})`);
 							$('#idrelacion').val(content.idrelacion);
 							$('#idrelacion2').val(content.idrelacion);
 							$('#nombre_socio').val(content.nombre);
@@ -45,10 +45,10 @@ function listarDatos(CI) {
 							$('#modalSolicitarBaja').modal('show');
 							cargarMSBhiddenItems();
 						}
-						else if (content.cedula) alert(content.message);
-						else if (content.registro) alert(content.message);
-						else if (content.baja) alert(content.message);
-						else if (content.bajaGestionada) alert(content.message);
+						else if (content.cedula) error(content.message);
+						else if (content.registro) error(content.message);
+						else if (content.baja) error(content.message);
+						else if (content.bajaGestionada) error(content.message);
 					},
 					error: function () {
 						$('#txtResult').html('Ocurrio un error. Por favor vuelva a intentar en instantes.');
@@ -56,10 +56,10 @@ function listarDatos(CI) {
 					}
 				});
 		}
-		else alert('La cédula ingresada no es válida.');
+		else error('La cédula ingresada no es válida.');
 	}
 	else {
-		alert('Se debe de ingresar la cédula del usuario previamente.');
+		error('Se debe de ingresar la cédula del usuario previamente.');
 		$('#modalSolicitarBaja .close').click();
 	}
 }

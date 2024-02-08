@@ -1,13 +1,11 @@
 <!-- Modal -->
-<div class="modal fade" id="modal_asignarLlamadaAUsuario" tabindex="-1" role="dialog"
-    aria-labelledby="modal_asignarLlamadaAUsuario" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="modal_asignarLlamadaAUsuario" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h4 class="modal-title">Asignar llamada</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Asignar llamada</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
@@ -59,13 +57,12 @@
                     </li>
                 </ul>
 
-                <select class="form-control" id="select_asignar_llamada_a_usuario"></select>
+                <select class="form-select" id="select_asignar_llamada_a_usuario"></select>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary"
-                    onclick="abrir_asignar_llamada(false)">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="abrir_asignar_llamada(false)">Guardar</button>
             </div>
         </div>
     </div>

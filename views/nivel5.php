@@ -16,6 +16,8 @@
 </head>
 
 <body>
+
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -44,71 +46,71 @@
 		<div class="d-block mx-auto">
 			<h1>Datos de contacto:</h1>
 			<fieldset disabled>
-				<div class="form-row">
-					<div class="form-group col-4">
+				<div class="row">
+					<div class="col-4">
 						<label for="cedula" class="col-form-label">Cedula:</label>
 						<input type="text" id="cedula" class="form-control">
 					</div>
-					<div class="form-group col-4">
+					<div class="col-4">
 						<label for="nombre" class="col-form-label">Nombre:</label>
 						<input type="text" id="nombre" class="form-control">
 					</div>
-					<div class="form-group col-4">
+					<div class="col-4">
 						<label for="valorCuota" class="col-form-label">Valor de cuota:</label>
 						<input type="text" id="valorCuota" class="form-control">
 					</div>
 				</div>
-				<div class="form-row">
-					<div class="form-group col-4">
+				<div class="row">
+					<div class="col-4">
 						<label for="direccion" class="col-form-label">Direccion:</label>
 						<textarea id="direccion" rows="1" class="form-control"></textarea>
 					</div>
-					<div class="form-group col-4">
+					<div class="col-4">
 						<label for="telefono" class="col-form-label">Telefono:</label>
 						<input type="text" id="telefono" class="form-control">
 					</div>
-					<div class="form-group col-4">
+					<div class="col-4">
 						<label for="filial" class="col-form-label">Filial:</label>
 						<input type="text" id="filial" class="form-control">
 					</div>
 				</div>
-				<div class="form-row">
-					<div class="form-group col-4">
+				<div class="row">
+					<div class="col-4">
 						<label for="ruta" class="col-form-label">Ruta:</label>
 						<input type="text" id="ruta" class="form-control">
 					</div>
-					<div class="form-group col-4">
+					<div class="col-4">
 						<label for="radio" class="col-form-label">Radio:</label>
 						<input type="text" id="radio" class="form-control">
 					</div>
-					<div class="form-group col-4">
+					<div class="col-4">
 						<label for="fechaAfiliacion" class="col-form-label">Fecha de afiliacion:</label>
 						<input type="text" id="fechaAfiliacion" class="form-control">
 					</div>
 				</div>
 			</fieldset>
-			<div class="form-row">
-				<div class="form-group col-3">
+			<div class="row">
+				<div class="col-3">
 					<input type="button" class="btn btn-block btn-outline-secondary" id="gestionarAnterior" value="Anterior">
 				</div>
-				<div class="form-group col-6">
+				<div class="col-6">
 					<input type="button" class="btn btn-block btn-danger" id="abrirModalGestion" value="Gestionar">
 				</div>
-				<div class="form-group col-3">
+				<div class="col-3">
 					<input type="button" class="btn btn-block btn-outline-secondary" id="gestionarSiguiente" value="Siguiente">
 				</div>
 			</div>
-			<div class="form-row">
-				<div class="form-group col-3">
+			<div class="row">
+				<div class="col-3">
 					<input type="button" id="b1" type="button" class="btn btn-primary btn-block mr-1" onclick="datosCoordina()" value="Datos Coordina">
 				</div>
-				<div class="form-group col-3">
+				<div class="col-3">
 					<input type="button" id="b2" type="button" class="btn btn-primary btn-block mx-1" onclick="datosCobranza()" value="Datos Cobranza">
 				</div>
-				<div class="form-group col-3">
+				<div class="col-3">
 					<input type="button" id="b3" type="button" class="btn btn-primary btn-block mx-1" onclick="datosProductos()" value="Datos Productos">
 				</div>
-				<div class="form-group col-3">
+				<div class="col-3">
 					<input type="button" id="b4" type="button" class="btn btn-primary btn-block ml-1" onclick="datosCRM()" value="Datos CRM">
 				</div>
 			</div>
@@ -119,8 +121,8 @@
 	<div class="container" style="display: none" id="busquedaAvanzada">
 		<div class="d-block mx-auto">
 			<form id="formBAdA">
-				<div class="form-row">
-					<div class="form-group col-4">
+				<div class="row">
+					<div class="col-4">
 						<label for="prioridad" class="col-form-label">Prioridad:</label>
 						<select name="prioridad" class="form-control">
 							<option value="">Sin especificar</option>
@@ -128,7 +130,7 @@
 							<option value="2">Máxima</option>
 						</select>
 					</div>
-					<div class="form-group col-4">
+					<div class="col-4">
 						<label for="cartera" class="col-form-label">Cartera:</label>
 						<select name="cartera" class="form-control">
 							<option value="">Sin especificar</option>
@@ -136,15 +138,15 @@
 							<option value="1">Domiciliario</option>
 						</select>
 					</div>
-					<div class="form-group col-4">
+					<div class="col-4">
 						<label for="filial" class="col-form-label">Filial:</label>
 						<select name="filial" id="filialBAdA" class="form-control">
 							<option value="">Sin especificar</option>
 						</select>
 					</div>
 				</div>
-				<div class="form-row">
-					<div class="form-group col-4">
+				<div class="row">
+					<div class="col-4">
 						<label for="estado" class="col-form-label">Estado:</label>
 						<select name="estado" class="form-control">
 							<option value="">Sin especificar</option>
@@ -159,7 +161,7 @@
 							<option value="9">Sin gestionar</option>
 						</select>
 					</div>
-					<div class="form-group col-2">
+					<div class="col-2">
 						<label for="" class="col-form-label">Filtro fecha:</label>
 						<select name="filtroFecha" id="filtroFecha" class="form-control">
 							<option value="">Sin filtrar</option>
@@ -169,24 +171,24 @@
 						</select>
 					</div>
 					<div id="filtroInexistente" class="col-6" style="display: inline;">
-						<div class="form-row">
+						<div class="row">
 						</div>
 					</div>
 					<div id="filtroJunto" class="col-6" style="display: none;">
-						<div class="form-row">
-							<div class="form-group col-6">
+						<div class="row">
+							<div class="col-6">
 								<label for="" class="col-form-label">Desde:</label>
 								<input type="text" name="fechaCompletaDesde" id="fechaCompletaDesde" class="form-control" readonly>
 							</div>
-							<div class="form-group col-6">
+							<div class="col-6">
 								<label for="" class="col-form-label">Hasta:</label>
 								<input type="text" name="fechaCompletaHasta" id="fechaCompletaHasta" class="form-control" readonly>
 							</div>
 						</div>
 					</div>
 					<div id="filtroSeparado" class="col-6" style="display: none;">
-						<div class="form-row">
-							<div class="form-group col-4">
+						<div class="row">
+							<div class="col-4">
 								<label for="mesDesde" class="col-form-label">Mes:</label>
 								<select name="mesDesde" id="mesDesde" class="form-control">
 									<option value="">Desde</option>
@@ -204,13 +206,13 @@
 									<option value="12">Diciembre</option>
 								</select>
 							</div>
-							<div class="form-group col-2">
+							<div class="col-2">
 								<label for="anhoDesde" class="col-form-label">Año:</label>
 								<select name="anhoDesde" id="anhoDesde" class="form-control">
 									<option value="">Desde</option>
 								</select>
 							</div>
-							<div class="form-group col-4">
+							<div class="col-4">
 								<label for="mesHasta" class="col-form-label">Mes:</label>
 								<select name="mesHasta" id="mesHasta" class="form-control">
 									<option value="">Hasta</option>
@@ -228,7 +230,7 @@
 									<option value="12">Diciembre</option>
 								</select>
 							</div>
-							<div class="form-group col-2">
+							<div class="col-2">
 								<label for="anhoHasta" class="col-form-label">Año:</label>
 								<select name="anhoHasta" id="anhoHasta" class="form-control">
 									<option value="">Hasta</option>

@@ -182,8 +182,8 @@ function error(mensaje) {
   Swal.fire({ title: 'Error!', html: mensaje, icon: 'error' });
 }
 
-function warning(mensaje) {
-  Swal.fire({ title: 'Advertencia!', html: mensaje, icon: 'warning' });
+function warning(mensaje, titulo = "") {
+  Swal.fire({ title: titulo, html: mensaje, icon: 'warning' });
 }
 
 function correcto(mensaje) {

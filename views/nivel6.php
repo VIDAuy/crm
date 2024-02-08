@@ -11,16 +11,22 @@
 <input type="hidden" id="nivel" value="<?= $_SESSION['nivel'] ?>">
 <input type="hidden" id="idrelacion">
 
-<nav class="navbar navbar-dark bg-dark text-white mb-4">
-	<a class="navbar-brand">Menú</a>
-	<h3 class="form-inline" id="nombre_usuario_en_sesion"></h3>
-	<form class="form-inline">
-		<!--
-		<button class="btn btn-outline-danger" style="float: right" onclick="cerrarSesion()">Cerrar sesión</button>
-		-->
-		<a class="btn btn-outline-danger" style="float: right" href="cerrarSesion.php" onclick="cerrarSesion()">Cerrar sesión</a>
-	</form>
+
+<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+	<div class="container-fluid">
+		<a class="navbar-brand">Menú</a>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="navbar-brand fw-bolder" href="#" id="nombre_usuario_en_sesion"></a>
+			</li>
+		</ul>
+		<div class="d-flex">
+			<a class="btn btn-outline-danger" href="cerrarSesion.php" onclick="cerrarSesion()">Cerrar sesión</a>
+		</div>
+	</div>
 </nav>
+
+
 <div class="container mb-5" align="center">
 	<h2 style="color:#FB0B0F">CRM</h2>
 </div>
@@ -83,68 +89,68 @@
 					<div class="alert alert-success border-success" role="alert">
 						<h3 class="text-center mb-5"><u><strong>Listado de datos del acompañante</strong></u></h3>
 						<!-- Listado de funcionarios -->
-						<div class="form-row text-center">
-							<div class="form-group col-lg-2">
+						<div class="row text-center">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Número nodum:</u></label>
 								<p id="funcionario_numero_nodum_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Nombre completo:</u></label>
 								<p id="funcionario_nombre_completo_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Teléfono:</u></label>
 								<p id="funcionario_telefono_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-3">
+							<div class="col-3">
 								<label for="" class="col-form-label"><u>Correo electrónico:</u></label>
 								<p id="funcionario_correo_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Fecha de ingreso:</u></label>
 								<p id="funcionario_fecha_ingreso_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Fecha de egreso:</u></label>
 								<p id="funcionario_fecha_egreso_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Empresa:</u></label>
 								<p id="funcionario_empresa_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Estado:</u></label>
 								<p id="funcionario_estado_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Cargo:</u></label>
 								<p id="funcionario_cargo_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Centro de costos:</u></label>
 								<p id="funcionario_centro_de_costos_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-3">
+							<div class="col-lg-3">
 								<label for="" class="col-form-label"><u>Tipo de comisionamiento:</u></label>
 								<p id="funcionario_tipo_de_comisionamiento_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Filial:</u></label>
 								<p id="funcionario_filial_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Sub Filial:</u></label>
 								<p id="funcionario_sub_filial_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Tipo de trabajador:</u></label>
 								<p id="funcionario_tipo_de_trabajador_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Causal de baja:</u></label>
 								<p id="funcionario_causal_de_baja_personal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-lg-2">
+							<div class="col-lg-2">
 								<label for="" class="col-form-label"><u>Medio de pago:</u></label>
 								<p id="funcionario_medio_de_pago_personal" style="font-weight: bold;"></p>
 							</div>
@@ -199,30 +205,30 @@
 					<!-- Listado de socios -->
 					<div class="alert alert-success border-success" role="alert">
 						<h3 class="text-center mb-5"><u><strong>Listado de datos del socio</strong></u></h3>
-						<div class="form-row text-center">
-							<div class="form-group col-4">
+						<div class="row text-center">
+							<div class="col-4">
 								<label for="" class="col-form-label">Nombre completo:</label>
 								<p id="nom" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-4">
+							<div class="col-4">
 								<label for="" class="col-form-label">Teléfono:</label>
 								<p id="telefono" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-4">
+							<div class="col-4">
 								<label for="" class="col-form-label">Fecha de afiliación:</label>
 								<p id="fechafil" style="font-weight: bold;"></p>
 							</div>
 						</div>
-						<div class="form-row text-center">
-							<div class="form-group col-4">
+						<div class="row text-center">
+							<div class="col-4">
 								<label for="" class="col-form-label">Radio:</label>
 								<p id="radio" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-4">
+							<div class="col-4">
 								<label for="" class="col-form-label">Sucursal:</label>
 								<p id="sucursal" style="font-weight: bold;"></p>
 							</div>
-							<div class="form-group col-4" id="div_inspira" style="display: none;">
+							<div class="col-4" id="div_inspira" style="display: none;">
 								<label for="" class="col-form-label">Inspira?:</label>
 								<p id="inspira" style="font-weight: bold;"></p>
 							</div>
@@ -265,7 +271,7 @@
 	<div class="alert alert-secondary border-secondary" role="alert">
 		<h3 class="text-center mb-5"><u>Consultas Generales</u></h3>
 		<div class="d-flex justify-content-center mb-3">
-			<div class="form-row">
+			<div class="row">
 				<div class="form-group">
 					<div class="row g-3 align-items-center">
 						<div class="col-auto">
@@ -289,7 +295,7 @@
 			</div>
 		</div>
 		<div class="d-flex justify-content-center mb-3">
-			<div class="form-row">
+			<div class="row">
 				<div class="form-group">
 					<div class="row g-3 align-items-center">
 						<div class="col-auto mb-3">
@@ -351,7 +357,7 @@
 		<h3 class="text-center mb-5"><u>Cierre de horas personalizado</u></h3>
 		<form id="form1" method="post" name="form1">
 			<div class="d-flex justify-content-center mb-4">
-				<div class="form-row">
+				<div class="row">
 					<div class="form-group">
 						<div class="row g-3 align-items-center">
 							<div class="col-auto">
@@ -383,7 +389,7 @@
 				</div>
 			</div>
 			<div class="d-flex justify-content-center">
-				<div class="form-row">
+				<div class="row">
 					<div class="form-group">
 						<div class="row g-3 align-items-center">
 							<div class="col-auto mb-3">

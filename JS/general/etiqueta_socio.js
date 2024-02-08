@@ -58,6 +58,8 @@ function ver_etiquetas_socio(openModal = false) {
         columns: [
             { data: "id" },
             { data: "etiqueta" },
+            { data: "usuario_agrego" },
+            { data: "fecha_registro" },
         ],
         order: [[0, "asc"]],
         bDestroy: true,

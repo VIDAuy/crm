@@ -19,12 +19,14 @@ if ($opcion == 1) {
 
         $id             = $row['id'];
         $etiqueta       = $row['mensaje'];
-        $usuario_agrego = $row['id_sub_usuario'];
-        $fecha_registro = date("d/m/Y", strtotime($row['fecha_registro']));
+        $usuario_agrego = obtener_usuario($row['id_sub_usuario']);
+        $fecha_registro = date("d/m/Y H:i:s", strtotime($row['fecha_registro']));
 
         $tabla["data"][] = [
             "id"             => $id,
             "etiqueta"       => $etiqueta,
+            "usuario_agrego" => $usuario_agrego,
+            "fecha_registro" => $fecha_registro
         ];
     }
 
@@ -104,4 +106,24 @@ function registrar_nueva_etiqueta($cedula, $mensaje, $id_sub_usuario)
     $consulta = mysqli_query($conexion, $sql);
 
     return $consulta;
+}
+
+function obtener_usuario($id)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_SUB_USUARIOS;
+
+    $sql = "SELECT nombre, apellido FROM {$tabla} WHERE id = '$id'";
+    $consulta = mysqli_query($conexion, $sql);
+
+    $respuesta = "";
+    if ($consulta == true) {
+        $resultado = mysqli_fetch_assoc($consulta);
+        $nombre = $resultado['nombre'];
+        $apellido = $resultado['apellido'];
+
+        $respuesta = $nombre . " " . $apellido;
+    }
+
+    return $respuesta;
 }
