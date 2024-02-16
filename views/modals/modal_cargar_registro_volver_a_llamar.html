@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="modal_cargar_registro_volver_a_llamar" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Cargar registro volver a llamar</h1>
@@ -22,24 +22,23 @@
 
                 <div class="row mb-3">
                     <div class="col-lg-12">
-                        <label for="" class="col-form-label">Observación:</label>
-                        <textarea class="form-control" rows="4" id="observacion_volver_a_llamar"
-                            placeholder="Ingrese observación de la llamada ..."></textarea>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" placeholder="Observación" id="observacion_volver_a_llamar"
+                                style="height: 100px"></textarea>
+                            <label for="observacion_volver_a_llamar">Observación:</label>
+                        </div>
                     </div>
                     <div class="col-lg-12">
-                        <label for="" class="col-form-label">Avisar a:</label>
-                        <select class="form-select agregarFiliales" id="avisar_a_volver_a_llamar"
-                            name="avisar_a_volver_a_llamar">
-                            <option selected value="sin_seleccion">Seleccione una opción</option>
-                            <option value="">No avisar</option>
-                        </select>
+                        <div class="form-floating mb-3">
+                            <select class="form-select agregarFiliales" id="avisar_a_volver_a_llamar" aria-label="Avisar a">
+                            </select>
+                            <label for="avisar_a_volver_a_llamar">Avisar a:</label>
+                        </div>
                     </div>
-                </div>
-                <div class="container border mb-3">
-                    <h5 class="text-center mb-3">Cargar Imagen:</h5>
-                    <div class="d-flex justify-content-center">
+                    <div class="col-lg-12">
+                        <label for="cargar_imagen_volver_a_llamar">Cargar Imagen:</label>
                         <input type="file" name="cargar_imagen_volver_a_llamar[]" id="cargar_imagen_volver_a_llamar"
-                            class="mb-3" accept=".jpg, .jpeg, .png, .pdf" multiple>
+                            class="form-control mb-3" accept=".jpg, .jpeg, .png, .pdf" multiple>
                     </div>
                 </div>
 

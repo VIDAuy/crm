@@ -1,54 +1,66 @@
 <?php
 include './configuraciones.php';
 
-$sector = $_SESSION['id'];
-$id_sub_usuario = $_REQUEST['id_sub_usuario'];
+
+$opcion = $_REQUEST['opcion'];
+
+$sector = $_SESSION['id_sector'];
+$id_sub_usuario = $_SESSION['id_sub_usuario'];
 
 
-$tabla["data"] = [];
 
+/** Tabla **/
+if ($opcion == 1) {
+    $tabla["data"] = [];
 
-$alertas_pendientes = obtener_alertas_pendientes($sector);
+    $alertas_pendientes = obtener_alertas_pendientes($sector);
 
-while ($row = mysqli_fetch_assoc($alertas_pendientes)) {
+    while ($row = mysqli_fetch_assoc($alertas_pendientes)) {
 
-    $id                   = $row['id'];
-    $cedula               = $row['cedula'];
-    $nombre               = $row['nombre'];
-    $telefono             = $row['telefono'];
-    $sector               = $row['sector'];
-    $id_usuario_asignado  = $row['id_usuario_asignado'];
-    $id_usuario_asignador = $row['id_usuario_asignador'];
+        $id                   = $row['id'];
+        $cedula               = $row['cedula'];
+        $nombre               = $row['nombre'];
+        $telefono             = $row['telefono'];
+        $sector               = $row['sector'];
+        $id_usuario_asignado  = $row['id_usuario_asignado'];
+        $id_usuario_asignador = $row['id_usuario_asignador'];
 
-    if ($id_usuario_asignado == "" && $id_usuario_asignador == "") {
-        $usuario_asignado  = "-";
-        $usuario_asignador = "-";
-        $acciones          = "<button class='btn btn-primary' onclick='abrir_asignar_alerta(true, `" . $id . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $sector . "`, `" . $id_sub_usuario . "`)'>Asignar</button>";
-    } else {
-        $usuario_asignado = obtener_nombre_usuario($id_usuario_asignado);
-        $usuario_asignador = obtener_nombre_usuario($id_usuario_asignador);
-        $acciones          = "<button class='btn btn-warning' onclick='abrir_asignar_alerta(true, `" . $id . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $sector . "`, `" . $id_sub_usuario . "`, `" . $id_usuario_asignado . "`, `" . $id_usuario_asignador . "`, `" . $usuario_asignado . "`, `" . $usuario_asignador . "` )'>Reasignar</button>";
+        if ($id_usuario_asignado == "" && $id_usuario_asignador == "") {
+            $usuario_asignado  = "-";
+            $usuario_asignador = "-";
+            $acciones          = "<button class='btn btn-primary' onclick='abrir_asignar_alerta(true, `" . $id . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $sector . "`, `" . $id_sub_usuario . "`)'>Asignar</button>";
+        } else {
+            $usuario_asignado = obtener_nombre_usuario($id_usuario_asignado);
+            $usuario_asignador = obtener_nombre_usuario($id_usuario_asignador);
+            $acciones          = "<button class='btn btn-warning' onclick='abrir_asignar_alerta(true, `" . $id . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $sector . "`, `" . $id_sub_usuario . "`, `" . $id_usuario_asignado . "`, `" . $id_usuario_asignador . "`, `" . $usuario_asignado . "`, `" . $usuario_asignador . "` )'>Reasignar</button>";
+        }
+
+        $tabla["data"][] = [
+            "id"                => $id,
+            "cedula"            => $cedula,
+            "sector"            => $sector,
+            "nombre"            => $nombre,
+            "telefono"          => $telefono,
+            "usuario_asignado"  => $usuario_asignado,
+            "usuario_asignador" => $usuario_asignador,
+            "acciones"          => $acciones,
+        ];
     }
 
-    $tabla["data"][] = [
-        "id"                => $id,
-        "cedula"            => $cedula,
-        "sector"            => $sector,
-        "nombre"            => $nombre,
-        "telefono"          => $telefono,
-        "usuario_asignado"  => $usuario_asignado,
-        "usuario_asignador" => $usuario_asignador,
-        "acciones"          => $acciones,
-    ];
+
+    echo json_encode($tabla);
 }
 
 
+/** Cantidad **/
+if ($opcion == 2) {
+    $datos = obtener_alertas_pendientes($sector);
+    $cantidad = mysqli_num_rows($datos);
 
-echo json_encode($tabla);
-
-
-
-
+    $response['error'] = false;
+    $response['cantidad'] = $cantidad;
+    echo json_encode($response);
+}
 
 
 

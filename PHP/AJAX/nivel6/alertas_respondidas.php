@@ -17,11 +17,11 @@ while ($resultado = mysqli_fetch_array($consulta)) {
     $respuesta_estado = $resultado["respuesta"];
 
     if ($respuesta_estado == "Pendiente") {
-        $estado = $app . '/img/icono_respuesta_pendiente.png';
+        $estado = $app . '/assets/img/icono_respuesta_pendiente.png';
     } else if ($respuesta_estado == "Cargado") {
-        $estado = $app . '/img/icono_respuesta_cargada.png';
+        $estado = $app . '/assets/img/icono_respuesta_cargada.png';
     } else {
-        $estado = $app . '/img/icono_respuesta_devuelta.png';
+        $estado = $app . '/assets/img/icono_respuesta_devuelta.png';
     }
 
     $fila = "<div class='media text-muted pt-3'>

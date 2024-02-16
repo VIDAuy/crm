@@ -2,7 +2,7 @@
 include '../conexiones/conexion2.php';
 
 const PRODUCCION = true; // para definir si es test o produccion la APP
-const URL_DOCUMENTOS = PRODUCCION ? 'http://192.168.1.250:82/crm/documentos/registros' : 'http://192.168.1.250:82/crm_test/documentos/registros';
+const URL_DOCUMENTOS = PRODUCCION ? 'http://192.168.1.250:82/crm/assets/documentos/registros' : 'http://192.168.1.250:82/crm_test/assets/documentos/registros';
 
 
 

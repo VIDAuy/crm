@@ -8,7 +8,7 @@ define("PATH_APP", __DIR__);
 
 const PRODUCCION = true; // para definir si es test o produccion la APP
 const URL_APP = PRODUCCION ? 'http://192.168.1.250:82/crm' : 'http://192.168.1.250:82/crm_test';
-const URL_DOCUMENTOS = PRODUCCION ? 'http://192.168.1.250:82/crm/documentos/registros' : 'http://192.168.1.250:82/crm_test/documentos/registros';
+const URL_DOCUMENTOS = PRODUCCION ? 'http://192.168.1.250:82/crm/assets/documentos/registros' : 'http://192.168.1.250:82/crm_test/assets/documentos/registros';
 
 error_reporting(PRODUCCION ? 0 : E_ALL);
 
@@ -26,7 +26,7 @@ const PATH_FUNCIONEs = "modelos/";
 include_once PATH_APP . "/db.php";
 
 //FUNCIONES
-
+include_once PATH_APP . "/funciones.php";
 
 //LOGS
 const LOGS_DIR = PATH_APP . "../logs";
@@ -51,6 +51,8 @@ const DB_COORDINACOMP_PROD           = array("host" => "192.168.1.250", "user" =
 const DB_CALL_PROD                   = array("host" => "192.168.1.13", "user" => "root", "password" => "sist.2k8", "db" => "call");
 const DB_CONTROL_UNIFORMES_PROD      = array("host" => "192.168.1.250", "user" => "root", "password" => "sist.2k8", "db" => "control_uniformes");
 const DB_VIDA_TE_LLEVA_PROD          = array("host" => "192.168.13.10", "user" => "root", "password" => "sist.2k8", "db" => "vida_te_lleva");
+const DB_REDES_DE_COBRANZA_PROD      = array("host" => "192.168.13.10", "user" => "root", "password" => "sist.2k8", "db" => "redes_cobranza");
+const DB_COBRA_PROD                  = array("host" => "192.168.250.11", "user" => "root", "password" => "sist.2k8", "db" => "cobra");
 
 
 //DEV O DB TEST
@@ -69,6 +71,8 @@ const DB_COORDINACOMP_TEST           = array("host" => "192.168.1.250", "user" =
 const DB_CALL_TEST                   = array("host" => "192.168.1.13", "user" => "root", "password" => "sist.2k8", "db" => "call");
 const DB_CONTROL_UNIFORMES_TEST      = array("host" => "192.168.1.250", "user" => "root", "password" => "sist.2k8", "db" => "control_uniformes_test");
 const DB_VIDA_TE_LLEVA_TEST          = array("host" => "192.168.13.10", "user" => "root", "password" => "sist.2k8", "db" => "vida_te_lleva");
+const DB_REDES_DE_COBRANZA_TEST      = array("host" => "192.168.13.10", "user" => "root", "password" => "sist.2k8", "db" => "redes_cobranza");
+const DB_COBRA_TEST                  = array("host" => "192.168.250.11", "user" => "root", "password" => "sist.2k8", "db" => "cobra");
 
 
 //BD PROD O TEST
@@ -87,6 +91,8 @@ const DB_COORDINACOMP           = PRODUCCION ? DB_COORDINACOMP_PROD           : 
 const DB_CALL                   = PRODUCCION ? DB_CALL_PROD                   : DB_CALL_TEST;
 const DB_CONTROL_UNIFORMES      = PRODUCCION ? DB_CONTROL_UNIFORMES_PROD      : DB_CONTROL_UNIFORMES_TEST;
 const DB_VIDA_TE_LLEVA          = PRODUCCION ? DB_VIDA_TE_LLEVA_PROD          : DB_VIDA_TE_LLEVA_TEST;
+const DB_REDES_DE_COBRANZA      = PRODUCCION ? DB_REDES_DE_COBRANZA_PROD      : DB_REDES_DE_COBRANZA_TEST;
+const DB_COBRA                  = PRODUCCION ? DB_COBRA_PROD                  : DB_COBRA_TEST;
 
 
 //TABLAS BD
@@ -137,11 +143,13 @@ const TABLA_FILIALES_CODIGOS_TEMPORAL   = "filiales_codigos_temporal";
 const TABLA_EMPRESAS_TEMPORAL           = "empresas_temporal";
 const TABLA_TIPO_PRODUCTO_TEMPORAL      = "tipo_productos_temporal";
 const TABLA_PATOLOGIAS                  = "patologias";
+const TABLA_COBROS_CUOTAS_ABITAB        = "cobros_cuotas_abitab";
 
 
 //SERVER - 1310
 const TABLA_PADRON_SOCIOS_BRASIL = "padron_socios_brasil";
 const TABLA_PADRON_COMAG         = "padron_comag";
+const TABLA_WEBHOOKS             = "webhooks";
 
 
 //SERVER - MOODLE

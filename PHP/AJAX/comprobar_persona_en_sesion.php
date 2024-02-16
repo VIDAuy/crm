@@ -27,6 +27,13 @@ $nombre = $datos_usuario['nombre'];
 $apellido = $datos_usuario['apellido'];
 
 
+$_SESSION['id_sub_usuario'] = $id_sub_usuario;
+$_SESSION['id_sector'] = $id_sector;
+$_SESSION['sector'] = $sector;
+$_SESSION['cedula'] = $cedula;
+$_SESSION['nombre'] = $nombre;
+$_SESSION['apellido'] = $apellido;
+
 
 $response['error'] = false;
 $response['mensaje'] = "Bienvenid@ de vuelta $nombre";

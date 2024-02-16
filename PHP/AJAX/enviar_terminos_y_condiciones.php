@@ -1,8 +1,11 @@
 <?php
 include './configuraciones.php';
+$id_sub_usuario = $_SESSION['id_sub_usuario'];
 $sector = $_REQUEST['sector'];
 $cedula = $_REQUEST['cedula'];
 $celular = $_REQUEST['celular'];
+
+
 
 $datos_padron = obtener_datos_padron($cedula);
 if (count($datos_padron) == 0) {
@@ -68,7 +71,7 @@ if ($parametros === false) {
     die(json_encode($response));
 }
 
-$mensaje_con_link = generar_link_terminos_y_condiciones($empresa, $empresaNombre, $link, $parametros);
+$mensaje_con_link = generar_link_terminos_y_condiciones($empresa, $link, $parametros);
 if ($mensaje_con_link == "") {
     $response['error'] = true;
     $response['mensaje'] = "Ocurrio un error al generar el link";
@@ -82,7 +85,7 @@ if ($envio_sms === false) {
     die(json_encode($response));
 }
 
-$dejar_registro_de_envio = registrar_envio($cedula, $nombre, $celulares, $sector);
+$dejar_registro_de_envio = registrar_envio($cedula, $nombre, $celulares, $sector, $id_sub_usuario);
 if ($dejar_registro_de_envio === false) {
     $response['error'] = true;
     $response['mensaje'] = "Ocurrieron errores al dejar constancia del envío de los términos y condiciones";
@@ -103,6 +106,7 @@ function obtener_datos_padron($cedula)
     $consulta = mysqli_query($conexion, $sql);
     return mysqli_fetch_assoc($consulta);
 }
+
 function obtener_productos_padron($cedula)
 {
     $conexion = connection(DB_ABMMOD);
@@ -155,6 +159,7 @@ function obtener_productos_padron($cedula)
     }
     return $servicios_socio;
 }
+
 function obtener_empresa($empresa)
 {
     $conexion = connection(DB_TERMINOS_Y_CONDICIONES);
@@ -163,6 +168,7 @@ function obtener_empresa($empresa)
     $consulta = mysqli_query($conexion, $sql);
     return mysqli_fetch_assoc($consulta);
 }
+
 function generar_parametros($empresa, $datos_productos)
 {
     $conexion = connection(DB_TERMINOS_Y_CONDICIONES);
@@ -186,13 +192,15 @@ function generar_parametros($empresa, $datos_productos)
     }
     return $errores == 0 ? $parametros : false;
 }
-function generar_link_terminos_y_condiciones($empresa, $empresaNombre, $link, $parametros)
+
+function generar_link_terminos_y_condiciones($empresa, $link, $parametros)
 {
     if ($empresa != 3 && $empresa != 2) {
         $link  = "Puede ver los terminos y condiciones de su contrato en $link" . $parametros;
     }
     return $link;
 }
+
 function sendSMS($celular, $mensaje)
 {
     $servicio = "http://192.168.104.6/apiws/1/apiws.php?wsdl";
@@ -204,13 +212,15 @@ function sendSMS($celular, $mensaje)
     $client = new SoapClient($servicio, $parametros);
     return $client->sendSms($a, $b, $c, $d);
 }
+
 function buscarCelular($numeros)
 {
     preg_match_all('/(09)[1-9]{1}\d{6}/x', $numeros, $respuesta);
     $respuesta = (count($respuesta[0]) !== 0) ? $respuesta[0] : false;
     return $respuesta;
 }
-function registrar_envio($cedula, $nombre, $celular, $sector)
+
+function registrar_envio($cedula, $nombre, $celular, $sector, $id_sub_usuario)
 {
     $conexion = connection(DB);
     $tabla = TABLA_REGISTROS;
@@ -218,22 +228,6 @@ function registrar_envio($cedula, $nombre, $celular, $sector)
     $socio = es_socio($cedula);
     $baja = esta_en_baja($cedula);
 
-    $sql = "INSERT INTO {$tabla} (cedula, nombre, telefono, fecha_registro, sector, observaciones, envioSector, activo, socio, baja) VALUES ('$cedula', '$nombre', '$celular', NOW(), '$sector', '$observacion', '', 1, $socio, $baja)";
+    $sql = "INSERT INTO {$tabla} (cedula, nombre, telefono, fecha_registro, sector, observaciones, envioSector, activo, socio, baja, id_sub_usuario) VALUES ('$cedula', '$nombre', '$celular', NOW(), '$sector', '$observacion', '', 1, $socio, $baja, $id_sub_usuario)";
     return mysqli_query($conexion, $sql);
-}
-function es_socio($cedula)
-{
-    $conexion = connection(DB);
-    $tabla = TABLA_REGISTROS;
-    $sql = "SELECT socio FROM {$tabla} WHERE cedula = '$cedula' ORDER BY id DESC LIMIT 1";
-    $consulta = mysqli_query($conexion, $sql);
-    return mysqli_fetch_assoc($consulta)['socio'];
-}
-function esta_en_baja($cedula)
-{
-    $conexion = connection(DB);
-    $tabla = TABLA_REGISTROS;
-    $sql = "SELECT baja FROM {$tabla} WHERE cedula = '$cedula' ORDER BY id DESC LIMIT 1";
-    $consulta = mysqli_query($conexion, $sql);
-    return mysqli_fetch_assoc($consulta)['baja'];
 }
