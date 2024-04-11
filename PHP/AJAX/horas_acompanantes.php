@@ -112,7 +112,7 @@ function consulta_descansos($cedula, $fecha_servicio)
 {
     include '../conexiones/conexion8.php';
 
-    $consulta = mysqli_query($conexion, "SELECT
+    $sql = "SELECT
     DATE(d.fecha_inicio) AS fecha_inicio
     FROM
     acompanantes AS a
@@ -121,9 +121,10 @@ function consulta_descansos($cedula, $fecha_servicio)
     a.estado = 1 
     AND d.descanso_trabajado = 1
 	AND a.documento = '$cedula'
-	AND DATE(d.fecha_inicio) = '$fecha_servicio'");
+	AND DATE(d.fecha_inicio) = '$fecha_servicio'";
+    $consulta = mysqli_query($conexion, $sql);
 
-    $resultado = mysqli_fetch_array($consulta);
+    $resultado = mysqli_num_rows($consulta) > 0 ? mysqli_fetch_array($consulta)['fecha_inicio'] : "";
 
-    return $resultado['fecha_inicio'];
+    return $resultado;
 }

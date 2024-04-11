@@ -1,278 +1,481 @@
 <?php
-$version = '?v=1.0.59';
+$version = '?v=1.0.86';
 session_start();
 date_default_timezone_set('America/Montevideo');
 
 //	DEPENDIENDO DE CON QUE USUARIO ESTÉ LOGUEADO LA PÁGINA QUE CARGA
 
-include('views/header.html');
-
 if (isset($_SESSION['nivel'])) {
+
+	include('views/header.php');
+
 	$fecha = date("Y-m-d");
-	header("Cache-Control: no-cache, must-revalidate");
 	include 'PHP/conexiones/conexion2.php';
 	$id = $_SESSION['id'];
 	switch ($_SESSION['nivel']) {
 		case 1:
-			echo '<script src="JS/funciones.js' . $version . '"></script>';
+
+			$array_cargar_js = [
+				"funciones.js",
+				"masDatos/datosAlertas.js",
+				"masDatos/datosCobranza.js",
+				"masDatos/datosCoordina.js",
+				"masDatos/datosProductos.js",
+				"sistemaBajas/historialDeBajas.js",
+				"sistemaBajas/solicitarBaja.js",
+				"serviciosContratados/listar_servicios.js",
+				"general/cobranza_abitab.js",
+				"general/volver_a_llamar.js",
+				"general/sesion.js",
+				"general/alertas_de_otras_areas.js",
+				"general/buscar_socio_o_funcionario.js",
+				"general/consultas_datos_socio_o_funcionario.js",
+				"general/identificacion_usuario.js",
+				"general/alertas_de_vida_te_lleva.js",
+				"general/cargar_registros.js",
+				"general/historia_comunicacion_de_cedula.js",
+				"general/historial_registros_alertas.js",
+				"general/patologias_socio.js",
+				"general/etiqueta_socio.js",
+				"general/crmessage.js",
+				"general/equifax.js",
+				"general/bajas_morosidad.js",
+			];
 
 			/** JS General **/
-			echo '<script src="JS/general/volver_a_llamar.js' . $version . '"></script>';
-			echo '<script src="JS/general/sesion.js' . $version . '"></script>';
-			echo '<script src="JS/general/alertas_de_otras_areas.js' . $version . '"></script>';
-			echo '<script src="JS/general/buscar_socio_o_funcionario.js' . $version . '"></script>';
-			echo '<script src="JS/general/consultas_datos_socio_o_funcionario.js' . $version . '"></script>';
-			echo '<script src="JS/general/identificacion_usuario.js' . $version . '"></script>';
-			echo '<script src="JS/general/alertas_de_vida_te_lleva.js' . $version . '"></script>';
-			echo '<script src="JS/general/cargar_registros.js' . $version . '"></script>';
-			echo '<script src="JS/general/historia_comunicacion_de_cedula.js' . $version . '"></script>';
-			echo '<script src="JS/general/historial_registros_alertas.js' . $version . '"></script>';
-			echo '<script src="JS/general/patologias_socio.js' . $version . '"></script>';
+			foreach ($array_cargar_js as $archivo) {
+				echo '<script src="./assets/js/' . $archivo . $version . '"></script>';
+			}
 			/** END JS General **/
 
 
-			include('views/nivel1.php');
-
-			include('views/includes/contenido_filiales.html');
-
-			// MODALES DE INFORMACIÓN
-			include('views/modals/modalDatosAlertas.html');
-			echo '<script src="JS/masDatos/datosAlertas.js' . $version . '"></script>';
-			include('views/modals/modalDatosCobranza.html');
-			echo '<script src="JS/masDatos/datosCobranza.js' . $version . '"></script>';
-			include('views/modals/modalDatosCoordina.html');
-			echo '<script src="JS/masDatos/datosCoordina.js' . $version . '"></script>';
-			include('views/modals/modalDatosProductos.html');
-			echo '<script src="JS/masDatos/datosProductos.js' . $version . '"></script>';
+			include('./views/content/nivel1.php');
 
 
-			include('views/includes/historiaComunicacionDeCedula.html');
+			echo '<div id="contenido1" style="display: none;">';
+			include('views/content/etiquetas_de_socio.html');
+			include('views/content/no_es_socio_registros.php');
+			include('views/content/no_es_socio.php');
+			include('views/content/si_es_socio.php');
+			echo '</div>';
+			include('views/content/funcionarios.html');
+			include('views/content/registros_socio.html');
+			echo '<div id="contenido2" style="display: none;">';
+			include('views/content/patologias_socio.html');
+			include('views/content/cobranza_abitab.html');
+			echo '</div>';
+			include('views/content/administrar_alertas_y_llamadas_pendientes.html');
 
-			// MODALES DE BAJA Y RELACIONADOS
-			include('views/modals/modalInformacionDetalladaBaja.html');
-			include('views/modals/modalHistoriaComunicacionDeCedula.html');
-			include('views/modals/modalHistorialDeBajas.html');
-			echo '<script src="JS/sistemaBajas/historialDeBajas.js' . $version . '"></script>';
-			include 'views/modals/modalSolicitarBajaFiliales.html';
-			echo '<script src="JS/sistemaBajas/solicitarBaja.js' . $version . '"></script>';
-			include('views/modals/modalServiciosContratados.html');
-			echo '<script src="JS/serviciosContratados/js.js' . $version . '"></script>';
-			include('views/modals/modal_identificar_persona_logueada.html');
-			include('views/modals/modalSesionExpirada.html');
-			include('views/modals/modal_asignar_llamada_a_usuario.html');
-			include('views/modals/modal_asignar_alerta_pendiente.html');
-			include('views/modals/modal_historial_registros_de_alertas.html');
-			include('views/modals/modal_historial_registros_volver_a_llamar.html');
-			include('views/modals/modal_agregar_patologia_socio.html');
+
+			$array_cargar_modals = [
+				"alertas/modal_datos_alertas.html",
+				"alertas/modal_asignar_alerta_pendiente.html",
+				"alertas/modal_historial_registros_de_alertas.html",
+				"datos_socio/modalDatosCobranza.html",
+				"datos_socio/modalDatosCoordina.html",
+				"datos_socio/modalDatosProductos.html",
+				"datos_socio/modalServiciosContratados.html",
+				"bajas/modal_informacion_detallada_baja.html",
+				"bajas/modal_historial_de_bajas.html",
+				"bajas/modal_solicitar_baja_filiales.html",
+				"bajas_morosidad/modal_upload_bajas_morosidad.html",
+				"modalHistoriaComunicacionDeCedula.html",
+				"datos_acompanantes/modal_horas_acompanantes.html",
+				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
+				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
+				"volver_a_llamar/modal_cambiar_fecha_y_hora_volver_a_llamar.html",
+				"etiquetas_socio/modal_ver_etiquetas_socio.html",
+				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
+				"auditorias/modal_auditorias_socio_registradas.html",
+				"auditorias/modal_ver_comentarios_auditoria_socio.html",
+				"auditorias/modal_registrar_comentario_auditoria.html",
+				"modal_agregar_patologia_socio.html",
+				"modal_identificar_persona_logueada.html",
+				"modalSesionExpirada.html",
+				"modal_mostrar_imagenes.html",
+				"modal_crmessage.html",
+			];
+
+			/** Carga Modals **/
+			foreach ($array_cargar_modals as $modal) {
+				include('./views/modals/' . $modal);
+			}
+			/** END Carga Modals **/
+
 
 			break;
 		case 2:
-			echo '<script src="JS/funciones.js' . $version . '"></script>';
+
+			$array_cargar_js = [
+				"funciones.js",
+				"masDatos/datosAlertas.js",
+				"masDatos/datosCobranza.js",
+				"masDatos/datosCoordina.js",
+				"masDatos/datosProductos.js",
+				"serviciosContratados/listar_servicios.js",
+				"general/cobranza_abitab.js",
+				"general/volver_a_llamar.js",
+				"general/sesion.js",
+				"general/alertas_de_otras_areas.js",
+				"general/buscar_socio_o_funcionario.js",
+				"general/consultas_datos_socio_o_funcionario.js",
+				"general/identificacion_usuario.js",
+				"general/alertas_de_vida_te_lleva.js",
+				"general/cargar_registros.js",
+				"general/historia_comunicacion_de_cedula.js",
+				"general/historial_registros_alertas.js",
+				"general/patologias_socio.js",
+				"general/etiqueta_socio.js",
+				"general/crmessage.js",
+				"general/equifax.js",
+				"general/bajas_morosidad.js",
+			];
 
 			/** JS General **/
-			echo '<script src="JS/general/volver_a_llamar.js' . $version . '"></script>';
-			echo '<script src="JS/general/sesion.js' . $version . '"></script>';
-			echo '<script src="JS/general/alertas_de_otras_areas.js' . $version . '"></script>';
-			echo '<script src="JS/general/buscar_socio_o_funcionario.js' . $version . '"></script>';
-			echo '<script src="JS/general/consultas_datos_socio_o_funcionario.js' . $version . '"></script>';
-			echo '<script src="JS/general/identificacion_usuario.js' . $version . '"></script>';
-			echo '<script src="JS/general/alertas_de_vida_te_lleva.js' . $version . '"></script>';
-			echo '<script src="JS/general/cargar_registros.js' . $version . '"></script>';
-			echo '<script src="JS/general/historia_comunicacion_de_cedula.js' . $version . '"></script>';
-			echo '<script src="JS/general/historial_registros_alertas.js' . $version . '"></script>';
-			echo '<script src="JS/general/patologias_socio.js' . $version . '"></script>';
+			foreach ($array_cargar_js as $archivo) {
+				echo '<script src="./assets/js/' . $archivo . $version . '"></script>';
+			}
 			/** END JS General **/
 
 
-			include('views/nivel2.php');
-			include('views/includes/contenido.html');
+			include('./views/content/nivel2.php');
 
-			// MODALES DE INFORMACIÓN
 
-			include('views/modals/modalDatosAlertas.html');
-			echo '<script src="JS/masDatos/datosAlertas.js' . $version . '"></script>';
-			include('views/modals/modalDatosCobranza.html');
-			echo '<script src="JS/masDatos/datosCobranza.js' . $version . '"></script>';
-			include('views/modals/modalDatosCoordina.html');
-			echo '<script src="JS/masDatos/datosCoordina.js' . $version . '"></script>';
-			include('views/modals/modalDatosProductos.html');
-			echo '<script src="JS/masDatos/datosProductos.js' . $version . '"></script>';
+			echo '<div id="contenido1" style="display: none;">';
+			include('views/content/etiquetas_de_socio.html');
+			include('views/content/no_es_socio_registros.php');
+			include('views/content/no_es_socio.php');
+			include('views/content/si_es_socio.php');
+			echo '</div>';
+			include('views/content/funcionarios.html');
+			echo '<div id="contenido2" style="display: none;">';
+			include('views/content/patologias_socio.html');
+			include('views/content/cobranza_abitab.html');
+			echo '</div>';
+			include('views/content/administrar_alertas_y_llamadas_pendientes.html');
 
-			// MODALES DE BAJA Y RELACIONADOS
 
-			include('views/modals/modalInformacionDetalladaBaja.html');
-			include('views/modals/modalServiciosContratados.html');
-			echo '<script src="JS/serviciosContratados/js.js' . $version . '"></script>';
-			include('views/modals/modal_identificar_persona_logueada.html');
-			include('views/modals/modalSesionExpirada.html');
-			include('views/modals/modal_asignar_llamada_a_usuario.html');
-			include('views/modals/modal_asignar_alerta_pendiente.html');
-			include('views/modals/modal_historial_registros_de_alertas.html');
-			include('views/modals/modal_historial_registros_volver_a_llamar.html');
+			$array_cargar_modals = [
+				"alertas/modal_datos_alertas.html",
+				"datos_socio/modalDatosCobranza.html",
+				"datos_socio/modalDatosCoordina.html",
+				"datos_socio/modalDatosProductos.html",
+				"bajas/modal_informacion_detallada_baja.html",
+				"bajas/modal_solicitar_baja.html",
+				"datos_socio/modalServiciosContratados.html",
+				"modal_identificar_persona_logueada.html",
+				"modalSesionExpirada.html",
+				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
+				"alertas/modal_asignar_alerta_pendiente.html",
+				"alertas/modal_historial_registros_de_alertas.html",
+				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
+				"etiquetas_socio/modal_ver_etiquetas_socio.html",
+				"modal_mostrar_imagenes.html",
+				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
+				"modal_crmessage.html",
+				"auditorias/modal_auditorias_socio_registradas.html",
+				"auditorias/modal_ver_comentarios_auditoria_socio.html",
+				"auditorias/modal_registrar_comentario_auditoria.html",
+				"bajas_morosidad/modal_upload_bajas_morosidad.html",
+			];
+
+			/** Carga Modals **/
+			foreach ($array_cargar_modals as $modal) {
+				include('./views/modals/' . $modal);
+			}
+			/** END Carga Modals **/
+
 
 			break;
 
 
 		case 3:
-			echo '<script src="JS/funciones.js' . $version . '"></script>';
+			$array_ruta_cargar_js = [
+				"index.js",
+				"funciones.js",
+				"masDatos/datosAlertas.js",
+				"masDatos/datosCobranza.js",
+				"masDatos/datosCoordina.js",
+				"masDatos/datosProductos.js",
+				"sistemaBajas/historialDeBajas.js",
+				"sistemaBajas/gestionarBajas.js",
+				"sistemaBajas/solicitarBaja.js",
+				"serviciosContratados/listar_servicios.js",
+				"enviar_documento_y_alerta/js.js",
+				"general/cobranza_abitab.js",
+				"general/volver_a_llamar.js",
+				"general/sesion.js",
+				"general/alertas_de_otras_areas.js",
+				"general/buscar_socio_o_funcionario.js",
+				"general/consultas_datos_socio_o_funcionario.js",
+				"general/identificacion_usuario.js",
+				"general/alertas_de_vida_te_lleva.js",
+				"general/cargar_registros.js",
+				"general/historia_comunicacion_de_cedula.js",
+				"general/historial_registros_alertas.js",
+				"general/patologias_socio.js",
+				"general/etiqueta_socio.js",
+				"general/auditorias_socios.js",
+				"general/crmessage.js",
+				"general/equifax.js",
+				"general/bajas_morosidad.js",
+			];
 
-			/** JS General **/
-			echo '<script src="JS/general/volver_a_llamar.js' . $version . '"></script>';
-			echo '<script src="JS/general/sesion.js' . $version . '"></script>';
-			echo '<script src="JS/general/alertas_de_otras_areas.js' . $version . '"></script>';
-			echo '<script src="JS/general/buscar_socio_o_funcionario.js' . $version . '"></script>';
-			echo '<script src="JS/general/consultas_datos_socio_o_funcionario.js' . $version . '"></script>';
-			echo '<script src="JS/general/identificacion_usuario.js' . $version . '"></script>';
-			echo '<script src="JS/general/alertas_de_vida_te_lleva.js' . $version . '"></script>';
-			echo '<script src="JS/general/cargar_registros.js' . $version . '"></script>';
-			echo '<script src="JS/general/historia_comunicacion_de_cedula.js' . $version . '"></script>';
-			echo '<script src="JS/general/historial_registros_alertas.js' . $version . '"></script>';
-			echo '<script src="JS/general/patologias_socio.js' . $version . '"></script>';
-			/** END JS General **/
-
-
-
-
-			include('views/nivel3.php');
-			include('views/includes/contenido.html');
-			include('views/includes/historiaComunicacionDeCedula.html');
-			include('views/includes/historiaComunicacionDeCedula_funcionarios.html');
-
-
-			// MODALES DE INFORMACIÓN
-
-			include('views/modals/modalDatosAlertas.html');
-			echo '<script src="JS/masDatos/datosAlertas.js' . $version . '"></script>';
-			include('views/modals/modalDatosCobranza.html');
-			echo '<script src="JS/masDatos/datosCobranza.js' . $version . '"></script>';
-			include('views/modals/modalDatosCoordina.html');
-			echo '<script src="JS/masDatos/datosCoordina.js' . $version . '"></script>';
-			include('views/modals/modalDatosProductos.html');
-			echo '<script src="JS/masDatos/datosProductos.js' . $version . '"></script>';
-			include('views/modals/modal_ver_mas_comentarios.html');
-			include('views/modals/modal_licencia_acompanantes.html');
-			include('views/modals/modal_faltas_acompanantes.html');
-			include('views/modals/modal_horas_acompanantes.html');
-			include('views/modals/modal_agendar_volver_a_llamar.html');
-			include('views/modals/modal_agenda_volver_a_llamar.html');
-			include('views/modals/modal_cargar_registro_volver_a_llamar.html');
-			include('views/modals/modal_enviar_terminos_y_condiciones.html');
-			include('views/modals/modal_mostrar_imagenes.html');
-			include('views/modals/modal_historial_registros_volver_a_llamar.html');
-			include('views/modals/modal_historial_registros_de_alertas.html');
+			/** Carga JS **/
+			foreach ($array_ruta_cargar_js as $ruta_archivo) {
+				echo '<script src="./assets/js/' . $ruta_archivo . $version . '"></script>';
+			}
+			/** END Carga JS **/
 
 
-			// MODALES DE BAJA Y RELACIONADOS
-
-			include('views/modals/modalInformacionDetalladaBaja.html');
-			include('views/modals/modalHistoriaComunicacionDeCedula.html');
-			include('views/modals/modalHistorialDeBajas.html');
-			echo '<script src="JS/sistemaBajas/historialDeBajas.js' . $version . '"></script>';
-			include('views/modals/modalListarBajas.html');
-			echo '<script src="JS/sistemaBajas/gestionarBajas.js' . $version . '"></script>';
-			include 'views/modals/modalSolicitarBaja.html';
-			echo '<script src="JS/sistemaBajas/solicitarBaja.js' . $version . '"></script>';
-			include('views/modals/modalServiciosContratados.html');
-			echo '<script src="JS/serviciosContratados/js.js' . $version . '"></script>';
-			include('views/modals/modalCargarDocumentos.html');
-			echo '<script src="JS/enviar_documento_y_alerta/js.js' . $version . '"></script>';
-			include('views/modals/modal_alertas_funcionarios.html');
-			include('views/modals/modal_identificar_persona_logueada.html');
-			include('views/modals/modalSesionExpirada.html');
-			include('views/modals/modal_asignar_llamada_a_usuario.html');
-			include('views/modals/modal_asignar_alerta_pendiente.html');
-			include('views/modals/modal_historial_registros_de_alertas.html');
-			include('views/modals/modal_historial_registros_volver_a_llamar.html');
-			include('views/modals/modal_agregar_patologia_socio.html');
+			include('./views/content/nivel3.php');
 
 
-			echo '<script src="JS/index.js' . $version . '"></script>';
+			echo '<div id="contenido1" style="display: none;">';
+			include('views/content/etiquetas_de_socio.html');
+			include('views/content/auditorias_socio.html');
+			include('views/content/no_es_socio_registros.php');
+			include('views/content/no_es_socio.php');
+			include('views/content/si_es_socio.php');
+			echo '</div>';
+			include('views/content/funcionarios.html');
+			include('views/content/registros_socio.html');
+			include('views/content/registros_funcionario.html');
+			echo '<div id="contenido2" style="display: none;">';
+			include('views/content/patologias_socio.html');
+			include('views/content/cobranza_abitab.html');
+			echo '</div>';
+			include('views/content/administrar_alertas_y_llamadas_pendientes.html');
+
+
+			$array_cargar_modals = [
+				"alertas/modal_alertas_funcionarios.html",
+				"alertas/modal_asignar_alerta_pendiente.html",
+				"alertas/modal_datos_alertas.html",
+				"alertas/modal_historial_registros_de_alertas.html",
+				"auditorias/modal_auditorias_socio_registradas.html",
+				"auditorias/modal_auditorias_socio.html",
+				"auditorias/modal_registrar_auditoria_socio.html",
+				"auditorias/modal_registrar_comentario_auditoria.html",
+				"auditorias/modal_ver_comentarios_auditoria_socio.html",
+				"bajas/modal_historial_de_bajas.html",
+				"bajas/modal_informacion_detallada_baja.html",
+				"bajas/modal_listar_bajas.html",
+				"bajas/modal_solicitar_baja.html",
+				"datos_acompanantes/modal_faltas_acompanantes.html",
+				"datos_acompanantes/modal_horas_acompanantes.html",
+				"datos_acompanantes/modal_licencia_acompanantes.html",
+				"datos_socio/modalDatosCobranza.html",
+				"datos_socio/modalDatosCoordina.html",
+				"datos_socio/modalDatosProductos.html",
+				"datos_socio/modalServiciosContratados.html",
+				"equifax/modal_registros_equifax.html",
+				"equifax/modal_upload_equifax.html",
+				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
+				"etiquetas_socio/modal_ver_etiquetas_socio.html",
+				"volver_a_llamar/modal_agenda_volver_a_llamar.html",
+				"volver_a_llamar/modal_agendar_volver_a_llamar.html",
+				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
+				"volver_a_llamar/modal_cambiar_fecha_y_hora_volver_a_llamar.html",
+				"volver_a_llamar/modal_cargar_registro_volver_a_llamar.html",
+				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
+				"modal_agregar_patologia_socio.html",
+				"modal_crmessage.html",
+				"modal_enviar_terminos_y_condiciones.html",
+				"modal_identificar_persona_logueada.html",
+				"modal_mostrar_imagenes.html",
+				"modal_ver_mas_comentarios.html",
+				"modalCargarDocumentos.html",
+				"modalHistoriaComunicacionDeCedula.html",
+				"modalSesionExpirada.html",
+				"bajas_morosidad/modal_upload_bajas_morosidad.html",
+			];
+
+
+			/** Carga Modals **/
+			foreach ($array_cargar_modals as $modal) {
+				include('./views/modals/' . $modal);
+			}
+			/** END Carga Modals **/
+
 
 			break;
 		case 4:
-			echo '<script src="JS/nivel4/js.js' . $version . '"></script>';
-			echo '<script src="JS/general/sesion.js' . $version . '"></script>';
-			include('views/nivel4.php');
-			include('views/modals/modal_identificar_persona_logueada.html');
-			include('views/modals/modalSesionExpirada.html');
-			include('views/modals/modal_asignar_llamada_a_usuario.html');
-			include('views/modals/modal_asignar_alerta_pendiente.html');
-			include('views/modals/modal_historial_registros_de_alertas.html');
-			include('views/modals/modal_historial_registros_volver_a_llamar.html');
+
+			$array_ruta_cargar_js = [
+				"nivel4/js.js",
+				"funciones.js",
+				"general/sesion.js",
+				"general/crmessage.js",
+				"general/equifax.js",
+			];
+
+			/** Carga JS **/
+			foreach ($array_ruta_cargar_js as $ruta_archivo) {
+				echo '<script src="./assets/js/' . $ruta_archivo . $version . '"></script>';
+			}
+			/** END Carga JS **/
+
+
+			include('./views/content/nivel4.php');
+
+
+			$array_cargar_modals = [
+				"modal_identificar_persona_logueada.html",
+				"modalSesionExpirada.html",
+				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
+				"alertas/modal_asignar_alerta_pendiente.html",
+				"alertas/modal_historial_registros_de_alertas.html",
+				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
+				"etiquetas_socio/modal_ver_etiquetas_socio.html",
+				"modal_mostrar_imagenes.html",
+				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
+				"modal_crmessage.html",
+				"auditorias/modal_auditorias_socio_registradas.html",
+				"auditorias/modal_ver_comentarios_auditoria_socio.html",
+				"auditorias/modal_registrar_comentario_auditoria.html",
+				"bajas/modal_solicitar_baja.html",
+			];
+
+
+			/** Carga Modals **/
+			foreach ($array_cargar_modals as $modal) {
+				include('./views/modals/' . $modal);
+			}
+			/** END Carga Modals **/
+
 
 			break;
-
-
 		case 5:
-			echo '<script src="JS/nivel5/js.js' . $version . '"></script>';
-			echo '<script src="JS/general/sesion.js' . $version . '"></script>';
-			include('views/nivel5.php');
 
-			// MODALES DE INFORMACIÓN
+			$array_ruta_cargar_js = [
+				"nivel5/js.js",
+				"masDatos/datosCobranza.js",
+				"masDatos/datosCoordina.js",
+				"masDatos/datosCRM.js",
+				"masDatos/datosProductos.js",
+				"sistemaBajas/historialDeBajas.js",
+				"sistemaBajas/gestionarBajas.js",
+				"serviciosContratados/listar_servicios.js",
+				"funciones.js",
+				"general/sesion.js",
+				"general/crmessage.js",
+				"general/equifax.js",
+				"general/bajas_morosidad.js",
+			];
 
-			include('views/modals/modalDatosCobranza.html');
-			echo '<script src="JS/masDatos/datosCobranza.js' . $version . '"></script>';
-			include('views/modals/modalDatosCoordina.html');
-			echo '<script src="JS/masDatos/datosCoordina.js' . $version . '"></script>';
-			include('views/modals/modalDatosCRM.html');
-			echo '<script src="JS/masDatos/datosCRM.js' . $version . '"></script>';
-			include('views/modals/modalDatosProductos.html');
-			echo '<script src="JS/masDatos/datosProductos.js' . $version . '"></script>';
+			/** Carga JS **/
+			foreach ($array_ruta_cargar_js as $ruta_archivo) {
+				echo '<script src="./assets/js/' . $ruta_archivo . $version . '"></script>';
+			}
+			/** END Carga JS **/
 
 
-			include('views/modals/modalGestionCentralizado.html');
-			include('views/modals/modalGestionDomiciliario.html');
-			include('views/modals/modalHistoriaComunicacionDeCedula.html');
-			include('views/modals/modalHistorialDeBajas.html');
-			echo '<script src="JS/sistemaBajas/historialDeBajas.js' . $version . '"></script>';
-			include('views/modals/modalLlamadasPendientes.html');
-			echo '<script src="JS/sistemaBajas/gestionarBajas.js' . $version . '"></script>';
-			include('views/modals/modalServiciosContratados.html');
-			echo '<script src="JS/serviciosContratados/js.js' . $version . '"></script>';
-			include('views/modals/modal_identificar_persona_logueada.html');
-			include('views/modals/modalSesionExpirada.html');
-			include('views/modals/modal_asignar_llamada_a_usuario.html');
-			include('views/modals/modal_asignar_alerta_pendiente.html');
-			include('views/modals/modal_historial_registros_de_alertas.html');
-			include('views/modals/modal_historial_registros_volver_a_llamar.html');
+			include('./views/content/nivel5.php');
+
+
+			$array_cargar_modals = [
+				"datos_socio/modalDatosCobranza.html",
+				"datos_socio/modalDatosCoordina.html",
+				"datos_socio/modalDatosCRM.html",
+				"datos_socio/modalDatosProductos.html",
+				"modalGestionCentralizado.html",
+				"modalGestionDomiciliario.html",
+				"modalHistoriaComunicacionDeCedula.html",
+				"bajas/modal_historial_de_bajas.html",
+				"bajas/modal_solicitar_baja.html",
+				"volver_a_llamar/modalLlamadasPendientes.html",
+				"datos_socio/modalServiciosContratados.html",
+				"modal_identificar_persona_logueada.html",
+				"modalSesionExpirada.html",
+				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
+				"alertas/modal_asignar_alerta_pendiente.html",
+				"alertas/modal_historial_registros_de_alertas.html",
+				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
+				"etiquetas_socio/modal_ver_etiquetas_socio.html",
+				"modal_mostrar_imagenes.html",
+				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
+				"modal_crmessage.html",
+				"auditorias/modal_auditorias_socio_registradas.html",
+				"auditorias/modal_ver_comentarios_auditoria_socio.html",
+				"auditorias/modal_registrar_comentario_auditoria.html",
+			];
+
+
+			/** Carga Modals **/
+			foreach ($array_cargar_modals as $modal) {
+				include('./views/modals/' . $modal);
+			}
+			/** END Carga Modals **/
+
 
 			break;
 
 
 		case 6:
-			echo '<script src="JS/nivel6/js.js' . $version . '"></script>';
-			echo '<script src="JS/nivel6/alertas/js.js' . $version . '"></script>';
-			echo '<script src="JS/general/sesion.js' . $version . '"></script>';
 
-			include('views/nivel6.php');
+			$array_ruta_cargar_js = [
+				"nivel6/js.js",
+				"nivel6/alertas/js.js",
+				"general/sesion.js",
+				"nivel6/crmessage.js",
+				"general/equifax.js",
+				"general/bajas_morosidad.js",
+			];
+
+			/** Carga JS **/
+			foreach ($array_ruta_cargar_js as $ruta_archivo) {
+				echo '<script src="./assets/js/' . $ruta_archivo . $version . '"></script>';
+			}
+			/** END Carga JS **/
 
 
-			// MODALES DE INFORMACIÓN
+			include('./views/content/nivel6.php');
 
-			include('views/modals/nivel6/modal_licencia_acompanantes.html');
-			include('views/modals/nivel6/modal_horas_acompanantes_personal.html');
-			include('views/modals/nivel6/modal_faltas_acompanantes_personal.html');
-			include('views/modals/nivel6/modalDatosCoordina_personal.html');
-			include('views/modals/nivel6/modalDatosCobranza_personal.html');
-			include('views/modals/nivel6/modalDatosProductos_personal.html');
 
-			include('views/modals/nivel6/modal_todas_licencias_acompanantes.html');
-			include('views/modals/nivel6/modal_todas_las_horas_acompanantes_personal.html');
-			include('views/modals/nivel6/modal_todos_registros_faltas_acompanantes_personal.html');
-			include('views/modals/nivel6/modal_alertas_funcionarios.html');
-			include('views/modals/nivel6/modal_capacitacion_acompanantes.html');
-			include('views/modals/modal_identificar_persona_logueada.html');
-			include('views/modals/modalSesionExpirada.html');
-			include('views/modals/modal_asignar_llamada_a_usuario.html');
-			include('views/modals/modal_asignar_alerta_pendiente.html');
-			include('views/modals/modal_historial_registros_de_alertas.html');
-			include('views/modals/modal_historial_registros_volver_a_llamar.html');
+			$array_cargar_modals = [
+				"nivel6/modal_licencia_acompanantes.html",
+				"nivel6/modal_horas_acompanantes_personal.html",
+				"nivel6/modal_faltas_acompanantes_personal.html",
+				"nivel6/modalDatosCoordina_personal.html",
+				"nivel6/modalDatosCobranza_personal.html",
+				"nivel6/modalDatosProductos_personal.html",
+				"nivel6/modal_todas_licencias_acompanantes.html",
+				"nivel6/modal_todas_las_horas_acompanantes_personal.html",
+				"nivel6/modal_todos_registros_faltas_acompanantes_personal.html",
+				"nivel6/alertas/modal_alertas_funcionarios.html",
+				"nivel6/modal_capacitacion_acompanantes.html",
+				"modal_identificar_persona_logueada.html",
+				"modalSesionExpirada.html",
+				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
+				"alertas/modal_asignar_alerta_pendiente.html",
+				"alertas/modal_historial_registros_de_alertas.html",
+				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
+				"etiquetas_socio/modal_ver_etiquetas_socio.html",
+				"modal_mostrar_imagenes.html",
+				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
+				"modal_crmessage.html",
+				"auditorias/modal_auditorias_socio_registradas.html",
+				"auditorias/modal_ver_comentarios_auditoria_socio.html",
+				"auditorias/modal_registrar_comentario_auditoria.html",
+				"bajas/modal_solicitar_baja.html",
+			];
+
+
+			/** Carga Modals **/
+			foreach ($array_cargar_modals as $modal) {
+				include('./views/modals/' . $modal);
+			}
+			/** END Carga Modals **/
+
 
 			break;
 	}
-} else {
-	include('views/log.html');
-	echo '<script src="JS/log.js' . $version . '"></script>';
-}
 
-include('views/footer.html');
+
+
+
+	include('views/footer.php');
+} else {
+	echo '<script>window.location.replace("login.php");</script>';
+}

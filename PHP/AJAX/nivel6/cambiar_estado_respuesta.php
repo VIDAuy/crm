@@ -4,9 +4,10 @@ session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-require '../../../PHPMailer/src/PHPMailer.php';
-require '../../../PHPMailer/src/SMTP.php';
-require '../../../PHPMailer/src/Exception.php';
+require '../../lib/PHPMailer/src/PHPMailer.php';
+require '../../lib/PHPMailer/src/SMTP.php';
+require '../../lib/PHPMailer/src/Exception.php';
+
 
 include '../../conexiones/conexion2.php';
 
