@@ -16,7 +16,7 @@
 
 					<input type="text" class="form-control solo_numeros" id="ci" name="ci" placeholder="Ingrese cédula a buscar ..." aria-label="Ingrese cédula a buscar ..." aria-describedby="basic-addon1" oninput="ocultarContenido()" maxlength="8">
 
-					<button class="btn btn-danger input-group-text" id="buscarCI" onclick="buscar();">Buscar 🔍</button>
+					<button class="btn btn-danger input-group-text" id="buscarCI" onclick="buscarDatos(false)">Buscar 🔍</button>
 				</div>
 			</div>
 		</div>

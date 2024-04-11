@@ -1,34 +1,49 @@
-function datosProductos() {
-	$('#b3').prop("disabled", true);
-	$('#b3').val('Cargando...');
-	$('#tbodyMDP tr').remove();
-	$.ajax(
-		{
-			url: 'PHP/AJAX/masDatos/datosProductos.php',
-			dataType: 'JSON',
-			data: { cedula: $('#cedulas').text() },
-			success: function (content) {
-				if (content.error) {
-					$('#b3').val('Sin Productos');
-					error(content.mensaje);
-				}
-				else {
-					$.each(content, function (index, el) {
-						nuevoServicio = '<tr>' +
-							'<td><input type="text" value="' + el.nroServicio + '"	readonly class="form-control"></td>' +
-							'<td><input type="text" value="' + el.servicio + '"		readonly class="form-control"></td>' +
-							'<td><input type="text" value="' + el.horas + '"			readonly class="form-control"></td>' +
-							'<td><input type="text" value="$' + el.importe + '"		readonly class="form-control"></td>' +
-							'</tr>';
-						$(nuevoServicio).appendTo('#tbodyMDP');
-					});
-				}
-				$('#modalDatosProductos').modal('show');
-				$('#b3').prop("disabled", false);
-				$('#b3').val('Productos');
+function datos_productos() {
+	let cedula = $('#cedulas').text();
+
+	if (cedula == '') {
+		error('Debe ingresar la cédula que desea consultar');
+	} else {
+
+		$('#btnDatosProductos').prop("disabled", true);
+		$('#btnDatosProductos').text('Cargando...');
+
+		$.ajax({
+			type: "GET",
+			url: `${url_ajax}masDatos/datosProductos.php?opcion=1`,
+			data: {
+				cedula: cedula
 			},
-			error: function () {
-				error('Ha ocurrido un error inesperado, por favor comuníquese con el administrador.');
+			dataType: "JSON",
+			success: function (response) {
+				if (response.error === false) {
+					tabla_productos(cedula);
+					$('#modalDatosProductos').modal('show');
+					$('#btnDatosProductos').prop("disabled", false);
+					$('#btnDatosProductos').text('Productos');
+				} else {
+					$('#btnDatosProductos').prop("disabled", true);
+					$('#btnDatosProductos').text('Productos (sin registros)');
+					error(response.mensaje);
+				}
 			}
 		});
-};
+
+	}
+}
+
+
+function tabla_productos(cedula) {
+	$("#tabla_productos_registrados").DataTable({
+		ajax: `${url_ajax}masDatos/datosProductos.php?cedula=${cedula}&opcion=2`,
+		columns: [
+			{ data: "nroServicio" },
+			{ data: "servicio" },
+			{ data: "horas" },
+			{ data: "importe" },
+		],
+		order: [[0, "desc"]],
+		bDestroy: true,
+		language: { url: url_lenguage },
+	});
+}

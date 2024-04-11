@@ -64,11 +64,13 @@ if ($res_seccion === "") {
 $id_nodum = $res_general['nro_nodum'];
 $cedula = $res_general['cedula'];
 $res_plan = consulta_comisionamiento($cedula);
+/*
 if ($res_plan === "") {
 	$response['error'] = true;
 	$response['mensaje'] = "Error en la consulta tipo comisionamiento";
 	die(json_encode($response));
 }
+*/
 
 
 $cod_dpto = $res_general['filiales'];
@@ -124,13 +126,14 @@ $empresa = $res_empresa['nom_emp'];
 $estado = $res_general['estado'];
 $cargo = $res_cargo['descrip'];
 $seccion = $res_seccion['desc_seccion'];
-$plan = $res_plan['plan'] != "" ? $res_plan['plan'] : "Ninguno";
+
+$plan = !is_array($res_plan) ? "Ninguno" : $res_plan['plan'];
 $filial = $res_filiales[0];
 $subfilial = $res_filiales[1];
 $tipo_trabajador = $res_tipo_trabajador['descrip'];
 $causa_baja = $cod_causal_baja == 0 ? "" : $res_causal_baja['desc_combo'];
 $medio_pago = $res_medio_pago['nom_banco'];
-$mail = $res_mail['email'] != "" ? $res_mail['email'] : "Sin Registro";
+$mail = !is_array($res_mail) ? "Sin Registro" : $res_mail['email'];
 
 
 
@@ -236,7 +239,6 @@ function consulta_general($cedula, $tipo)
 	return $respuesta == null ? "" : $respuesta;
 }
 
-
 function consulta_telefono($cod_persona)
 {
 	global $conexion;
@@ -245,7 +247,6 @@ function consulta_telefono($cod_persona)
 
 	return sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC);
 }
-
 
 function consulta_empresa($cod_empresa)
 {
@@ -256,7 +257,6 @@ function consulta_empresa($cod_empresa)
 	return sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC);
 }
 
-
 function consulta_cargo($cod_cargo)
 {
 	global $conexion;
@@ -266,7 +266,6 @@ function consulta_cargo($cod_cargo)
 	return sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC);
 }
 
-
 function consulta_centro_costos($cod_seccion)
 {
 	global $conexion;
@@ -275,7 +274,6 @@ function consulta_centro_costos($cod_seccion)
 
 	return sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC);
 }
-
 
 function consulta_comisionamiento($cedula)
 {
@@ -292,9 +290,11 @@ function consulta_comisionamiento($cedula)
 	  ORDER BY tabla_planes.fec_vigencia DESC;
 	");
 
-	return sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC);
-}
+	$resultado = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC);
+	$resultado = $resultado == null ? "" : $resultado;
 
+	return $resultado;
+}
 
 function consulta_filiales($cod_dpto)
 {
@@ -306,7 +306,6 @@ function consulta_filiales($cod_dpto)
 	return explode('-', $respuesta['nom_dpto']);
 }
 
-
 function consulta_tipo_trabajador($cod_tipo_trabajador)
 {
 	global $conexion;
@@ -315,7 +314,6 @@ function consulta_tipo_trabajador($cod_tipo_trabajador)
 
 	return sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC);
 }
-
 
 function consulta_causal_baja($cod_causal_baja)
 {
@@ -326,7 +324,6 @@ function consulta_causal_baja($cod_causal_baja)
 	return sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC);
 }
 
-
 function consulta_medio_pago($cod_banco)
 {
 	global $conexion;
@@ -336,7 +333,6 @@ function consulta_medio_pago($cod_banco)
 	return sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC);
 }
 
-
 function consulta_mail($cod_persona)
 {
 	global $conexion;
@@ -345,7 +341,6 @@ function consulta_mail($cod_persona)
 
 	return sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC);
 }
-
 
 
 

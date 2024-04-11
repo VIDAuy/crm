@@ -22,7 +22,7 @@ function agregar_etiqueta_socio(openModal = false) {
 
             $.ajax({
                 type: "POST",
-                url: `${url_app}etiquetas_socio.php`,
+                url: `${url_ajax}etiquetas_socio.php`,
                 data: {
                     "opcion": 3,
                     "cedula": cedula,
@@ -46,15 +46,32 @@ function agregar_etiqueta_socio(openModal = false) {
     }
 }
 
-function ver_etiquetas_socio(openModal = false) {
-    if (openModal == true) {
-        $("#modal_verEtiquetasSocio").modal("show");
-    }
+function ver_etiquetas_socio() {
 
     let cedula = $("#ci").val();
 
+    $.ajax({
+        type: "GET",
+        url: `${url_ajax}etiquetas_socio.php`,
+        data: {
+            "opcion": 2,
+            "cedula": cedula
+        },
+        dataType: "JSON",
+        success: function (response) {
+            if (response.error === false) {
+                response.cantidad > 0 ? tabla_etiquetas(cedula) : error("El socio no tiene etiquetas registradas.");
+            } else {
+                error(response.mensaje);
+            }
+        }
+    });
+
+}
+
+function tabla_etiquetas(cedula) {
     $("#tabla_etiquetas_socio").DataTable({
-        ajax: `${url_app}etiquetas_socio.php?opcion=1&cedula=${cedula}`,
+        ajax: `${url_ajax}etiquetas_socio.php?opcion=1&cedula=${cedula}`,
         columns: [
             { data: "id" },
             { data: "etiqueta" },
@@ -63,11 +80,10 @@ function ver_etiquetas_socio(openModal = false) {
         ],
         order: [[0, "asc"]],
         bDestroy: true,
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-        },
+        language: { url: url_lenguage },
     });
 
+    $("#modal_verEtiquetasSocio").modal("show");
 }
 
 function mostrar_cantidad_etiquetas_socio() {
@@ -76,7 +92,7 @@ function mostrar_cantidad_etiquetas_socio() {
 
     $.ajax({
         type: "GET",
-        url: `${url_app}etiquetas_socio.php`,
+        url: `${url_ajax}etiquetas_socio.php`,
         data: {
             "opcion": 2,
             "cedula": cedula

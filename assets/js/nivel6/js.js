@@ -1,8 +1,9 @@
 const produccion = true;
 const app = produccion ? 'crm' : 'crm_test';
-const url_app = 'http://192.168.1.250:82/' + app + '/PHP/AJAX/nivel6/';
-const url_app_procesos =
-  'http://192.168.1.250:82/' + app + '/PHP/AJAX/nivel6/procesos/';
+const url_app = `http://192.168.1.250:82/${app}/PHP/AJAX/nivel6/`;
+const url_app_procesos = `http://192.168.1.250:82/${app}/PHP/AJAX/nivel6/procesos/`;
+const url_ajax = `http://192.168.1.250:82/${app}/PHP/AJAX/`;
+
 
 $(document).ready(function () {
   ocultarTodoContenido();
@@ -260,18 +261,16 @@ function licencia_acompanante() {
                     .eq(i)
                     .before(
                       '<tr class="group">' +
-                        '<td colspan="5" style="background-color: #6F934F; color: white; font-weight: bolder;">' +
-                        group +
-                        '</td></tr>'
+                      '<td colspan="5" style="background-color: #6F934F; color: white; font-weight: bolder;">' +
+                      group +
+                      '</td></tr>'
                     );
 
                   last = group;
                 }
               });
           },
-          language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
-          },
+          language: { url: url_lenguage },
           dom: 'Bfrtip',
           buttons: ['excel'],
           footerCallback: function (row, data, start, end, display) {
@@ -352,9 +351,7 @@ function horas_acompanante(cedula, fecha_desde, fecha_hasta) {
           ],
           order: [[0, 'asc']],
           bDestroy: true,
-          language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
-          },
+          language: { url: url_lenguage },
           dom: 'Bfrtip',
           buttons: ['excel'],
         });
@@ -390,7 +387,7 @@ function faltas_acompanante(cedula, fecha_desde, fecha_hasta) {
     ],
     bDestroy: true,
     order: [[0, 'asc']],
-    language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+    language: { url: url_lenguage },
     dom: 'Bfrtip',
     buttons: ['excel'],
   });
@@ -424,9 +421,7 @@ function coordinacion_socio(cedula) {
           columns: [{ data: 'observacion' }, { data: 'id' }],
           bDestroy: true,
           order: [[0, 'asc']],
-          language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
-          },
+          language: { url: url_lenguage },
           dom: 'Bfrtip',
           buttons: ['excel'],
         });
@@ -473,9 +468,7 @@ function cobranza_socio(cedula) {
           ],
           bDestroy: true,
           order: [[0, 'desc']],
-          language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
-          },
+          language: { url: url_lenguage },
           dom: 'Bfrtip',
           buttons: ['excel'],
         });
@@ -522,9 +515,7 @@ function productos_socio(cedula) {
           ],
           bDestroy: true,
           order: [[0, 'asc']],
-          language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
-          },
+          language: { url: url_lenguage },
           dom: 'Bfrtip',
           buttons: ['excel'],
         });
@@ -692,18 +683,16 @@ function registro_completo_licencias_acompanantes(fecha_desde, fecha_hasta) {
                     .eq(i)
                     .before(
                       '<tr class="group">' +
-                        '<td colspan="6" style="background-color: #6F934F; color: white; font-weight: bolder;">' +
-                        group +
-                        '</td></tr>'
+                      '<td colspan="6" style="background-color: #6F934F; color: white; font-weight: bolder;">' +
+                      group +
+                      '</td></tr>'
                     );
 
                   last = group;
                 }
               });
           },
-          language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
-          },
+          language: { url: url_lenguage },
           dom: 'Bfrtip',
           buttons: ['excel'],
           rowGroup: {
@@ -739,7 +728,7 @@ function registro_completo_faltas_acompanantes(fecha_desde, fecha_hasta) {
     ],
     bDestroy: true,
     order: [[0, 'desc']],
-    language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+    language: { url: url_lenguage },
     dom: 'Bfrtip',
     buttons: ['excel'],
   });
@@ -776,7 +765,7 @@ function registro_completo_horas_acompanantes(fecha_desde, fecha_hasta) {
     ],
     order: [[0, 'asc']],
     bDestroy: true,
-    language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+    language: { url: url_lenguage },
     dom: 'Bfrtip',
     buttons: ['excel'],
   });
@@ -818,9 +807,7 @@ function registro_capacitacion_acompanantes(fecha_desde, fecha_hasta) {
           ],
           order: [[3, 'desc']],
           bDestroy: true,
-          language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
-          },
+          language: { url: url_lenguage },
           dom: 'Bfrtip',
           buttons: ['excel'],
         });
@@ -887,13 +874,13 @@ function mostrarLoader(opcion = 'M') {
   $loader =
     opcion == 'M'
       ? Swal.fire({
-          title: 'Cargando...',
-          allowEscapeKey: false,
-          allowOutsideClick: false,
-          didOpen: () => {
-            swal.showLoading();
-          },
-        })
+        title: 'Cargando...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          swal.showLoading();
+        },
+      })
       : $loader.close();
 }
 

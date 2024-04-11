@@ -2,7 +2,7 @@
 	$(function() {
 		$('#ci').keypress(function(e) {
 			if (e.which == 13) {
-				buscar();
+				buscarDatos(true);
 			}
 		});
 	})
@@ -11,25 +11,6 @@
 <input type="hidden" id="nivel" value="<?= $_SESSION['nivel'] ?>">
 <input type="hidden" id="idrelacion">
 
-
-<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-	<div class="container-fluid">
-		<a class="navbar-brand">Menú</a>
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a class="navbar-brand fw-bolder" href="#" id="nombre_usuario_en_sesion"></a>
-			</li>
-		</ul>
-		<div class="d-flex">
-			<a class="btn btn-outline-danger" href="cerrarSesion.php" onclick="cerrarSesion()">Cerrar sesión</a>
-		</div>
-	</div>
-</nav>
-
-
-<div class="container mb-5" align="center">
-	<h2 style="color:#FB0B0F">CRM</h2>
-</div>
 
 
 <!-- Contenedor General -->

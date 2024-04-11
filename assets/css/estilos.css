@@ -101,3 +101,7 @@ tr.group:hover {
 .notie-container {
   box-shadow: none;
 }
+
+.bg-purple {
+  background-color: #6f42c1;
+}

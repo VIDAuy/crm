@@ -1,6 +1,11 @@
 const produccion = true;
-const app = produccion ? 'crm' : 'crm_test';
-const url_app = 'http://192.168.1.250:82/' + app + '/PHP/AJAX/';
+const protocolo = "http";
+const server = produccion ? "192.168.1.250:82" : "192.168.1.250:82";
+const app = produccion ? "crm" : "crm_test";
+const url_app = `${protocolo}://${server}/${app}`;
+const url_ajax = `${url_app}/PHP/AJAX/`;
+const url_lenguage = `${url_app}/assets/js/lenguage.json`;
+
 
 // AJAX
 function agregarFiliales() {
@@ -18,7 +23,7 @@ function agregarFiliales() {
   }
 
   $.ajax({
-    url: url_app + 'agregarFiliales.php',
+    url: `${url_ajax}agregarFiliales.php`,
     dataType: 'JSON',
     success: function (r) {
       $.each(r.datos, function (i, v) {
@@ -28,6 +33,25 @@ function agregarFiliales() {
     },
   });
 }
+
+function select_usuarios(div) {
+
+  document.getElementById(div).innerHTML = '<option value="" selected>Ninguna seleccionada</option>';
+
+  $.ajax({
+    type: "GET",
+    url: `${url_ajax}select_usuarios.php?`,
+    dataType: "JSON",
+    success: function (response) {
+      let datos = response.datos;
+      datos.map((val) => {
+        document.getElementById(div).innerHTML += `<option value="${val['id']}">${val['usuario']}</option>`;
+      });
+    }
+  });
+
+}
+
 
 function enviar_terminos_y_condiciones_socio(openModal = false) {
   if (openModal === true) {
@@ -48,7 +72,7 @@ function enviar_terminos_y_condiciones_socio(openModal = false) {
     } else {
       $.ajax({
         type: 'POST',
-        url: `${url_app}enviar_terminos_y_condiciones.php`,
+        url: `${url_ajax}enviar_terminos_y_condiciones.php`,
         data: {
           sector: sector,
           cedula: cedula,
@@ -187,7 +211,7 @@ function warning(mensaje, titulo = "") {
 }
 
 function correcto(mensaje) {
-  Swal.fire({ title: 'Exito!', html: mensaje, icon: 'success' });
+  Swal.fire({ title: 'Éxito!', html: mensaje, icon: 'success' });
 }
 
 function alerta_ancla(titulo, mensaje, icono) {
@@ -202,41 +226,33 @@ function alerta_ancla(titulo, mensaje, icono) {
   });
 }
 
-function modal_ver_imagen_registro(ruta, id) {
-  document.getElementById('mostrar_imagenes_relamos').innerHTML = '';
+function cargando(opcion = "M", mensaje = null) {
+  if (opcion === "M") {
+    $loader = Swal.fire({
+      icon: "info",
+      title: "Cargando...",
+      html: mensaje,
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
+  } else {
+    Swal.hideLoading();
+    Swal.close();
+  }
+}
 
-  $.ajax({
-    type: 'GET',
-    url: `${url_app}imagenes_de_registros.php`,
-    data: {
-      id: id,
-    },
-    dataType: 'JSON',
-    success: function (response) {
-      if (response.error === false) {
-        let imagenes = response.datos;
-
-        imagenes.map((val) => {
-          let separar_nombre_archivo = val.split('.');
-          let extencion_archivo = separar_nombre_archivo[1];
-
-          if (extencion_archivo != 'pdf') {
-            document.getElementById(
-              'mostrar_imagenes_relamos'
-            ).innerHTML += `<img src="${ruta}/${val}" style="width: 100%; height: auto"> <br> <br>`;
-          } else {
-            document.getElementById(
-              'mostrar_imagenes_relamos'
-            ).innerHTML += `<iframe src="${ruta}/${val}" width=100% height=600></iframe>`;
-          }
-        });
-      } else {
-        error(response.mensaje);
-      }
-    },
+function showLoading(title = "Cargando...") {
+  Swal.fire({
+    title,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => Swal.showLoading(),
   });
+}
 
-  $('#modalVerImagenesRegistro').modal('show');
+function hideLoading() {
+  Swal.close();
 }
 
 function mostrarLoader(opcion = 'M') {
@@ -278,10 +294,10 @@ function ocultar_todo_contenido() {
   $('.contenido').css({ display: 'none' });
   $('#historiaComunicacionDeCedulaDiv').css('display', 'none');
   $('#historiaComunicacionDeCedulaDiv_funcionarios').css('display', 'none');
-  $('#b1').val('Coordinación');
-  $('#b1').attr('disabled', false);
-  $('#b2').val('Cobranza');
-  $('#b2').attr('disabled', false);
+  $('#btnDatosCoordinacion').text('Coordinación');
+  $('#btnDatosCoordinacion').attr('disabled', false);
+  $('#btnDatosCobranza').text('Cobranza');
+  $('#btnDatosCobranza').attr('disabled', false);
 
   //noEsSocioRegistro
   $('#cedulasNSR').val('');
@@ -312,4 +328,47 @@ function ocultar_todo_contenido() {
 
   $('#obser').val('');
   $('#observacionesNSR').val('');
+}
+
+function fecha_hora_actual() {
+  let fecha = new Date();
+  let hora = fecha.getHours();
+  let minutos = fecha.getMinutes();
+  fecha = fecha.toJSON().slice(0, 10);
+  hora = String(hora).length == 1 ? `0${hora}` : hora;
+  minutos = String(minutos).length == 1 ? `0${minutos}` : minutos;
+
+  return `${fecha} ${hora}:${minutos}`;
+}
+
+function fecha_actual(obtener) {
+  let devolver = "";
+  let fecha = new Date();
+  if (obtener == "fecha") devolver = fecha.toJSON().slice(0, 10);
+  if (obtener == "anio") devolver = fecha.getFullYear();
+  if (obtener == "mes") devolver = fecha.getMonth() + 1;
+  if (obtener == "dia") devolver = fecha.getDay();
+
+  return `${devolver}`;
+}
+
+function controlCedula(cedula) {
+  if (cedula == "") {
+    error("Debe ingresar una cédula");
+  } else if (comprobarCI(cedula) === false) {
+    error("Debe ingresar una cédula válida");
+  } else {
+    return true;
+  }
+}
+
+function esNumero(cadena) {
+  const regex_numeros = /^[0-9]*$/;
+  return regex_numeros.test(cadena);
+}
+
+//Cambiar clase y nombre de botón
+function cambiar_div(div, clase, nombre) {
+  document.getElementById(`${div}`).className = `${clase}`;
+  document.getElementById(`${div}`).innerHTML = `${nombre}`;
 }

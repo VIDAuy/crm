@@ -102,16 +102,16 @@
 			</div>
 			<div class="row">
 				<div class="col-3">
-					<input type="button" id="b1" type="button" class="btn btn-primary btn-block mr-1" onclick="datosCoordina()" value="Datos Coordina">
+					<button type="button" id="b1" class="btn btn-primary btn-block mr-1" onclick="datosCoordina()">Datos Coordina</button>
 				</div>
 				<div class="col-3">
-					<input type="button" id="b2" type="button" class="btn btn-primary btn-block mx-1" onclick="datosCobranza()" value="Datos Cobranza">
+					<button type="button" id="b2" class="btn btn-primary btn-block mx-1" onclick="datosCobranza()">Datos Cobranza</button>
 				</div>
 				<div class="col-3">
-					<input type="button" id="b3" type="button" class="btn btn-primary btn-block mx-1" onclick="datosProductos()" value="Datos Productos">
+					<button type="button" id="b3" class="btn btn-primary btn-block mx-1" onclick="datosProductos()">Datos Productos</button>
 				</div>
 				<div class="col-3">
-					<input type="button" id="b4" type="button" class="btn btn-primary btn-block ml-1" onclick="datosCRM()" value="Datos CRM">
+					<button type="button" id="b4" class="btn btn-primary btn-block ml-1" onclick="datosCRM()">Datos CRM</button>
 				</div>
 			</div>
 			<div id="datosMorosoDiv">

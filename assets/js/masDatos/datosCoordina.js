@@ -1,43 +1,57 @@
-function datosCoordina() {
-	$('#b1').prop("disabled", true);
-	$('#b1').val('Cargando...');
-	$.ajax(
-		{
-			url: 'PHP/AJAX/masDatos/datosCoordina.php',
-			dataType: 'JSON',
-			data:
-			{
-				CI: $('#cedulas').text()
+function datos_coordinacion() {
+	let cedula = $('#cedulas').text();
+
+	if (cedula == '') {
+		error('Debe ingresar la cédula que desea consultar');
+	} else {
+
+		$('#btnDatosCoordinacion').prop("disabled", true);
+		$('#btnDatosCoordinacion').text('Cargando...');
+
+		$.ajax({
+			type: "GET",
+			url: `${url_ajax}masDatos/datosCoordina.php`,
+			data: {
+				cedula: cedula,
+				opcion: 1
+			},
+			dataType: "JSON",
+			success: function (response) {
+				if (response.error === false) {
+					$('#btnDatosCoordinacion').prop("disabled", false);
+					$('#btnDatosCoordinacion').text('Coordinación');
+					tabla_coordinacion(cedula);
+				} else {
+					$('#btnDatosCoordinacion').prop("disabled", true);
+					$('#btnDatosCoordinacion').text('Coordinación (sin registros)');
+					error(response.mensaje);
+				}
 			}
-		})
-		.done(function (datos) {
-			if (datos.error) {
-				$('#b1').val('Coordinación (sin registros)');
-				error(datos.mensaje);
-			} else {
-				$('#tbodyMDCoo tr').remove();
-				$.each(datos, function (index, el) {
-					let nuevaLinea =
-						'<tr>' +
-						'<td scope="row">' + el.id + '</td>' +
-						'<td>' + el.observacion + '</td>' +
-						'<td>' + el.fecha_inicio + '</td>' +
-						'<td>' + el.fecha_fin + '</td>' +
-						'<td>' + el.hora_inicio + '</td>' +
-						'<td>' + el.hora_fin + '</td>' +
-						'<td>' + el.horas_x_dia + '</td>' +
-						'<td>' + el.lugar + '</td>' +
-						'<td>' + el.estado + '</td>' +
-						'<td>' + el.patologia + '</td>' +
-						'</tr>';
-					$(nuevaLinea).appendTo('#tbodyMDCoo');
-				});
-				$('#modalDatosCoordina').modal('show');
-				$('#b1').prop("disabled", false);
-				$('#b1').val('Coordinación');
-			}
-		})
-		.fail(function () {
-			console.log("error");
-		})
+		});
+
+	}
+}
+
+
+function tabla_coordinacion(cedula) {
+	$("#tabla_servicios_coordinacion").DataTable({
+		ajax: `${url_ajax}masDatos/datosCoordina.php?cedula=${cedula}&opcion=2`,
+		columns: [
+			{ data: "id" },
+			{ data: "observacion" },
+			{ data: "fecha_inicio" },
+			{ data: "fecha_fin" },
+			{ data: "hora_inicio" },
+			{ data: "hora_fin" },
+			{ data: "horas_x_dia" },
+			{ data: "lugar" },
+			{ data: "estado" },
+			{ data: "patologia" },
+		],
+		order: [[0, "desc"]],
+		bDestroy: true,
+		language: { url: url_lenguage },
+	});
+
+	$("#modalDatosCoordina").modal("show");
 }

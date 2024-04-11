@@ -2,10 +2,6 @@ $(document).keypress(function (e) {
 	if (e.which == 13) log();
 });
 
-$('#boton').on('click', function () {
-	log();
-});
-
 function log() {
 	let usuario = $('#usuario').val();
 	let password = $('#password').val();
@@ -19,7 +15,7 @@ function log() {
 		let $data = $('#form').serialize();
 		$.ajax(
 			{
-				url: 'PHP/AJAX/log.php',
+				url: 'PHP/AJAX/login.php',
 				data: $data,
 				method: 'POST',
 				dataType: 'JSON',

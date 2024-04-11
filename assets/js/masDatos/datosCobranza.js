@@ -1,81 +1,49 @@
-function datosCobranza() {
-	$('#b2').prop("disabled", true);
-	$('#b2').val('Cargando...');
-	$("#example4").DataTable().destroy();
-	$("#tbodyMDC tr").remove();
-	if ($('#cedulas').text() == '') {
-		error('Antes de consultar los datos debe ingresar una cédula');
-	}
-	else {
-		$.ajax(
-			{
-				url: 'PHP/AJAX/masDatos/datosCobranza.php',
-				dataType: 'JSON',
-				data:
-				{
-					CI: $('#cedulas').text()
-				},
-			})
-			.done(function (datos) {
-				if (datos.sinCuotas) {
-					error(datos.mensaje);
-					$('#b2').val('Sin datos de cobranza');
-				}
-				else {
-					$.each(datos, function (index, el) {
-						let nuevaLinea =
-							'<tr>' +
-							'<th>' + el.mes + '</th>' +
-							'<th>' + el.anho + '</th>' +
-							'<th>$' + el.importe + '</th>' +
-							'<th>' + el.cobrado + '</th>' +
-							'</tr>';
-						$(nuevaLinea).appendTo('#tbodyMDC');
-					});
-					$("#example4").DataTable(
-						{
-							searching: true,
-							paging: true,
-							lengthChange: false,
-							ordering: true,
-							info: true,
-							order: [1, 'asc'],
-							columnDefs:
-								[
-									{
-										targets: [0],
-										orderData: [0, 1]
-									}, {
-										targets: [3],
-										orderData: [3, 0]
-									}
-								],
-							language:
-							{
-								zeroRecords: "No se encontraron registros.",
-								info: "Pagina _PAGE_ de _PAGES_",
-								infoEmpty: "No Hay Registros Disponibles",
-								infoFiltered: "(filtrado de _MAX_ hasta records)",
-								search: "Buscar:",
-								paginate:
-								{
-									first: "Primero",
-									last: "Último",
-									next: "Siguiente",
-									previous: "Anterior"
-								},
-							}
-						});
-					stateSave: true
-					$('[type="search"]').addClass('form-control-static');
-					$('[type="search"]').css({ borderRadius: '5px' });
+function datos_cobranza() {
+	let cedula = $('#cedulas').text();
+
+	if (cedula == '') {
+		error('Debe ingresar la cédula que desea consultar');
+	} else {
+
+		$('#btnDatosCobranza').prop("disabled", true);
+		$('#btnDatosCobranza').text('Cargando...');
+
+		$.ajax({
+			type: "GET",
+			url: `${url_ajax}masDatos/datosCobranza.php?opcion=1`,
+			data: {
+				cedula: cedula
+			},
+			dataType: "JSON",
+			success: function (response) {
+				if (response.error === false) {
+					tabla_cobranzas(cedula);
 					$('#modalDatosCobranza').modal('show');
-					$('#b2').prop("disabled", false);
-					$('#b2').val('Cobranza');
+					$('#btnDatosCobranza').prop("disabled", false);
+					$('#btnDatosCobranza').text('Cobranza');
+				} else {
+					$('#btnDatosCobranza').prop("disabled", true);
+					$('#btnDatosCobranza').text('Cobranzas (sin registros)');
+					error(response.mensaje);
 				}
-			})
-			.fail(function () {
-				console.log("error");
-			})
+			}
+		});
+
 	}
+}
+
+
+function tabla_cobranzas(cedula) {
+	$("#tabla_registros_cobranza").DataTable({
+		ajax: `${url_ajax}masDatos/datosCobranza.php?cedula=${cedula}&opcion=2`,
+		columns: [
+			{ data: "mes" },
+			{ data: "anho" },
+			{ data: "importe" },
+			{ data: "cobrado" },
+		],
+		order: [[1, "desc"], [0, "desc"]],
+		bDestroy: true,
+		language: { url: url_lenguage },
+	});
 }

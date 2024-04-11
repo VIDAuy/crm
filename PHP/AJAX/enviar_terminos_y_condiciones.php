@@ -1,5 +1,5 @@
 <?php
-include './configuraciones.php';
+include_once '../configuraciones.php';
 $id_sub_usuario = $_SESSION['id_sub_usuario'];
 $sector = $_REQUEST['sector'];
 $cedula = $_REQUEST['cedula'];
@@ -211,13 +211,6 @@ function sendSMS($celular, $mensaje)
     $d = $parametros['msgRecip'] = (string)$celular;
     $client = new SoapClient($servicio, $parametros);
     return $client->sendSms($a, $b, $c, $d);
-}
-
-function buscarCelular($numeros)
-{
-    preg_match_all('/(09)[1-9]{1}\d{6}/x', $numeros, $respuesta);
-    $respuesta = (count($respuesta[0]) !== 0) ? $respuesta[0] : false;
-    return $respuesta;
 }
 
 function registrar_envio($cedula, $nombre, $celular, $sector, $id_sub_usuario)
