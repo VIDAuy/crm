@@ -51,9 +51,7 @@ if (isset($_SESSION['nivel'])) {
 
 			echo '<div class="contenido" style="display: none;">';
 			include('views/content/etiquetas_de_socio.html');
-			include('views/content/no_es_socio_registros.html');
-			include('views/content/no_es_socio.html');
-			include('views/content/si_es_socio.html');
+			include('views/content/contenido_filiales.html');
 			echo '</div>';
 			include('views/content/funcionarios.html');
 			include('views/content/registros_socio.html');
@@ -83,6 +81,7 @@ if (isset($_SESSION['nivel'])) {
 				"modal_agregar_patologia_socio.html",
 				"modal_cambiar_fecha_y_hora_volver_a_llamar.html",
 				"modal_ver_etiquetas_socio.html",
+				"modal_mostrar_imagenes.html",
 				"modal_agregar_etiquetas_socio.html"
 			];
 
@@ -156,6 +155,7 @@ if (isset($_SESSION['nivel'])) {
 				"modal_historial_registros_de_alertas.html",
 				"modal_historial_registros_volver_a_llamar.html",
 				"modal_ver_etiquetas_socio.html",
+				"modal_mostrar_imagenes.html",
 				"modal_agregar_etiquetas_socio.html"
 			];
 
@@ -293,6 +293,7 @@ if (isset($_SESSION['nivel'])) {
 				"modal_historial_registros_de_alertas.html",
 				"modal_historial_registros_volver_a_llamar.html",
 				"modal_ver_etiquetas_socio.html",
+				"modal_mostrar_imagenes.html",
 				"modal_agregar_etiquetas_socio.html"
 			];
 
@@ -347,6 +348,7 @@ if (isset($_SESSION['nivel'])) {
 				"modal_historial_registros_de_alertas.html",
 				"modal_historial_registros_volver_a_llamar.html",
 				"modal_ver_etiquetas_socio.html",
+				"modal_mostrar_imagenes.html",
 				"modal_agregar_etiquetas_socio.html"
 			];
 
@@ -398,6 +400,7 @@ if (isset($_SESSION['nivel'])) {
 				"modal_historial_registros_de_alertas.html",
 				"modal_historial_registros_volver_a_llamar.html",
 				"modal_ver_etiquetas_socio.html",
+				"modal_mostrar_imagenes.html",
 				"modal_agregar_etiquetas_socio.html"
 			];
 

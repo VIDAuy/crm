@@ -60,14 +60,20 @@ if (isset($_GET['ID'])) {
 			$avisar_a = $id_avisar_a != "" ? obtener_area_avisada($id_avisar_a) : "";
 			$observaciones = $row['observaciones'];
 			$id_sub_usuario = $row['id_sub_usuario'];
-			$nombre_sub_usuario = $id_sub_usuario != "" ? @utf8_encode(obtener_nombre_sub_usuario($id_sub_usuario)) : "";
+			$sector = $row['sector'];
 
+			if ($sector == "Audit1" || $sector == "Audit2" || $sector == "Audit3") {
+				$usuario = ($sector == "Audit1") ? "Nathalia Horvat" : (($sector == "Audit2") ? "Andrea Horvat" : (($sector == "Audit3") ? "Tatiana Landa" : ""));
+			} else {
+				$nombre_sub_usuario = $id_sub_usuario != "" ? @utf8_encode(obtener_nombre_sub_usuario($id_sub_usuario)) : "";
+				$usuario = $nombre_sub_usuario == "" || $id_sub_usuario == "" ? "-" : $nombre_sub_usuario;
+			}
 
 			$f[] = array(
 				'id'			=> $row['id'],
 				'fecha' 		=> date("d/m/Y H:i:s", strtotime($row['fecha_registro'])),
 				'sector' 		=> $row['sector'],
-				'usuario'       => $usuario = $nombre_sub_usuario == "" || $id_sub_usuario == "" ? "-" : $nombre_sub_usuario,
+				'usuario'       => $usuario,
 				'observacion'	=> $observaciones,
 				'avisar_a'	    => ucfirst($avisar_a),
 				'socio' 		=> $socio,

@@ -114,11 +114,11 @@ function buscar() {
 function buscarDatos() {
     let cedula = $("#ci").val();
     let consultar = document.querySelector('input[name="radioBuscar"]:checked').value;
-
+    
     if (cedula.length != 0) {
         if (consultar === "socio" && comprobarCI(cedula)) {
             buscarSocio(cedula);
-        } else if (consultar === "funcionario") {
+        } else if (consultar == 'funcionario') {
             const regex_numeros = /^[0-9]*$/;
             if (regex_numeros.test(cedula)) {
                 buscarFuncionario(cedula, "cedula");

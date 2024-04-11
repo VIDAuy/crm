@@ -11,7 +11,10 @@
 <input type="hidden" id="nivel" value="<?= $_SESSION['nivel'] ?>">
 <input type="hidden" id="idrelacion">
 
+<?php 
+$areas_nivel_3 =$_SESSION["usuario"] == 'Rrhh_coord' || $_SESSION['usuario'] == 'Morosos' || $_SESSION['usuario'] == 'Calidad_interna';
 
+?>
 
 <div class="d-flex justify-content-center">
 	<div class="container mt-5 mb-3">
@@ -21,7 +24,7 @@
 					<div class="input-group mb-3">
 						<span class="input-group-text" id="basic-addon1">Cédula:</span>
 						<?php
-						if ($_SESSION['usuario'] == 'Morosos' || $_SESSION['usuario'] == 'Calidad_interna') {
+						if ($areas_nivel_3) {
 							echo '<input type="text" class="form-control" id="ci" name="ci" placeholder="Ingrese cédula a buscar ..." aria-label="Ingrese cédula a buscar ..." aria-describedby="basic-addon1" oninput="ocultarContenido()" maxlength="8">
 
 							<button class="btn btn-danger input-group-text" id="buscarCI" onclick="buscarDatos();">Buscar 🔍</button>';
@@ -35,7 +38,7 @@
 				</div>
 			</div>
 			<?php
-			if ($_SESSION['usuario'] == 'Morosos' || $_SESSION['usuario'] == 'Calidad_interna') {
+			if ($areas_nivel_3 ) {
 				echo '<div class="col-lg-3"><div class="form-check">
 					<input class="form-check-input" type="radio" name="radioBuscar" id="buscarSocio" value="socio" checked>
 					<label class="form-check-label" for="buscarSocio">
