@@ -7,7 +7,7 @@
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">
                     <img class="me-3" src="https://www.oas.org/ext/Portals/14/EasyDNNnews/588/Image.png" alt=""
                         width="48" height="38" />
-                    <span id="span_usuario"></span>
+                    <span class="text-success fw-bolder" id="span_usuario"></span>
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -123,10 +123,20 @@
                                         <div class="form-floating mb-3">
                                             <select class="form-select"
                                                 id="txt_area_consultada_nueva_consulta_crmessage"
-                                                aria-label="Floating label select example">
+                                                aria-label="Floating label select example" onchange="mostrar_select_usuarios_crmessage()">
                                             </select>
                                             <label for="txt_area_consultada_nueva_consulta_crmessage">Seleccione área a
                                                 consultar:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6" id="div_sub_usuario_crmessage">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select"
+                                                id="txt_usuario_consultar_nueva_consulta_crmessage"
+                                                aria-label="Floating label select example">
+                                            </select>
+                                            <label for="txt_usuario_consultar_nueva_consulta_crmessage">Seleccione
+                                                usuario a consultar:</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
