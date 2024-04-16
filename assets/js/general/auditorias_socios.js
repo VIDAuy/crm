@@ -177,7 +177,7 @@ function tabla_registros_auditoria_socio(btnRegistrarComentario = false, filtrar
             { data: "usuario_registro" },
             { data: "acciones" },
         ],
-        order: [[0, "asc"]],
+        order: [[0, "desc"]],
         bDestroy: true,
         language: { url: url_lenguage },
     });
