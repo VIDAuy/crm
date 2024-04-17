@@ -21,6 +21,7 @@ function cantidad_alertas() {
     let nivel = $("#nivel").val();
     let id_sub_usuario = localStorage.getItem("id_sub_usuario");
 
+    //if (["Calidad", "Bajas", "Cobranzas", "Rrhh_coord", "Coordinacion", "Morosos", "Comercial"].includes(sector)) {
     if (["Calidad", "Bajas", "Cobranzas"].includes(sector)) {
 
         if (id_sub_usuario != null) {

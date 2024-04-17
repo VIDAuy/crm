@@ -12,34 +12,23 @@ function eliminar_local_storage() {
 }
 
 function ejecutar_acciones_sesion() {
-  let sector = $('#sector').val();
-  if (
-    sector == 'Recepcion' ||
-    sector == 'Morosos' ||
-    sector == 'Calidad' ||
-    sector == 'Servicios' ||
-    sector == 'Coordinacion' ||
-    sector == 'Bajas' ||
-    sector == 'Calidad_interna'
-  ) {
-    if (localStorage.getItem('status') == 'pendiente') cerrarSesion();
+  if (localStorage.getItem('status') == 'pendiente') cerrarSesion();
 
-    (function ($) {
-      var timeout;
-      $(document).on('mousemove', function (event) {
-        if (timeout !== undefined) {
-          window.clearTimeout(timeout);
+  (function ($) {
+    var timeout;
+    $(document).on('mousemove', function (event) {
+      if (timeout !== undefined) {
+        window.clearTimeout(timeout);
+      }
+      timeout = window.setTimeout(function () {
+        let cedula = localStorage.getItem('cedula');
+        if (cedula != null) {
+          //Creas una funcion nueva para jquery
+          $(event.target).trigger('mousemoveend');
         }
-        timeout = window.setTimeout(function () {
-          let cedula = localStorage.getItem('cedula');
-          if (cedula != null) {
-            //Creas una funcion nueva para jquery
-            $(event.target).trigger('mousemoveend');
-          }
-        }, 600000); //Determinas el tiempo en milisegundo aquí, 10 minutos en 600000 milisegundos
-      });
-    })(jQuery);
-  }
+      }, 600000); //Determinas el tiempo en milisegundo aquí, 10 minutos en 600000 milisegundos
+    });
+  })(jQuery);
 }
 
 
@@ -72,12 +61,9 @@ function extender_sesion() {
   } else {
 
     if (cedula != cedula_registrada) {
-
       if (errores == 1) error("La cédula ingresada no es correcta. <br> <span style='font-weight: bolder'> Tiene un máximo de 3 intentos para ingresar la cédula correcta, de lo contrario, se cerrará la sesión. </span>");
       if (errores == 2) error("¡Última oportunidad! <br> <span style='font-weight: bolder'> Si no ingresa su cédula correctamente se cerrará la sesión. </span>");
-
       if (errores >= 3) cerrarSesion();
-
       errores++;
 
     } else {

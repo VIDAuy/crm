@@ -72,13 +72,11 @@ function tabla_mis_consultas() {
         order: [[0, "asc"]],
         bDestroy: true,
         language: { url: url_lenguage },
-        columnDefs: [
-            {
-                targets: [0],
-                visible: false,
-                searchable: false,
-            },
-        ],
+        columnDefs: [{
+            targets: [0],
+            visible: false,
+            searchable: false,
+        }],
         ordering: false,
         dom: 'frtip',
     });
@@ -94,13 +92,11 @@ function tabla_consultas_asignadas() {
         order: [[0, "asc"]],
         bDestroy: true,
         language: { url: url_lenguage },
-        columnDefs: [
-            {
-                targets: [0],
-                visible: false,
-                searchable: false,
-            },
-        ],
+        columnDefs: [{
+            targets: [0],
+            visible: false,
+            searchable: false,
+        },],
         ordering: false,
         dom: 'frtip',
     });
