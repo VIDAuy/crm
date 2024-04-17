@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.0.94';
+$version = '?v=1.0.95';
 session_start();
 date_default_timezone_set('America/Montevideo');
 
