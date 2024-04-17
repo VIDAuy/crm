@@ -68,21 +68,26 @@ function identificar_persona() {
                     localStorage.setItem("cedula", datos.cedula);
                     localStorage.setItem("nombre", datos.nombre);
                     localStorage.setItem("apellido", datos.apellido);
+                    let gestor = datos.gestor;
+                    let id_sector = datos.id_sector;
                     //correcto_pasajero(response.mensaje);
                     $('#cedula_identificar_persona').val('');
                     $('#modal_identificar_persona_en_sesion').modal("hide");
                     $('#nombre_usuario_en_sesion').text(`➡ ${datos.nombre} ${datos.apellido}`);
 
 
-                    if (
-                        (sector == "Calidad" && ["43382081", "49554284", "45909437", "46955506", "48936512"].includes(cedula)) ||
-                        (sector == "Bajas" && ["44417851", "50709395"].includes(cedula)) ||
-                        (sector == "Rrhh_coord" && ["49651319", "54608246"].includes(cedula))
-                    ) {
+                    if (["Calidad"].includes(sector)) {
+                        alertas_de_vida_te_lleva();
+                        setInterval(alertas_de_vida_te_lleva, 15000);
+                    }
+
+                    if (["Calidad", "Bajas", "Rrhh_coord", "Morosos", "Coordinacion"].includes(sector) && gestor == 1) {
                         tabla_llamadas_pendientes();
                         setInterval(tabla_llamadas_pendientes, 300000);
+
                         tabla_alertas_pendientes();
                         setInterval(tabla_alertas_pendientes, 300000);
+
                         badge_cantidad_pendientes_volver_a_llamar();
                         setInterval(badge_cantidad_pendientes_volver_a_llamar, 15000);
 
@@ -90,7 +95,13 @@ function identificar_persona() {
                         $("#vista_tabla_volver_a_llamar-tab").css("display", "block");
                     }
 
-                    if ((sector == "Cobranzas" && ["47070163"].includes(cedula))) {
+                    if (["Calidad", "Bajas", "Rrhh_coord", "Morosos", "Coordinacion"].includes(sector)) {
+                        cantidad_volver_a_llamar();
+                        setInterval(cantidad_volver_a_llamar, 15000);
+                        $(".ctr_agendar_volver_a_llamar").css("display", "block");
+                    }
+
+                    if (["Cobranzas"].includes(sector) && gestor == 1) {
                         tabla_alertas_pendientes();
                         setInterval(tabla_alertas_pendientes, 300000);
 
@@ -98,16 +109,8 @@ function identificar_persona() {
                         $("#vista_tabla_volver_a_llamar-tab").css("display", "none");
                     }
 
-                    if (["Calidad", "Morosos", "Bajas", "Rrhh_coord"].includes(sector)) $(".ctr_agendar_volver_a_llamar").css("display", "block");
 
-                    if (["Calidad", "Bajas", "Cobranzas", "Rrhh_coord"].includes(sector)) {
-                        $("#div_agregarEtiquetaSocio").css("display", "block");
-                        $("#contenedor_cobranza_abitab").css("display", "block");
-                    }
-
-
-                    cantidad_volver_a_llamar();
-                    setInterval(cantidad_volver_a_llamar, 15000);
+                    cantidad_alertas();
                     cantidad_consultas_no_leidas();
                     ejecutar_acciones_sesion();
 

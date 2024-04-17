@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.0.97';
+$version = '?v=1.0.99';
 session_start();
 date_default_timezone_set('America/Montevideo');
 
@@ -61,10 +61,8 @@ if (isset($_SESSION['nivel'])) {
 			echo '</div>';
 			include('views/content/funcionarios.html');
 			include('views/content/registros_socio.html');
-			echo '<div id="contenido2" style="display: none;">';
 			include('views/content/patologias_socio.html');
 			include('views/content/cobranza_abitab.html');
-			echo '</div>';
 			include('views/content/administrar_alertas_y_llamadas_pendientes.html');
 
 
@@ -82,9 +80,12 @@ if (isset($_SESSION['nivel'])) {
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
 				"modalHistoriaComunicacionDeCedula.html",
 				"datos_acompanantes/modal_horas_acompanantes.html",
+				"volver_a_llamar/modal_agenda_volver_a_llamar.html",
+				"volver_a_llamar/modal_agendar_volver_a_llamar.html",
 				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
-				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
 				"volver_a_llamar/modal_cambiar_fecha_y_hora_volver_a_llamar.html",
+				"volver_a_llamar/modal_cargar_registro_volver_a_llamar.html",
+				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
 				"etiquetas_socio/modal_ver_etiquetas_socio.html",
 				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
@@ -150,10 +151,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/si_es_socio.php');
 			echo '</div>';
 			include('views/content/funcionarios.html');
-			echo '<div id="contenido2" style="display: none;">';
 			include('views/content/patologias_socio.html');
 			include('views/content/cobranza_abitab.html');
-			echo '</div>';
 			include('views/content/administrar_alertas_y_llamadas_pendientes.html');
 
 
@@ -244,10 +243,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/funcionarios.html');
 			include('views/content/registros_socio.html');
 			include('views/content/registros_funcionario.html');
-			echo '<div id="contenido2" style="display: none;">';
 			include('views/content/patologias_socio.html');
 			include('views/content/cobranza_abitab.html');
-			echo '</div>';
 			include('views/content/administrar_alertas_y_llamadas_pendientes.html');
 
 

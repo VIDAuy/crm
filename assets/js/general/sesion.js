@@ -7,8 +7,6 @@ $(document).ready(function () {
 function eliminar_local_storage() {
   localStorage.clear();
   localStorage.setItem('status', 'ok');
-  $('.ctr_agendar_volver_a_llamar').css('display', 'none');
-  $('.administrar_pendientes').css('display', 'none');
 }
 
 function ejecutar_acciones_sesion() {
