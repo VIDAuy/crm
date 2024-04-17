@@ -1,27 +1,43 @@
 $(document).ready(function () {
 
-    abrir_modal_identificarse(true);
+    verificar_sub_usuario();
 
 });
 
 
-function abrir_modal_identificarse(openModal = false) {
-    let sector = $("#sector").val();
-
-    if (["Recepcion", "Morosos", "Calidad", "Servicios", "Coordinacion", "Bajas", "Calidad_interna", "Cobranzas", "Rrhh_coord"].includes(sector)) {
-        if (openModal === true) {
-            $('#modal_identificar_persona_en_sesion').modal({ backdrop: 'static', keyboard: false })
-            $('#modal_identificar_persona_en_sesion').modal("show");
-
-            $('#cedula_identificar_persona').keypress(function (event) {
-                var keycode = (event.keyCode ? event.keyCode : event.which);
-                if (keycode == '13') identificar_persona();
-            });
-        } else {
-
-            identificar_persona();
-
+function verificar_sub_usuario() {
+    $.ajax({
+        type: "GET",
+        url: `${url_ajax}verificar_sub_usuarios.php`,
+        dataType: "JSON",
+        beforeSend: function () {
+            showLoading();
+        },
+        complete: function () {
+            hideLoading();
+        },
+        success: function (response) {
+            if (response.error === false) {
+                if (response.estatus === 200) abrir_modal_identificarse(true);
+            } else {
+                error(response.mensaje);
+            }
         }
+    });
+}
+
+
+function abrir_modal_identificarse(openModal = false) {
+    if (openModal === true) {
+        $('#modal_identificar_persona_en_sesion').modal({ backdrop: 'static', keyboard: false })
+        $('#modal_identificar_persona_en_sesion').modal("show");
+
+        $('#cedula_identificar_persona').keypress(function (event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '13') identificar_persona();
+        });
+    } else {
+        identificar_persona();
     }
 }
 
