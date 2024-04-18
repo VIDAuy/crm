@@ -69,7 +69,6 @@ function identificar_persona() {
                     localStorage.setItem("nombre", datos.nombre);
                     localStorage.setItem("apellido", datos.apellido);
                     let gestor = datos.gestor;
-                    let id_sector = datos.id_sector;
                     //correcto_pasajero(response.mensaje);
                     $('#cedula_identificar_persona').val('');
                     $('#modal_identificar_persona_en_sesion').modal("hide");
