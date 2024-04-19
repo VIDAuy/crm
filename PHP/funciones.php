@@ -11,6 +11,17 @@ function obtener_usuarios()
     return $consulta;
 }
 
+/** Obtener todos los sub usuarios */
+function obtener_sub_usuarios()
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_SUB_USUARIOS;
+    $sql = "SELECT * FROM {$tabla} WHERE activo = 1 ORDER BY id ASC";
+    $consulta = mysqli_query($conexion, $sql);
+
+    return $consulta;
+}
+
 /** Obtener datos de usuario mediante id **/
 function obtener_datos_usuario($id)
 {
