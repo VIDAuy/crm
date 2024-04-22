@@ -59,6 +59,10 @@ if ($_SESSION['nivel'] == 1) {
                 <label for='' class='col-form-label'>Inspira?:</label>
                 <p id='inspira' style='font-weight: bold;'></p>
             </div>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Servicios Activos?</label>
+                <div id='span_comprobar_servicios'></div>
+            </div>
         </div>
     </div>";
 

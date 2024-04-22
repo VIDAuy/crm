@@ -75,6 +75,9 @@ function buscarSocio() {
             $("#cedulas").text(cedula);
             historiaComunicacionDeCedula();
             mostrar_cantidad_etiquetas_socio();
+            comprobar_servicios_activos();
+
+
             if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Cobranzas", "Comercial"].includes(sector)){
                 verificar_auditoria_socio();
                 verificar_socio_equifax();
