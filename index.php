@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.1.0';
+$version = '?v=1.1.2';
 session_start();
 date_default_timezone_set('America/Montevideo');
 
@@ -95,7 +95,9 @@ if (isset($_SESSION['nivel'])) {
 				"modal_identificar_persona_logueada.html",
 				"modalSesionExpirada.html",
 				"modal_mostrar_imagenes.html",
-				"modal_crmessage.html",
+				"crmessage/modal_crmessage.html",
+				"crmessage/modal_historial_crmessage.html",
+				"crmessage/modal_mensajes_crmessage.html",
 			];
 
 			/** Carga Modals **/
@@ -173,7 +175,9 @@ if (isset($_SESSION['nivel'])) {
 				"etiquetas_socio/modal_ver_etiquetas_socio.html",
 				"modal_mostrar_imagenes.html",
 				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
-				"modal_crmessage.html",
+				"crmessage/modal_crmessage.html",
+				"crmessage/modal_historial_crmessage.html",
+				"crmessage/modal_mensajes_crmessage.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
@@ -280,7 +284,9 @@ if (isset($_SESSION['nivel'])) {
 				"volver_a_llamar/modal_cargar_registro_volver_a_llamar.html",
 				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
 				"modal_agregar_patologia_socio.html",
-				"modal_crmessage.html",
+				"crmessage/modal_crmessage.html",
+				"crmessage/modal_historial_crmessage.html",
+				"crmessage/modal_mensajes_crmessage.html",
 				"modal_enviar_terminos_y_condiciones.html",
 				"modal_identificar_persona_logueada.html",
 				"modal_mostrar_imagenes.html",
@@ -331,7 +337,9 @@ if (isset($_SESSION['nivel'])) {
 				"etiquetas_socio/modal_ver_etiquetas_socio.html",
 				"modal_mostrar_imagenes.html",
 				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
-				"modal_crmessage.html",
+				"crmessage/modal_crmessage.html",
+				"crmessage/modal_historial_crmessage.html",
+				"crmessage/modal_mensajes_crmessage.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
@@ -397,7 +405,9 @@ if (isset($_SESSION['nivel'])) {
 				"etiquetas_socio/modal_ver_etiquetas_socio.html",
 				"modal_mostrar_imagenes.html",
 				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
-				"modal_crmessage.html",
+				"crmessage/modal_crmessage.html",
+				"crmessage/modal_historial_crmessage.html",
+				"crmessage/modal_mensajes_crmessage.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
@@ -457,7 +467,9 @@ if (isset($_SESSION['nivel'])) {
 				"etiquetas_socio/modal_ver_etiquetas_socio.html",
 				"modal_mostrar_imagenes.html",
 				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
-				"modal_crmessage.html",
+				"crmessage/modal_crmessage.html",
+				"crmessage/modal_historial_crmessage.html",
+				"crmessage/modal_mensajes_crmessage.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
