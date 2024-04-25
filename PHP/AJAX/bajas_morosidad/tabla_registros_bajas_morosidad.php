@@ -25,9 +25,6 @@ echo json_encode($tabla);
 
 
 
-
-
-
 function obtener_bajas_morosidad()
 {
     $conexion = connection(DB);

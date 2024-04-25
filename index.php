@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.1.4';
+$version = '?v=1.1.5';
 session_start();
 date_default_timezone_set('America/Montevideo');
 
@@ -99,6 +99,7 @@ if (isset($_SESSION['nivel'])) {
 				"crmessage/modal_crmessage.html",
 				"crmessage/modal_historial_crmessage.html",
 				"crmessage/modal_mensajes_crmessage.html",
+				"crmessage/modal_reasignar_crmessage.html",
 			];
 
 			/** Carga Modals **/
@@ -179,6 +180,7 @@ if (isset($_SESSION['nivel'])) {
 				"crmessage/modal_crmessage.html",
 				"crmessage/modal_historial_crmessage.html",
 				"crmessage/modal_mensajes_crmessage.html",
+				"crmessage/modal_reasignar_crmessage.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
@@ -289,6 +291,7 @@ if (isset($_SESSION['nivel'])) {
 				"crmessage/modal_crmessage.html",
 				"crmessage/modal_historial_crmessage.html",
 				"crmessage/modal_mensajes_crmessage.html",
+				"crmessage/modal_reasignar_crmessage.html",
 				"modal_enviar_terminos_y_condiciones.html",
 				"modal_identificar_persona_logueada.html",
 				"modal_mostrar_imagenes.html",
@@ -343,6 +346,7 @@ if (isset($_SESSION['nivel'])) {
 				"crmessage/modal_crmessage.html",
 				"crmessage/modal_historial_crmessage.html",
 				"crmessage/modal_mensajes_crmessage.html",
+				"crmessage/modal_reasignar_crmessage.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
@@ -411,6 +415,7 @@ if (isset($_SESSION['nivel'])) {
 				"crmessage/modal_crmessage.html",
 				"crmessage/modal_historial_crmessage.html",
 				"crmessage/modal_mensajes_crmessage.html",
+				"crmessage/modal_reasignar_crmessage.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
@@ -473,6 +478,7 @@ if (isset($_SESSION['nivel'])) {
 				"crmessage/modal_crmessage.html",
 				"crmessage/modal_historial_crmessage.html",
 				"crmessage/modal_mensajes_crmessage.html",
+				"crmessage/modal_reasignar_crmessage.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
