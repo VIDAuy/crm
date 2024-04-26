@@ -194,6 +194,7 @@ function verificar_auditoria_socio() {
             dataType: "JSON",
             success: function (response) {
                 if (response.error === false) {
+                    $("#contenedor_auditorias_socio").css("display", "block");
                     $("#div_auditorias_socio").html("<button class='btn btn-info' onclick='tabla_registros_auditoria_socio(false, true)'> Auditoría Socio </button>");
                 } else if (response.error == 222) {
                     error(response.mensaje);
