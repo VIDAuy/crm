@@ -6,6 +6,7 @@ $tabla["data"] = [];
 $usuario = $_SESSION['usuario'];
 $btnRegistrarComentario = $_REQUEST['btnRegistrarComentario'];
 $cedula = $_REQUEST['cedula'];
+$area = ucfirst(obtener_datos_usuario($_SESSION['id'])['usuario']);
 
 $auditorias = obtener_auditorias_socio($cedula);
 
@@ -21,7 +22,7 @@ while ($row = mysqli_fetch_assoc($auditorias)) {
     $comentarios = obtener_comentarios_auditoria($id);
     if (mysqli_num_rows($comentarios) > 0) $acciones .= "<button class='btn btn-sm btn-info me-2' onclick='ver_comentarios_auditorias_socio(`" . $id . "`, `" . $cedula . "`)'>Ver Comentarios</button>";
 
-    if ($btnRegistrarComentario == "true" && in_array($usuario_registro, ["Audit1", "Audit2", "Audit3"]))
+    if ($btnRegistrarComentario == "true" && in_array($area, ["Audit1", "Audit2", "Audit3"]))
         $acciones .= "<button class='btn btn-sm btn-success' onclick='registrar_comentario_auditoria_socio(true, `" . $id . "`)'>Nuevo Comentario</button>";
 
     $usuario_registro = $usuario_registro == "Audit1" ? "Nathalia Horvat" : (

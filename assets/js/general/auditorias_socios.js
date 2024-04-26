@@ -123,6 +123,7 @@ function ver_comentarios_auditorias_socio(id, cedula) {
         columns: [
             { data: "id" },
             { data: "comentario" },
+            { data: "usuario_registro" },
             { data: "fecha_registro" },
             { data: "acciones" },
         ],
@@ -195,7 +196,7 @@ function verificar_auditoria_socio() {
             success: function (response) {
                 if (response.error === false) {
                     $("#contenedor_auditorias_socio").css("display", "block");
-                    $("#div_auditorias_socio").html("<button class='btn btn-info' onclick='tabla_registros_auditoria_socio(false, true)'> Auditoría Socio </button>");
+                    $("#div_auditorias_socio").html("<button class='btn btn-info' onclick='tabla_registros_auditoria_socio(true, true)'> Auditoría Socio </button>");
                 } else if (response.error == 222) {
                     error(response.mensaje);
                 }
