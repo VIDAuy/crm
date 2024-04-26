@@ -1,27 +1,21 @@
 <!-- Alertas y Llamadas Pendientes-->
-<div class="container administrar_pendientes" style="display: none">
+<div class="container administrar_pendientes" id="contenedor_administrar_pendientes" style="display: none">
 
     <hr class="style5 container">
 
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="vista_tabla_alertas_pendientes-tab" data-bs-toggle="tab"
-                data-bs-target="#vista_tabla_alertas_pendientes" type="button" role="tab"
-                aria-controls="vista_tabla_alertas_pendientes" aria-selected="true">
+            <button class="nav-link active" id="vista_tabla_alertas_pendientes-tab" data-bs-toggle="tab" data-bs-target="#vista_tabla_alertas_pendientes" type="button" role="tab" aria-controls="vista_tabla_alertas_pendientes" aria-selected="true">
                 Alertas pendientes
                 <span class="badge text-bg-secondary" id="cantidad_total_alertas_pendientes"></span>
             </button>
 
-            <button class="nav-link" id="vista_tabla_volver_a_llamar-tab" data-bs-toggle="tab"
-                data-bs-target="#vista_tabla_volver_a_llamar" type="button" role="tab"
-                aria-controls="vista_tabla_volver_a_llamar" aria-selected="false">
+            <button class="nav-link" id="vista_tabla_volver_a_llamar-tab" data-bs-toggle="tab" data-bs-target="#vista_tabla_volver_a_llamar" type="button" role="tab" aria-controls="vista_tabla_volver_a_llamar" aria-selected="false">
                 Volver a llamar
                 <span class="badge text-bg-secondary" id="cantidad_total_pendientes_volver_a_llamar"></span>
             </button>
 
-            <button class="nav-link" id="vista_tabla_crmessage-tab" data-bs-toggle="tab"
-                data-bs-target="#vista_tabla_crmessage" type="button" role="tab" aria-controls="vista_tabla_crmessage"
-                aria-selected="false">
+            <button class="nav-link" id="vista_tabla_crmessage-tab" data-bs-toggle="tab" data-bs-target="#vista_tabla_crmessage" type="button" role="tab" aria-controls="vista_tabla_crmessage" aria-selected="false">
                 CRMessage
                 <span class="badge text-bg-secondary" id="cantidad_total_pendientes_crmessage"></span>
             </button>
@@ -30,13 +24,11 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
 
-        <div class="tab-pane fade show active" id="vista_tabla_alertas_pendientes" role="tabpanel"
-            aria-labelledby="vista_tabla_alertas_pendientes-tab" tabindex="0">
+        <div class="tab-pane fade show active" id="vista_tabla_alertas_pendientes" role="tabpanel" aria-labelledby="vista_tabla_alertas_pendientes-tab" tabindex="0">
             <div class="alert alert-primary border-primary" role="alert">
                 <div class="table-responsive">
                     <h3 class="text-center mb-3"><u>Alertas Pendientes:</u></h3>
-                    <table id="tabla_alertas_pendientes" class="table table-sm table-bordered table-striped table-hover"
-                        width="100%">
+                    <table id="tabla_alertas_pendientes" class="table table-sm table-bordered table-striped table-hover" width="100%">
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
@@ -56,13 +48,11 @@
             </div>
         </div>
 
-        <div class="tab-pane fade" id="vista_tabla_volver_a_llamar" role="tabpanel"
-            aria-labelledby="vista_tabla_volver_a_llamar-tab" tabindex="0">
+        <div class="tab-pane fade" id="vista_tabla_volver_a_llamar" role="tabpanel" aria-labelledby="vista_tabla_volver_a_llamar-tab" tabindex="0">
             <div class="alert alert-primary border-primary" role="alert">
                 <div class="table-responsive">
                     <h3 class="text-center mb-3"><u>Volver a llamar:</u></h3>
-                    <table id="tabla_llamadas_pendientes"
-                        class="table table-sm table-bordered table-striped table-hover" width="100%">
+                    <table id="tabla_llamadas_pendientes" class="table table-sm table-bordered table-striped table-hover" width="100%">
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
@@ -87,13 +77,11 @@
             </div>
         </div>
 
-        <div class="tab-pane fade" id="vista_tabla_crmessage" role="tabpanel"
-            aria-labelledby="vista_tabla_crmessage-tab" tabindex="0">
+        <div class="tab-pane fade" id="vista_tabla_crmessage" role="tabpanel" aria-labelledby="vista_tabla_crmessage-tab" tabindex="0">
             <div class="alert alert-primary border-primary" role="alert">
                 <div class="table-responsive">
                     <h3 class="text-center mb-3"><u>CRMessage:</u></h3>
-                    <table id="tabla_crmessage_todos_pendientes"
-                        class="table table-sm table-bordered table-striped table-hover" width="100%">
+                    <table id="tabla_crmessage_todos_pendientes" class="table table-sm table-bordered table-striped table-hover" width="100%">
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
