@@ -17,13 +17,16 @@ while ($row = mysqli_fetch_assoc($auditorias)) {
     $descripcion = $row['descripcion'];
     $fecha_auditoria = $row['fecha'];
     $fecha_registro = $row['fecha_registro'];
-    $usuario_registro = ucfirst(obtener_datos_usuario($row['usuario_registro'])['usuario']);
+    $usuario_registro = ucfirst(obtener_datos_usuario($row['area_registro'])['usuario']);
     $acciones = "";
     $comentarios = obtener_comentarios_auditoria($id);
-    if (mysqli_num_rows($comentarios) > 0) $acciones .= "<button class='btn btn-sm btn-info me-2' onclick='ver_comentarios_auditorias_socio(`" . $id . "`, `" . $cedula . "`)'>Ver Comentarios</button>";
+    if (mysqli_num_rows($comentarios) > 0)
+        $acciones .= "<button class='btn btn-sm btn-info me-2' onclick='mostrar_comentarios_auditoria(true, `" . $id . "`, `" . $cedula . "`)'>🔍</button>";
 
-    if ($btnRegistrarComentario == "true" && in_array($area, ["Audit1", "Audit2", "Audit3"]))
-        $acciones .= "<button class='btn btn-sm btn-success' onclick='registrar_comentario_auditoria_socio(true, `" . $id . "`)'>Nuevo Comentario</button>";
+    if ($btnRegistrarComentario == "true" && in_array($area, ["Audit1", "Audit2", "Audit3"])) {
+        $acciones .= "<button class='btn btn-sm btn-success me-2' onclick='registrar_comentario_auditoria_socio(true, `" . $id . "`)'>➕</button>";
+        $acciones .= "<button class='btn btn-sm btn-primary' onclick='editar_auditoria_socio(true, `" . $id . "`, `" . $descripcion . "`, `" . $fecha_auditoria . "`)'>✏</button>";
+    }
 
     $usuario_registro = $usuario_registro == "Audit1" ? "Nathalia Horvat" : (
         $usuario_registro == "Audit2" ? "Andrea Horvat" : (
@@ -35,7 +38,7 @@ while ($row = mysqli_fetch_assoc($auditorias)) {
         $descripcion = str_ireplace($br, "\r\n", $descripcion);
 
         $descripcion_sin_editar = $descripcion;
-        $descripcion = substr($descripcion, 0, 22) . " ...<button class='btn btn-link' onclick='verMasTabla(`" . $descripcion_sin_editar . "`);'>Ver Más</button>";
+        $descripcion = substr($descripcion, 0, 20) . " ...<button class='btn btn-link' onclick='verMasTabla(`" . $descripcion_sin_editar . "`);'>Ver Más</button>";
         $descripcion = mb_convert_encoding($descripcion, 'UTF-8', 'UTF-8');
     }
 
