@@ -95,7 +95,7 @@ function identificar_persona() {
                         $("#vista_tabla_volver_a_llamar-tab").css("display", "block");
                     }
 
-                    if (["Calidad", "Bajas"].includes(sector) && gestor == 1) {
+                    if (["Calidad", "Bajas", "Auditoria"].includes(sector) && gestor == 1) {
                         $("#vista_tabla_crmessage-tab").css("display", "block");
                         cantidad_total_pendientes_crmessage();
                         setInterval(cantidad_total_pendientes_crmessage, 15000);
@@ -108,7 +108,7 @@ function identificar_persona() {
                         $(".ctr_agendar_volver_a_llamar").css("display", "block");
                     }
 
-                    if (["Cobranzas", "Comercial"].includes(sector) && gestor == 1) {
+                    if (["Cobranzas", "Comercial", "Auditoria"].includes(sector) && gestor == 1) {
                         tabla_alertas_pendientes();
                         setInterval(tabla_alertas_pendientes, 300000);
 
