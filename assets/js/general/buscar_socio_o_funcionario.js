@@ -1,3 +1,14 @@
+$(document).ready(function () {
+
+    let sector = $("#sector").val();
+    if (sector == "Personal") {
+        $("#container_cierre_de_horas_personalizado").css("display", "block");
+        $("#contenedor_consultas_generales").css("display", "block");
+    }
+
+});
+
+
 function buscarDatos(radioButton = false) {
     let cedula = $("#ci").val();
 
@@ -92,7 +103,7 @@ function buscarSocio() {
                 $("#contenedor_cobranza_abitab").css("display", "block");
                 tabla_cobranza_abitab();
             }
-            
+
 
             if (datos.noSocioConRegistros) {
                 alerta("Problema!", datos.mensaje, "warning");
@@ -176,8 +187,8 @@ function buscarFuncionario(cedula, tipo) {
             $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "block");
             $("#historiaComunicacionDeCedulaDiv").css("display", "none");
             $("#acciones_socios_nivel_3").css("display", "none");
-
             historiaComunicacionDeCedula_funcionarios();
+
         } else {
             ocultar_todo_funcionario();
             alerta("<span style='color: #9C0404'> No se han encontrado resultados! </span>", "Seguro que la cédula ingresada pertenece a un funcionario?", "error");
