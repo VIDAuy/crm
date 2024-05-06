@@ -157,11 +157,9 @@ function mostrar_comentarios_auditoria(openModal = false, id, cedula) {
     }
 }
 
+
 function ver_comentarios_auditorias_socio(id, cedula) {
-
-
     tabla_comentarios_auditoria(id);
-
     $("#modal_verComentariosAuditoriaSocio").modal("show");
 }
 
@@ -299,6 +297,7 @@ function modal_ver_mp3(ruta_registros, string_imagenes) {
 
     $('#modalVerImagenesRegistro').modal('show');
 }
+
 
 function pausar_audios_al_cerrar_modal() {
     $('.player_audio').trigger("pause");
