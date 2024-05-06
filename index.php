@@ -35,6 +35,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/crmessage.js",
 				"general/equifax.js",
 				"general/bajas_morosidad.js",
+				"general/alertas_generales.js",
 			];
 
 			/** JS General **/
@@ -57,7 +58,7 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/historial_registros_socio.php');
 			include('views/content/patologias_socio.php');
 			include('views/content/cobranza_abitab.php');
-			include('views/content/gestionar_pendientes.php');
+			include('views/content/administrar_pendientes.php');
 
 
 			$array_cargar_modals = [
@@ -96,7 +97,7 @@ if (isset($_SESSION['nivel'])) {
 				"crmessage/modal_historial_crmessage.html",
 				"crmessage/modal_mensajes_crmessage.html",
 				"crmessage/modal_reasignar_crmessage.html",
-				"modal_alertas_generales.html",
+				"alertas/modal_alertas_generales.html",
 			];
 
 			/** Carga Modals **/
@@ -128,6 +129,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/crmessage.js",
 				"general/equifax.js",
 				"general/bajas_morosidad.js",
+				"general/alertas_generales.js",
 			];
 
 			/** JS General **/
@@ -149,7 +151,7 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/contenido_funcionarios.php');
 			include('views/content/patologias_socio.php');
 			include('views/content/cobranza_abitab.php');
-			include('views/content/gestionar_pendientes.php');
+			include('views/content/administrar_pendientes.php');
 
 
 			$array_cargar_modals = [
@@ -180,7 +182,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_editar_comentario_auditoria.html",
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
 				"bajas_morosidad/modal_registros_bajas_morosidad.html",
-				"modal_alertas_generales.html",
+				"alertas/modal_alertas_generales.html",
 			];
 
 			/** Carga Modals **/
@@ -221,6 +223,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/bajas_morosidad.js",
 				"general/consultas_generales.js",
 				"general/cierre_de_horas_personalizado.js",
+				"general/alertas_generales.js",
 			];
 
 			/** Carga JS **/
@@ -244,7 +247,7 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/historial_registros_funcionarios.php');
 			include('views/content/patologias_socio.php');
 			include('views/content/cobranza_abitab.php');
-			include('views/content/gestionar_pendientes.php');
+			include('views/content/administrar_pendientes.php');
 			include('views/content/consultas_generales.php');
 			include('views/content/cierre_de_horas_personalizado.php');
 
@@ -300,7 +303,7 @@ if (isset($_SESSION['nivel'])) {
 				"modalSesionExpirada.html",
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
 				"bajas_morosidad/modal_registros_bajas_morosidad.html",
-				"modal_alertas_generales.html",
+				"alertas/modal_alertas_generales.html",
 			];
 
 
@@ -351,7 +354,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_editar_auditorias.html",
 				"auditorias/modal_editar_comentario_auditoria.html",
 				"bajas/modal_solicitar_baja.html",
-				"modal_alertas_generales.html",
+				"alertas/modal_alertas_generales.html",
 			];
 
 
@@ -420,7 +423,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_registrar_comentario_auditoria.html",
 				"auditorias/modal_editar_auditorias.html",
 				"auditorias/modal_editar_comentario_auditoria.html",
-				"modal_alertas_generales.html",
+				"alertas/modal_alertas_generales.html",
 			];
 
 

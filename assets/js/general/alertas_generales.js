@@ -1,15 +1,3 @@
-$(document).ready(function () {
-
-    obtener_alertas_generales();
-    setInterval(obtener_alertas_generales, 15000);
-
-    badge_cantidad_alertas_generales_pendientes();
-    setInterval(badge_cantidad_alertas_generales_pendientes, 15000);
-
-});
-
-
-
 function obtener_alertas_generales() {
 
     $("#span_alertas_auditoria").text(`0+`);
