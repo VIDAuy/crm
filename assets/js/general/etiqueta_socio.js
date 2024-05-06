@@ -1,12 +1,3 @@
-$(document).ready(function () {
-
-    mostrar_cantidad_etiquetas_socio();
-    setInterval(mostrar_cantidad_etiquetas_socio, 60000);
-
-});
-
-
-
 function agregar_etiqueta_socio(openModal = false) {
     if (openModal == true) {
         $("#modal_AgregarEtiquetaSocio").modal("show");

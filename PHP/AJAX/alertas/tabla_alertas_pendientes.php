@@ -27,10 +27,11 @@ if ($opcion == 1) {
             $usuario_asignador = "-";
             $acciones          = "<button class='btn btn-primary' onclick='abrir_asignar_alerta(true, `" . $id . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $sector . "`, `" . $id_sub_usuario . "`)'>Asignar</button>";
         } else {
-            $usuario_asignado = obtener_nombre_usuario($id_usuario_asignado);
-            $usuario_asignador = obtener_nombre_usuario($id_usuario_asignador);
+            $usuario_asignado = obtener_nombre_sub_usuario($id_usuario_asignado);
+            $usuario_asignador = obtener_nombre_sub_usuario($id_usuario_asignador);
             $acciones          = "<button class='btn btn-warning' onclick='abrir_asignar_alerta(true, `" . $id . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $sector . "`, `" . $id_sub_usuario . "`, `" . $id_usuario_asignado . "`, `" . $id_usuario_asignador . "`, `" . $usuario_asignado . "`, `" . $usuario_asignador . "` )'>Reasignar</button>";
         }
+
 
         $tabla["data"][] = [
             "id"                => $id,
@@ -79,21 +80,11 @@ function obtener_alertas_pendientes($sector)
     WHERE 
     activo = 1 AND 
     envioSector = $sector AND 
-    cedula != ''";
+    cedula != '' AND
+    eliminado = 0
+    LIMIT 100";
 
     $consulta = mysqli_query($conexion, $sql);
 
     return $consulta;
-}
-
-function obtener_nombre_usuario($id_usuario)
-{
-    $conexion = connection(DB);
-    $tabla = TABLA_SUB_USUARIOS;
-
-    $sql = "SELECT nombre, apellido FROM {$tabla} WHERE id = '$id_usuario'";
-    $consulta = mysqli_query($conexion, $sql);
-    $resultado = mysqli_fetch_assoc($consulta);
-
-    return $resultado['nombre'] . " " . $resultado['apellido'];
 }

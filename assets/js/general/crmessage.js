@@ -195,6 +195,7 @@ function nueva_consulta_crmessage() {
                     $("#txt_consulta_nueva_consulta_crmessage").val('');
                     $("#txt_area_consultada_nueva_consulta_crmessage").val('');
                     $("#txt_cedula_nueva_consulta_crmessage").val('');
+                    cantidad_consultas_no_leidas();
                     tabla_mis_consultas();
                     if ($("#ci").val() != "") historiaComunicacionDeCedula();
                     $("#nav-mis-consultas-tab").trigger('click'); //Muestro por defecto la ventana de ❝Mis Consultas❞

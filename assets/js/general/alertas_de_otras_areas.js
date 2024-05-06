@@ -4,8 +4,6 @@ $(document).ready(function () {
     $("#bq").text("0+");
     cantidad_alertas();
     setInterval(cantidad_alertas, 15000);
-    badge_cantidad_alertas_pendientes();
-    setInterval(badge_cantidad_alertas_pendientes, 15000);
     $("#vista_tabla_volver_a_llamar-tab").css("display", "none");
     agregarFiliales();
 });
@@ -163,4 +161,28 @@ function abrir_asignar_alerta(openModal = false, id, cedula, nombre, telefono, s
 
         }
     }
+}
+
+
+function ver_registros_alertas() {
+
+    $('#tabla_historial_alertas').DataTable({
+        ajax: `${url_ajax}alertas/tabla_historial_alertas.php`,
+        columns: [
+            { data: 'id' },
+            { data: 'cedula' },
+            { data: 'sector' },
+            { data: 'observaciones' },
+            { data: 'nombre' },
+            { data: 'telefono' },
+            { data: 'fecha_registro' },
+            { data: 'usuario_asignado' },
+            { data: 'usuario_asignador' },
+        ],
+        "order": [[0, 'desc']],
+        "bDestroy": true,
+        language: { url: url_lenguage },
+    });
+
+    $("#modal_historialRegistrosDeAlertas").modal("show");
 }
