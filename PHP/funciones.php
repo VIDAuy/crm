@@ -407,3 +407,29 @@ function obtener_tipos($opcion, $codigo)
 
     return $resultado;
 }
+
+/** Obtener los permisos **/
+function comprobar_permisos($opcion, $id_area, $id_herramienta, $contenido)
+{
+    $conexion = connection(DB);
+    $tabla1 = TABLA_CONTENIDO_CRM;
+    $tabla2 = TABLA_CONTENIDO_CRM_POR_AREA;
+
+    if ($opcion == 1) $where = "cc.id = '$id_herramienta'";
+    if ($opcion == 2) $where = "cc.id_referencia_contenido = '$contenido'";
+
+    $sql = "SELECT
+	        cc.id,
+	        cc.nombre
+           FROM
+	        {$tabla1} cc
+	        INNER JOIN {$tabla2} ccpa ON cc.id = ccpa.id_contenido_crm 
+           WHERE
+	        cc.activo = 1 AND
+            ccpa.activo = 1 AND 
+            ccpa.id_usuario = '$id_area' AND 
+            $where";
+    $consulta = mysqli_query($conexion, $sql);
+
+    return $consulta;
+}

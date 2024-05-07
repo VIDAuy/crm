@@ -2,10 +2,8 @@
 include_once '../configuraciones.php';
 
 $id_area = $_SESSION['id'];
-$cedula = isset($_REQUEST['cedula']) ? $_REQUEST['cedula'] : "";
 
-
-$obtener_items = obtener_menu($id_area, $cedula);
+$obtener_items = obtener_menu($id_area);
 
 
 while ($row = mysqli_fetch_assoc($obtener_items)) {
@@ -23,6 +21,11 @@ while ($row = mysqli_fetch_assoc($obtener_items)) {
             "");
     $badge = $badge != "" ? "<span class='badge text-bg-danger' id='$badge'>0+</span>" : "";
 
+
+    $id_items[] = [
+        $id
+    ];
+
     $items_menu[] = [
         "<li class='nav-item'>
                 $a
@@ -35,6 +38,7 @@ while ($row = mysqli_fetch_assoc($obtener_items)) {
 }
 
 $response['error'] = false;
+$response['id_items'] = $id_items;
 $response['items_menu'] = $items_menu;
 echo json_encode($response);
 
