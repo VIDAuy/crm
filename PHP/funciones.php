@@ -433,3 +433,23 @@ function comprobar_permisos($opcion, $id_area, $id_herramienta, $contenido)
 
     return $consulta;
 }
+
+/** Obtener el primer celular o número teléfonico de un string **/
+function buscarNumero($numeros)
+{
+    if ($numeros == "") {
+        $respuesta = false;
+    } else {
+
+        $primer_numero = substr($numeros, 0, 1);
+        $primeros_dos_numeros = substr($numeros, 0, 2);
+
+        if ($primeros_dos_numeros == "09" && strlen($numeros) > 8) {
+            $respuesta = substr($numeros, 0, 9);
+        } else if (($primer_numero == "2" || $primer_numero == "4") && strlen($numeros) > 7) {
+            $respuesta = substr($numeros, 0, 8);
+        }
+    }
+
+    return $respuesta == "" ? "0" : $respuesta;
+}

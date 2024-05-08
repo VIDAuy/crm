@@ -1,3 +1,9 @@
+function mostrar_agregar_etiqueta_socio() {
+    $("#div_agregarEtiquetaSocio").css("display", "block");
+}
+
+
+
 function agregar_etiqueta_socio(openModal = false) {
     if (openModal == true) {
         $("#modal_AgregarEtiquetaSocio").modal("show");
@@ -94,6 +100,7 @@ function mostrar_cantidad_etiquetas_socio() {
             if (response.error === false) {
                 let cantidad = response.cantidad;
                 document.getElementById("cantidad_etiquetas_socio").innerHTML = cantidad + "+";
+                $("#contenedor_etiquetas_de_socio").css("display", "block");
             } else {
                 error(response.mensaje);
             }

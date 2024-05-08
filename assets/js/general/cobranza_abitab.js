@@ -1,5 +1,4 @@
 function tabla_cobranza_abitab() {
-
   let cedula = $("#ci").val();
 
   $("#tabla_cobranza_abitab").DataTable({
@@ -26,4 +25,8 @@ function tabla_cobranza_abitab() {
     bDestroy: true,
     language: { url: url_lenguage },
   });
+  
+
+  $("#contenedor_cobranza_abitab").css("display", "block");
+
 }
