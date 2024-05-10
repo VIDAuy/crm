@@ -11,7 +11,7 @@ while ($row = mysqli_fetch_assoc($obtener_menu)) {
     $area     = ucfirst(obtener_datos_usuario($row['id_usuario'])['usuario']);
     $usuario  = ucfirst(obtener_nombre_sub_usuario($row['id_sub_usuario']));
     $item     = obtener_item($row['id_item'])['nombre'];
-    $acciones = "<button class='btn btn-sm btn-danger' onclick='eliminar_menu(`" . $id . "`);'>❌</button>";
+    $acciones = "<button class='btn btn-sm btn-danger' onclick='eliminar_menu_por_usuario(`" . $id . "`);'>❌</button>";
 
     $tabla["data"][] = [
         'id'       => $id,
