@@ -287,11 +287,19 @@ function modal_ver_mp3(ruta_registros, string_imagenes) {
         let imagen = val.trim();
         let separar_nombre_archivo = imagen.split('.');
         let extencion_archivo = separar_nombre_archivo[1];
-        div.innerHTML += `
-        <h3>Audio ${count}:</h3>
-        <audio controls class='player_audio mb-4' id="audio_nro_${count}" loop>
-            <source src="${ruta_registros}/${imagen}">
-        </audio>`;
+
+        if (extencion_archivo != "pdf") {
+            div.innerHTML += `
+            <h3 class="mt-3">Audio ${count}:</h3>
+            <audio controls class='player_audio mb-4' id="audio_nro_${count}" loop>
+                <source src="${ruta_registros}/${imagen}">
+            </audio>`;
+        } else {
+            modal = "1";
+            div.innerHTML += `
+            <h3 class="mt-3">Archivo ${count}:</h3>
+            <iframe class="mb-4" src="${ruta_registros}/${imagen}" title="Archivo: ${count}" width='100%' height='450'></iframe>`;
+        }
         count++;
     });
 
