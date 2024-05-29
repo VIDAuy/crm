@@ -1,30 +1,22 @@
 $(document).ready(function () {
+
   eliminar_local_storage();
 
-  ejecutar_acciones_sesion();
 });
 
-function eliminar_local_storage() {
-  localStorage.clear();
-  localStorage.setItem('status', 'ok');
-}
 
-function ejecutar_acciones_sesion() {
+
+function ejecutar_acciones_sesion(tiempo) {
   if (localStorage.getItem('status') == 'pendiente') cerrarSesion();
 
   (function ($) {
     var timeout;
     $(document).on('mousemove', function (event) {
-      if (timeout !== undefined) {
-        window.clearTimeout(timeout);
-      }
+      if (timeout !== undefined) window.clearTimeout(timeout);
       timeout = window.setTimeout(function () {
         let cedula = localStorage.getItem('cedula');
-        if (cedula != null) {
-          //Creas una funcion nueva para jquery
-          $(event.target).trigger('mousemoveend');
-        }
-      }, 600000); //Determinas el tiempo en milisegundo aquí, 10 minutos en 600000 milisegundos
+        if (cedula != null) $(event.target).trigger('mousemoveend');
+      }, tiempo); //Determinas el tiempo en milisegundo aquí, 10 minutos en 600000 milisegundos
     });
   })(jQuery);
 }
@@ -43,6 +35,7 @@ $(document).on('mousemoveend', function () {
     }
   });
 });
+
 
 let errores = 1;
 function extender_sesion() {
@@ -73,6 +66,13 @@ function extender_sesion() {
 
   }
 }
+
+
+function eliminar_local_storage() {
+  localStorage.clear();
+  localStorage.setItem('status', 'ok');
+}
+
 
 function cerrarSesion() {
   localStorage.clear();

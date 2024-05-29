@@ -109,7 +109,7 @@ function identificar_persona() {
 
 
 
-                    ejecutar_acciones_sesion();
+                    ejecutar_acciones_sesion(datos.tiempo_expiracion);
 
                 } else {
                     error(response.mensaje);
