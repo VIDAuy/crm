@@ -127,6 +127,12 @@ function buscarSocio() {
                 $("#span_direccion_titular_tarjeta_credito").text(datos.direccion);
                 $("#span_nro_tarjeta_credito").text(datos.numero_tarjeta);
                 $("#span_datos_titular_tarjeta_credito").text(datos.nombre_titular);
+                $("#span_ruta").text(datos.ruta);
+                $("#span_fecha_nacimiento").text(datos.fecha_nacimiento);
+                $("#span_cedula_titular").text(datos.cedula_titular);
+                $("#span_telefono_titular").text(datos.telefono_titular);
+                $("#span_observaciones").text(datos.observaciones);
+                $("#span_importe_total").text(datos.total_importe);
             }
 
         }).fail(function (err) {
