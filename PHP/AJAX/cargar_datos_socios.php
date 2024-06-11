@@ -13,7 +13,7 @@ $datos_padron = mysqli_fetch_assoc($consulta_padron);
 if ($datos_padron != "") {
 	$datos_padron['fecha_afiliacion'] = (new DateTime($datos_padron['fecha_afiliacion']))->format('d/m/Y');
 	$datos_padron['nombre'] = remplazarAcentos($datos_padron['nombre']);
-	$datos_padron['direccion'] = eliminarAcentos($datos_padron['direccion']);
+	$datos_padron['direccion'] = $datos_padron['direccion'];
 }
 
 
