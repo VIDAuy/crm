@@ -56,6 +56,54 @@ function select_usuarios(div) {
 }
 
 
+/*
+select_sub_usuarios("Agregar", "select_asignar_llamada_a_usuario_agregar");
+select_sub_usuarios("Editar", "select_asignar_llamada_a_usuario_editar", id_sub_usuario, nombre_sub_usuario);
+*/
+
+function select_sub_usuarios(opcion, div, id_sub_usuario = null, nombre_sub_usuario = null) {
+
+  let id_area = localStorage.getItem("id_sector");
+  let option = opcion == "Agregar" ? `<option value='0' selected>Seleccione un usuario</option>` : `<option value='${id_sub_usuario}' selected>${nombre_sub_usuario}</option>`;
+  let params = opcion == "Agregar" ? `area=${id_area}` : `id_sub_usuario=${id_sub_usuario}`;
+
+  document.getElementById(div).innerHTML = `${option}`;
+
+  $.ajax({
+    type: "GET",
+    url: `${url_ajax}volver_a_llamar/select_sub_usuarios.php?${params}`,
+    dataType: "JSON",
+    success: function (response) {
+      let datos = response.datos;
+      datos.map((val) => {
+        document.getElementById(div).innerHTML += `<option value="${val['id']}">${val['nombre']}</option>`;
+      });
+    }
+  });
+
+}
+
+
+function mostrar_recordatorio() {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+  Toast.fire({
+    icon: 'info',
+    title: 'Recordatorio',
+    html: 'Tiene agenda pendiente para volver a llamar!',
+  });
+}
+
+
 function enviar_terminos_y_condiciones_socio(openModal = false) {
   if (openModal === true) {
     $('#cedula_enviar_terminos_condiciones').val('');

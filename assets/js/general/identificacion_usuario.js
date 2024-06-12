@@ -32,6 +32,11 @@ function abrir_modal_identificarse(openModal = false) {
         $('#modal_identificar_persona_en_sesion').modal({ backdrop: 'static', keyboard: false })
         $('#modal_identificar_persona_en_sesion').modal("show");
 
+        /** Si esta abierto el modal se autoselecciona el campo password **/
+        $('#modal_identificar_persona_en_sesion').on('shown.bs.modal', function (e) {
+            $('#cedula_identificar_persona').focus();
+        });
+
         $('#cedula_identificar_persona').keypress(function (event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if (keycode == '13') identificar_persona();
@@ -40,6 +45,7 @@ function abrir_modal_identificarse(openModal = false) {
         identificar_persona();
     }
 }
+
 
 function identificar_persona() {
     let sector = $("#sector").val();

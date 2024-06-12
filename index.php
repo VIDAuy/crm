@@ -100,6 +100,7 @@ if (isset($_SESSION['nivel'])) {
 				"crmessage/modal_mensajes_crmessage.html",
 				"crmessage/modal_reasignar_crmessage.html",
 				"alertas/modal_alertas_generales.html",
+				"alertas/modal_asignar_alertas_generales.html",
 				"discador/modal_upload_discador.html",
 				"discador/modal_registros_discador.html",
 				"modal_busqueda_avanzada.html",
@@ -190,6 +191,7 @@ if (isset($_SESSION['nivel'])) {
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
 				"bajas_morosidad/modal_registros_bajas_morosidad.html",
 				"alertas/modal_alertas_generales.html",
+				"alertas/modal_asignar_alertas_generales.html",
 				"discador/modal_upload_discador.html",
 				"discador/modal_registros_discador.html",
 				"modal_busqueda_avanzada.html",
@@ -316,6 +318,7 @@ if (isset($_SESSION['nivel'])) {
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
 				"bajas_morosidad/modal_registros_bajas_morosidad.html",
 				"alertas/modal_alertas_generales.html",
+				"alertas/modal_asignar_alertas_generales.html",
 				"discador/modal_upload_discador.html",
 				"discador/modal_registros_discador.html",
 				"modal_busqueda_avanzada.html",
@@ -370,6 +373,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_editar_comentario_auditoria.html",
 				"bajas/modal_solicitar_baja.html",
 				"alertas/modal_alertas_generales.html",
+				"alertas/modal_asignar_alertas_generales.html",
 			];
 
 
@@ -439,6 +443,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_editar_auditorias.html",
 				"auditorias/modal_editar_comentario_auditoria.html",
 				"alertas/modal_alertas_generales.html",
+				"alertas/modal_asignar_alertas_generales.html",
 			];
 
 
