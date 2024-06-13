@@ -32,7 +32,7 @@ $title = PRODUCCION ? "CRM" : "CRM_TEST";
             <div class="col-sm-6 col-md-4 col-md-offset-4 mx-auto">
                 <div class="account-wall">
                     <img class="profile-img mb-2" src="./assets/img/globito.jpg" alt="Logo de vida" />
-                    <h2 class="text-center fw-bolder mb-3" id="titulo_login">CRM</h2>
+                    <h2 class="text-center fw-bolder mb-3" id="titulo_login"><?= $title; ?></h2>
                     <form class="form-signin" name="form" id="form">
                         <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Usuario" autofocus>
                         <input type="password" id="password" name="password" class="form-control mb-3" placeholder="Código">

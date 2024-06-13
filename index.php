@@ -104,6 +104,7 @@ if (isset($_SESSION['nivel'])) {
 				"discador/modal_upload_discador.html",
 				"discador/modal_registros_discador.html",
 				"modal_busqueda_avanzada.html",
+				"modal_ver_mas_html.html",
 			];
 
 			/** Carga Modals **/
@@ -195,6 +196,7 @@ if (isset($_SESSION['nivel'])) {
 				"discador/modal_upload_discador.html",
 				"discador/modal_registros_discador.html",
 				"modal_busqueda_avanzada.html",
+				"modal_ver_mas_html.html",
 			];
 
 			/** Carga Modals **/
@@ -322,6 +324,7 @@ if (isset($_SESSION['nivel'])) {
 				"discador/modal_upload_discador.html",
 				"discador/modal_registros_discador.html",
 				"modal_busqueda_avanzada.html",
+				"modal_ver_mas_html.html",
 			];
 
 

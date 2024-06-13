@@ -505,3 +505,19 @@ function buscarCelular($numeros)
     $respuesta = (count($respuesta[0]) !== 0) ? $respuesta[0] : false;
     return $respuesta;
 }
+
+function corregir_acentos($texto)
+{
+    $remplazar_array = [
+        "'" => '', '"' => ' ', '`' => ' ', '`' => '', "Âº" => "°", "NÂª" => "N°",
+        "Ã‘" => "Ñ", "Ã±" => "ñ", "ï¿½" => "Ñ",
+        "Ã‰" => "É", "Ã©" => "é", "JOS?" => "JOSÉ", "Ãˆ" => "É",
+        "Ã" => "Í", "Ã" => "í", "ÃŒ" => "í", "Ã¬" => "Í",
+        "Ã" => "Á", "Ã¡" => "Á", "Ã€" => "Á",
+        "Ã³" => "ó", 'Ã“' => "Ó", "Ã’" => "Ó",
+        "N?" => "Ú", "Ãº" => "Ú", "Ãš" => "Ú",
+    ];
+
+    $texto = strtr($texto, $remplazar_array);
+    return strtoupper($texto);
+}

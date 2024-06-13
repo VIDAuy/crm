@@ -472,3 +472,28 @@ function cambiar_div(div, clase, nombre) {
   document.getElementById(`${div}`).className = `${clase}`;
   document.getElementById(`${div}`).innerHTML = `${nombre}`;
 }
+
+
+function formato_editor(div) {
+  tinymce.init({
+    selector: `#${div}`,
+    language: 'es_MX',
+    branding: false,
+    menubar: false,
+    toolbar:
+      'undo redo | fontfamily fontsize forecolor backcolor | bold italic underline | alignleft aligncenter alignright alignjustify | outdent indent',
+    statusbar: false,
+    plugins: 'image',
+    browser_spellcheck: true
+  });
+}
+
+
+function modalVerMasHtml(comentario, tiene_formato) {
+  if (tiene_formato == 1) {
+    $("#mostrar_mas_html").html(comentario);
+    $('#modalVerMasHtml').modal('show');
+  } else {
+    verMasTabla(comentario);
+  }
+}

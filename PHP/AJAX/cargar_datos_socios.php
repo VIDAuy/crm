@@ -12,8 +12,10 @@ $datos_padron = mysqli_fetch_assoc($consulta_padron);
 
 if ($datos_padron != "") {
 	$datos_padron['fecha_afiliacion'] = (new DateTime($datos_padron['fecha_afiliacion']))->format('d/m/Y');
-	$datos_padron['nombre'] = remplazarAcentos($datos_padron['nombre']);
-	$datos_padron['direccion'] = $datos_padron['direccion'];
+	$datos_padron['nombre'] = corregir_acentos($datos_padron['nombre']);
+	$datos_padron['direccion'] = corregir_acentos($datos_padron['direccion']);
+	$datos_padron['nombre_titular'] = corregir_acentos($datos_padron['nombre_titular']);
+	$datos_padron['observaciones'] = corregir_acentos($datos_padron['observaciones']);
 }
 
 
@@ -80,6 +82,7 @@ echo json_encode($datos_padron);
 function datos_padron($cedula)
 {
 	include '../conexiones/conexion.php';
+	mysqli_set_charset($conexion, "utf8");
 	$tabla1 = TABLA_PADRON_DATOS_SOCIO;
 	$tabla2 = TABLA_PADRON_PRODUCTO_SOCIO;
 

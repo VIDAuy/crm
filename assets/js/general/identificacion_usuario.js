@@ -85,28 +85,28 @@ function identificar_persona() {
                     contenido.map((val) => {
                         if (val == 9) {
                             badge_cantidad_alertas_pendientes();
-                            setInterval(badge_cantidad_alertas_pendientes, 15000);
+                            setInterval(badge_cantidad_alertas_pendientes, 30000);
                             tabla_alertas_pendientes();
                             setInterval(tabla_alertas_pendientes, 30000);
                             $(".administrar_pendientes").css("display", "block");
                         }
                         if (val == 10) {
                             tabla_llamadas_pendientes();
-                            setInterval(tabla_llamadas_pendientes, 15000);
+                            setInterval(tabla_llamadas_pendientes, 30000);
                             badge_cantidad_pendientes_volver_a_llamar();
-                            setInterval(badge_cantidad_pendientes_volver_a_llamar, 15000);
+                            setInterval(badge_cantidad_pendientes_volver_a_llamar, 30000);
                             $("#vista_tabla_volver_a_llamar-tab").css("display", "block");
                         }
                         if (val == 11) {
                             cantidad_total_pendientes_crmessage();
-                            setInterval(cantidad_total_pendientes_crmessage, 15000);
+                            setInterval(cantidad_total_pendientes_crmessage, 30000);
                             tabla_gestionar_pendientes_crmessage();
                             setInterval(tabla_gestionar_pendientes_crmessage, 30000);
                             $("#vista_tabla_crmessage-tab").css("display", "block");
                         }
                         if (val == 12) {
                             badge_cantidad_alertas_generales_pendientes();
-                            setInterval(badge_cantidad_alertas_generales_pendientes, 15000);
+                            setInterval(badge_cantidad_alertas_generales_pendientes, 30000);
                             tabla_reasignar_alertas_generales();
                             setInterval(tabla_reasignar_alertas_generales, 30000);
                             $("#vista_tabla_alertas_generales-tab").css("display", "block");

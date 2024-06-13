@@ -67,8 +67,11 @@ function buscarSocio() {
             beforeSend: function () {
                 ocultar_todo_socio();
                 ocultar_todo_funcionario();
+                showLoading();
             },
         }).done(function (datos) {
+            hideLoading();
+
             $("#cedulas").text(cedula);
             historiaComunicacionDeCedula();
             mostrar_cantidad_etiquetas_socio();
@@ -156,8 +159,11 @@ function buscarFuncionario(cedula, tipo) {
         beforeSend: function () {
             ocultar_todo_socio();
             ocultar_todo_funcionario();
+            showLoading();
         },
     }).done(function (response) {
+        hideLoading();
+        
         $("#cedulas").text(cedula);
         if (response.error === false) {
             let datos = response.datos;
